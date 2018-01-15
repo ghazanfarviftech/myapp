@@ -28,6 +28,9 @@ export class CoinSentPage {
     this.personList.push("second");
   }
 
+menu(){
+    this.menuCtrl.open();
+  }
 
 commentedit()
 {

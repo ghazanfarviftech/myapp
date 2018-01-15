@@ -12,7 +12,9 @@ export class ProfilePage {
 
   }
 
-
+menus(){
+    this.menuCtrl.toggle();
+  }
 coinsSent(){
     this.navCtrl.push(CoinSentPage);
   }

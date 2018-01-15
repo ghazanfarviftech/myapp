@@ -5,7 +5,28 @@ page-home {
         width: 90%;
         height: 30px;
         margin-left: 5%;
-        text-align: center;
+        text-align: left;
+        padding-left: 5px;
+        background: #fafafa;
+        border-style: solid;
+        border-width: 1px 1px 1px 1px;
+        border-color: #cccccc;
+
+    }
+.text-input::-moz-placeholder {
+  color: #cccccc;
+}
+
+.text-input:-ms-input-placeholder {
+  color: #cccccc;
+}
+
+.text-input::-webkit-input-placeholder {
+  text-indent: 0;
+  color: #cccccc;
+}
+    input-placeholder{
+        color: red !important;
     }
 
     button{
@@ -13,6 +34,7 @@ page-home {
         height: 30px;
        margin-left: 5%;
         background-color: #25b6b5;
+        color: white;
     }
 
 
@@ -22,5 +44,21 @@ page-home {
         color:#25b6b5;
     }
 
+    .toolbar-title{
+    text-align: center;
+    color: #b3b3b4;
+    font-weight: 400;
+    }
+
+    .ion-footer
+    {
+    background:#f0f0f0;
+    }
+
+    .footercopyright{
+    color : #b3b3b4;
+    font-size: 1rem;
+    font-weight: 800;
+    }
 
 }
