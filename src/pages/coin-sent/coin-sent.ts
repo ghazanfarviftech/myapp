@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,MenuController } from 'ionic-angular';
 import { CommentEditPage } from "../comment-edit/comment-edit";
 /**
  * Generated class for the CoinSentPage page.
@@ -16,7 +16,7 @@ import { CommentEditPage } from "../comment-edit/comment-edit";
 export class CoinSentPage {
 
   personList : Array<Object>;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public menuCtrl:MenuController) {
   }
 
   ionViewDidLoad() {
