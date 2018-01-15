@@ -1,0 +1,74 @@
+<ion-menu [content]="mycontent">
+  <ion-content>
+    <ion-list style="margin-top: 20%;">
+    <ion-item>
+        <p><img src="assets/menu.png"/><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333"> Management Philosophy</span></p>
+    </ion-item>
+    <ion-item>
+        <p><img src="assets/menu (1).png"/><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333"> Contact Note Reception Box</span></p>
+    </ion-item>
+    <ion-item>
+        <p><img src="assets/menu (2).png"/><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333"> Daily Note Reception Box</span></p>
+    </ion-item>
+    <ion-item (click)="profile()">
+        <p><img src="assets/menu (3).png"/><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333"> My Page Profile</span></p>
+    </ion-item>
+    <ion-item>
+        <p><img src="assets/menu (4).png"/><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333"> Coins Time Line</span></p>
+    </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #mycontent [root]="DashboardPage"></ion-nav>
+
+<ion-content>
+<ion-row>
+  <ion-col col-12>
+    <ion-icon (click)="menu()" name="menu" ></ion-icon>
+  </ion-col>
+</ion-row>
+<ion-row style="margin-top: 20%;">
+    <ion-col col-12>
+
+<ion-slides>
+  <ion-slide>
+   <img src="assets/1.jpg">
+</ion-slide>
+  <ion-slide>
+<img src="assets/2.jpg">
+  </ion-slide>
+  <ion-slide>
+   <img src="assets/3.jpg">
+   
+  </ion-slide>
+</ion-slides>
+
+    </ion-col>
+</ion-row>
+
+<ion-row style="margin-left: 7%;">
+    <ion-col col-4>
+        <img src="assets/pad (1).png" id="a"/>
+    </ion-col>
+    <ion-col col-4>
+        <img src="assets/pad (2).png" id="a"/>
+    </ion-col>
+    <ion-col col-4>
+        <img src="assets/pad (3).png" id="a"/>
+    </ion-col>
+</ion-row>
+
+<ion-row style="margin-left: 7%;">
+    <ion-col col-4>
+        <img src="assets/pad (1).png" id="a"/>
+    </ion-col>
+    <ion-col col-4>
+        <img src="assets/pad (2).png" id="a"/>
+    </ion-col>
+    <ion-col col-4>
+        <img src="assets/pad (3).png" id="a"/>
+    </ion-col>
+</ion-row>
+
+</ion-content>
