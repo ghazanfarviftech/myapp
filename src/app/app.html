@@ -1,1 +1,32 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu side="right" [content]="mycontent">
+  <ion-content>
+
+    <ion-list style="margin-top: 20%;">
+    <ion-item (click)="management()">
+        <p><img src="assets/menu.png"/><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Management Philosophy</span></p>
+    </ion-item>
+    <ion-item >
+        <p><img src="assets/menu (1).png"/><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Contact Note Reception Box</span></p>
+    </ion-item>
+    <ion-item>
+        <p><img src="assets/menu (2).png"/><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Daily Note Reception Box</span></p>
+    </ion-item>
+    <ion-item (click)="profile()">
+        <p><img src="assets/menu (3).png"/><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> My Page Profile</span></p>
+    </ion-item>
+    <ion-item (click)="coinTimeline()">
+        <p><img src="assets/menu (4).png"/><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Coins Time Line</span></p>
+    </ion-item>
+    <ion-item class="logout">
+     
+    </ion-item>
+    </ion-list>
+
+    <ion-row class="logout">
+       <button ion-button color="dark" outline class="btn-logout">Logout</button>
+    </ion-row>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>

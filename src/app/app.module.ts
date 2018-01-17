@@ -10,6 +10,9 @@ import { DashboardPage } from "../pages/dashboard/dashboard";
 import { ProfilePage } from "../pages/mypageprofile/profile";
 import { CoinSentPage } from "../pages/coin-sent/coin-sent";
 import { CommentEditPage } from "../pages/comment-edit/comment-edit";
+import { ManagementPage } from "../pages/management/management";
+import { CoinTimelinePage } from "../pages/coin-timeline/coin-timeline";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -17,7 +20,9 @@ import { CommentEditPage } from "../pages/comment-edit/comment-edit";
     DashboardPage,
     ProfilePage,
     CoinSentPage,
-    CommentEditPage
+    CommentEditPage,
+    ManagementPage,
+    CoinTimelinePage
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,9 @@ import { CommentEditPage } from "../pages/comment-edit/comment-edit";
     DashboardPage,
     ProfilePage,
     CoinSentPage,
-    CommentEditPage
+    CommentEditPage,
+    ManagementPage,
+    CoinTimelinePage
   ],
   providers: [
     StatusBar,
