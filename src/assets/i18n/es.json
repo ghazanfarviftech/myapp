@@ -1,0 +1,10 @@
+{
+  "key" : "Traducción Key",
+  "nested": {
+    "user": "Usuario",
+    "signIn": "Entrar",
+    "signUp": "Registrarse"
+  }
+  "Login": "logi"
+  , "HOME": "استهلال",
+}

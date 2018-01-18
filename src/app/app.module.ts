@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule,IonicPageModule  } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -12,6 +12,17 @@ import { CoinSentPage } from "../pages/coin-sent/coin-sent";
 import { CommentEditPage } from "../pages/comment-edit/comment-edit";
 import { ManagementPage } from "../pages/management/management";
 import { CoinTimelinePage } from "../pages/coin-timeline/coin-timeline";
+
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import { TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+import { LanguageService } from '../providers/language.service';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 
 @NgModule({
   declarations: [
@@ -25,8 +36,21 @@ import { CoinTimelinePage } from "../pages/coin-timeline/coin-timeline";
     CoinTimelinePage
   ],
   imports: [
+  IonicPageModule.forChild(HomePage),
+    TranslateModule.forChild(),
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    HttpClientModule,
+    IonicModule.forRoot(MyApp),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    })
+  ],
+  exports: [
+    HomePage
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,8 +64,10 @@ import { CoinTimelinePage } from "../pages/coin-timeline/coin-timeline";
     CoinTimelinePage
   ],
   providers: [
+  LanguageService,
     StatusBar,
     SplashScreen,
+    HttpClientModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
