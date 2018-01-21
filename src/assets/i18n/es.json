@@ -4,7 +4,8 @@
     "user": "Usuario",
     "signIn": "Entrar",
     "signUp": "Registrarse"
-  }
-  "Login": "logi"
-  , "HOME": "استهلال",
+  },
+  "Login": "logi",
+  "HOME": "استهلال",
+   "HELLO": "ca"
 }

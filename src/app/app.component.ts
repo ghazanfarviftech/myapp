@@ -10,7 +10,7 @@ import { CoinTimelinePage } from "../pages/coin-timeline/coin-timeline";
 import { ManagementPage } from "../pages/management/management";
 
 import {TranslateService, LangChangeEvent} from '@ngx-translate/core';
-
+import { Globalization } from '@ionic-native/globalization';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,12 +19,27 @@ export class MyApp {
 @ViewChild('mycontent') nav: NavController
   rootPage:any = HomePage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public menuCtrl: MenuController,public translate: TranslateService) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public menuCtrl: MenuController,public translate: TranslateService ,public globe: Globalization) {
 
 translate.setDefaultLang('de');
 
      // the lang to use, if the lang isn't available, it will use the current loader to get them
     translate.use('de');
+
+    if ((<any>window).cordova) {
+          this.globe.getPreferredLanguage().then(result => {
+            var language = this.getSuitableLanguage(result.value);
+            translate.use(language);
+            console.log("wow code working"+language);
+            //sysOptions.systemLanguage = language;
+          });
+        } else {
+          let browserLanguage = translate.getBrowserLang();
+          var language = this.getSuitableLanguage(browserLanguage);
+          translate.use(language);
+          console.log("browser"+language);
+          //sysOptions.systemLanguage = language;
+        }
   
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -56,6 +71,10 @@ translate.setDefaultLang('de');
     this.nav.push(ManagementPage);
   }
 
+getSuitableLanguage(language) {
+    language = language.substring(0, 2).toLowerCase();
+    return language;//availableLanguages.some(x => x.code == language) ? language : defaultLanguage;
+  }
   
 }
 

@@ -19,6 +19,10 @@ import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { LanguageService } from '../providers/language.service';
 
+import { Globalization } from '@ionic-native/globalization';
+import { RevoService } from '../providers/revoservices';
+import { HttpModule } from '@angular/http';
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -68,6 +72,9 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     HttpClientModule,
+    Globalization,
+    HttpModule,
+    RevoService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
