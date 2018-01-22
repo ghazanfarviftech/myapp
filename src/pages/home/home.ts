@@ -14,7 +14,7 @@ export class HomePage {
   data: any;
   mydata: any;
   loginData = { username:'', password:'' };
-  
+  response : any;
   constructor(platform: Platform,public navCtrl: NavController,public menuCtrl:MenuController,public translate: TranslateService,public languageService: LanguageService,public authService: RevoService) {
 
    let defaultLanguage = translate.getDefaultLang();
@@ -40,6 +40,7 @@ console.log("wow");
   //this.mydata = my.replace("}", "").split(":")[1].split("~");
 
 
+this.response = my;
   console.log("json data agaya : " +my);
      // this.appPrefence.store("empid", this.mydata[0]);
     //this.appPrefence.store("hrchy", this.mydata[2]);
@@ -51,6 +52,7 @@ console.log("wow");
       //this.loading.dismiss();
       //this.presentToast(err);
 
+this.response = err;
       console.log("errrorrr agayayaayayayaya " + err);
     });
     
