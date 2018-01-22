@@ -33,6 +33,7 @@ export class HomePage {
 console.log("wow");
    
 
+/*
    this.authService.login(this.loginData).then((result) => {
      // this.loading.dismiss();
       this.data = result;
@@ -55,8 +56,10 @@ this.response = my;
 this.response = err;
       console.log("errrorrr agayayaayayayaya " + err);
     });
+
+    */
     
-    //this.navCtrl.push(DashboardPage);
+    this.navCtrl.push(DashboardPage);
   }
 
 setLanguage(){

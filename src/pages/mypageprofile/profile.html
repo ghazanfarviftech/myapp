@@ -80,7 +80,14 @@
 </ion-row>
 <ion-row>
   <ion-col col-12>
-    <img src="assets/Pic.png" />
+   <div style="display: block">
+  <canvas baseChart
+          [datasets]="radarChartData"
+          [labels]="radarChartLabels"
+          [chartType]="radarChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+</div>
   </ion-col>
 </ion-row>
 
