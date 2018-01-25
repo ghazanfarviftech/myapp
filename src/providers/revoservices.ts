@@ -86,15 +86,10 @@ this.http.post("http://chainayena.net/revo/api/revo-employee-login",  credential
         headers.set('companyid',alldata.CompanyID);
          headers.set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13');
          headers.set('Content-Type','application/json');
-       // headers.set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13');
-/*.set('sessionid',alldata.SessionID)
-  .set('employeeid',alldata.EmployeeID)
-  .set('companyid',alldata.CompanyID)
-  .set('token','e662c46b5bef24a96c3128e25f43beaa05e3bd13') */
-
+      
   console.log("data to be send to service : "+alldata);
 this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
- { headers: headers })
+  { headers: new HttpHeaders().set('Content-Type', 'application/json').set('sessionid', alldata.SessionID).set('employeeid', alldata.EmployeeID.toString()).set('companyid', alldata.CompanyID.toString()).set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13') })
         .subscribe(res => {
          console.log("data : "+ res);
           resolve(res);
@@ -104,5 +99,28 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
         });
   });
   }
+  public coinsent(alldata)
+  {
+    
+    return new Promise((resolve, reject) => {
   
+      let headers = new HttpHeaders();
+      headers.set('sessionid', alldata.SessionID);
+      headers.set('employeeid', alldata.EmployeeID);
+      headers.set('companyid', alldata.CompanyID);
+      headers.set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13');
+      headers.set('Content-Type', 'application/json');
+
+      console.log("data to be send to service : " + alldata);
+      this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-isent",
+        { headers: new HttpHeaders().set('Content-Type', 'application/json').set('sessionid', alldata.SessionID).set('employeeid', alldata.EmployeeID.toString()).set('companyid', alldata.CompanyID.toString()).set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13') })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
 }

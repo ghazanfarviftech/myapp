@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController  } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, NavParams , MenuController  } from 'ionic-angular';
 import { CommentEditPage } from "../comment-edit/comment-edit";
 import { ManagementPage } from "../management/management";
 import { CoinReceivedPage } from "../coin-received/coin-received";
@@ -9,6 +9,7 @@ import { DailyNewsReceptBoxPage } from "../daily-news-recept-box/daily-news-rece
 import { ContactNotesPage } from "../contact-notes-received/contact-notes";
 import { CoinTimelinePage } from "../coin-timeline/coin-timeline";
 import { MessageMainPage } from "../message-main/message-main";
+import { RevoService } from "../../providers/revoservices";
 
 /**
  * Generated class for the CoinSentPage page.
@@ -25,10 +26,36 @@ import { MessageMainPage } from "../message-main/message-main";
 export class CoinSentPage {
 
   personList : Array<Object>;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public menuCtrl:MenuController) {
+  alldata: any;
+  response: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public params: NavParams, public authService: RevoService, public loadingCtrl: LoadingController,
+    private toastCtrl: ToastController) {
+    this.alldata = params.get('alldata');
   }
 
   ionViewDidLoad() {
+    this.authService.coinsent(this.alldata).then((result) => {
+      this.response = result;
+
+      var my = JSON.stringify(this.response);
+      console.log("response :" + my);
+      var dataoverall = JSON.parse(my);
+      if (dataoverall.success) {
+        //this.EmployeeNames = dataoverall.responseData[0].EmployeeName;
+       // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
+       // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
+       // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
+
+      } else {
+
+      }
+    }, (err) => {
+      // this.loading.dismiss();
+      // this.presentToast(err);
+      //this.response = err;
+      console.log("errrorr " + err);
+    });
+
     console.log('ionViewDidLoad CoinSentPage');
     this.personList = [];
     this.personList.push("first");
