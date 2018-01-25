@@ -1,0 +1,193 @@
+<!--
+  Generated template for the CoinsintroductionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-nav #mycontent [root]="CoinsintroductionPage"></ion-nav>
+<ion-header>
+  <ion-row style="    box-shadow: 0px 0px 3px grey;">
+    <ion-col col-4>
+      <img src="assets/dashboard/Pic (5).png" (click)="message()" style="height: 30px; width:40px">
+  
+    </ion-col>
+    <ion-col col-6><span class="logo" (click)="dashboard()">Logo Logo</span></ion-col>
+    <ion-col col-2>
+      <img item-right src="assets/dashboard/Pic (4).png" menuToggle="right"  style="height: 30px; width:30px">
+    </ion-col>
+  </ion-row>
+  <ion-row>
+ <ion-col col-3>
+    <img class="tabIcon" (click)="myProfile()" src="assets/profile.png" />
+  </ion-col>
+  <ion-col col-3>
+       <img class="tabIcon" (click)="contacts()" src="assets/contact.png" />
+    <ion-badge class="notification">2</ion-badge>
+  </ion-col>
+  <ion-col col-3>
+        <img  (click)="dailyNews()"  class="tabIcon" src="assets/daily.png"  />
+    <ion-badge class="notification">26</ion-badge>
+  </ion-col>
+  <ion-col col-3>
+       <img class="tabIcon" (click)="timeline()" src="assets/coinActive.png"/>
+  </ion-col>
+</ion-row>
+  <ion-navbar >
+      <ion-title>{{ 'Coin Introduction' | translate }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content class="gray-content">
+
+
+  <ion-card id="cardcolor">
+    <ion-card-title>
+      <h2>{{ 'Special Coin' | translate }}</h2>
+    </ion-card-title>
+  <ion-card-content  id="contentbg">
+    <h3>  Anthena</h3>
+
+    <img src="assets/coinsintroduction/Pic (4).png" id="imgspecial"/>
+
+    <p>
+      this is an special coin name anthena
+    </p>
+
+ </ion-card-content>
+</ion-card>
+ 
+
+
+
+
+<ion-row padding>
+  {{ 'Coin of this month' | translate }}
+</ion-row>
+<ion-row style="background: white" padding>
+  
+    <h3 >
+      Special Coin
+   </h3>
+ 
+     <ion-row>
+    
+    <ion-col col-3>
+      <img item-right src="assets/coinsintroduction/Pic (5).png"  />
+    </ion-col>
+        <ion-col col-9>
+         <p> this is the coin of this month . this is the coin of this month 
+          this is the coin of this month 
+          this is the coin of this month </p>
+    </ion-col>
+    </ion-row>
+
+</ion-row>
+
+<ion-row padding>
+   {{ 'Coins' | translate }}
+</ion-row>
+<ion-item >
+  
+     <ion-row>
+    <ion-col col-3>
+    <ion-row >
+      <img  src="assets/coinsintroduction/Pic (6).png" (click)="presentAlert()" width="75px" height="75px" />
+    </ion-row>
+        <ion-row >
+          why thinking
+    </ion-row>
+    </ion-col>
+
+        <ion-col col-3>
+    <ion-row >
+      <img  src="assets/coinsintroduction/Pic (1).png" (click)="presentAlert()" width="75px" height="75px" />
+    </ion-row>
+        <ion-row >
+          why thinking
+    </ion-row>
+    </ion-col>
+        <ion-col col-3>
+          <ion-row >
+            <img  src="assets/coinsintroduction/Pic (2).png" width="75px" height="75px" />
+          </ion-row>
+        <ion-row >
+          why thinking
+    </ion-row>
+    </ion-col>
+
+ <ion-col col-3>
+    <ion-row >
+      <img  src="assets/coinsintroduction/Pic (3).png" (click)="presentAlert()" width="75px" height="75px" />
+    </ion-row>
+        <ion-row >
+          why thinking
+    </ion-row>
+    </ion-col>
+
+
+
+    </ion-row>
+
+
+     <ion-row>
+    <ion-col col-4>
+    <ion-row >
+      <img  src="assets/coinsintroduction/Pic (6).png" (click)="presentAlert()" width="75px" height="75px" />
+    </ion-row>
+        <ion-row >
+          why thinking
+    </ion-row>
+    </ion-col>
+
+        <ion-col col-4>
+    <ion-row >
+      <img  src="assets/coinsintroduction/Pic (7).png" (click)="presentAlert()" width="75px" height="75px" />
+    </ion-row>
+        <ion-row >
+          why thinking
+    </ion-row>
+    </ion-col>
+
+
+        <ion-col col-4>
+    <ion-row >
+      <img src="assets/coinsintroduction/Pic (8).png" (click)="presentAlert()" width="75px" height="75px" />
+    </ion-row>
+        <ion-row >
+          why thinking
+    </ion-row>
+    </ion-col>
+
+
+
+
+    </ion-row>
+    
+
+
+</ion-item>
+
+</ion-content>
+<ion-footer>
+
+  <ion-row class="toolbar-background-md" >
+      <ion-col col-3>
+
+        <button ion-button round class="btn-app" (click)="timeline()">{{ 'TimeLine'  | translate }}</button>
+
+    </ion-col>
+    <ion-col col-3>
+      <button ion-button round class="btn-app" (click)="ranking()">{{ 'Ranking' | translate }}</button>
+    </ion-col>
+    <ion-col col-3>
+
+   <button ion-button round class="btn-app" (click)="coinsintro()">{{ 'Introduction' | translate }}</button>
+    </ion-col>
+
+    <ion-col col-3>
+      <button ion-button round class="btn-app" (click)="coinSend()">{{ 'Send Now'  | translate }}</button>
+
+    </ion-col>
+  </ion-row>  
+ </ion-footer>

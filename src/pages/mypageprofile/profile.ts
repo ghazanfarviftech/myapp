@@ -1,39 +1,96 @@
 import { Component } from '@angular/core';
-import { NavController , MenuController } from 'ionic-angular';
+import { NavController , MenuController, LoadingController, ToastController,NavParams } from 'ionic-angular';
 import { DashboardPage } from "../dashboard/dashboard";
 import { CoinSentPage } from "../coin-sent/coin-sent";
+import { CoinReceivedPage } from "../coin-received/coin-received";
+import { ManagementPage } from "../management/management";
+import { ProfileSettingsPage } from "../profile-settings/profile-settings";
+
+import { DailyNewsReceptBoxPage } from "../daily-news-recept-box/daily-news-recept-box";
+import { ContactNotesPage } from "../contact-notes-received/contact-notes";
+import { CoinTimelinePage } from "../coin-timeline/coin-timeline";
+import { MessageMainPage } from "../message-main/message-main";
+import { AppPreferences } from '@ionic-native/app-preferences';
+import { RevoService } from "../../providers/revoservices";
+
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController,public menuCtrl:MenuController) {
-
+  loginData:  any;
+  alldata : any;
+  constructor(public navCtrl: NavController,public menuCtrl:MenuController 
+    ,public authService: RevoService, public loadingCtrl: LoadingController,
+     private toastCtrl: ToastController,private appPreferences: AppPreferences,public params: NavParams) {
+      this.alldata = params.get('alldata');
   }
 
-menus(){
-    this.menuCtrl.toggle();
+  ionViewDidLoad() {
+
+    this.authService.profile(this.alldata).then((result) => {
+
+      console.log("response " + result);
+    }, (err) => {
+      // this.loading.dismiss();
+      // this.presentToast(err);
+      //this.response = err;
+      console.log("errrorr " + err);
+    });
+    console.log('ionViewDidLoad ProfilePage');
   }
+
+screenOpen(name:string){
+   this.navCtrl.push(name);
+
+}
+profile(){
+   //this.navCtrl.push(ProfilePage);
+
+}
 coinsSent(){
     this.navCtrl.push(CoinSentPage);
   }
+coinsReceived(){
+    this.navCtrl.push(CoinReceivedPage);
+  }
 
 
-   public radarChartLabels:string[] = ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'];
- 
-  public radarChartData:any = [
-    {data: [65, 59, 90, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 96, 27, 100], label: 'Series B'}
-  ];
-  public radarChartType:string = 'radar';
- 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
+  menu(){
+    this.menuCtrl.open();
   }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
+
+  management(){
+    this.navCtrl.push(ManagementPage);
   }
+  profileSettings(){
+     this.navCtrl.push(ProfileSettingsPage);
+  }
+  dashboard(){
+     this.navCtrl.push(DashboardPage);
+  }
+
+
+   dailyNews(){
+    this.navCtrl.push(DailyNewsReceptBoxPage);
+  }
+
+   contacts(){
+    this.navCtrl.push(ContactNotesPage);
+  }
+
+ myProfile(){
+    this.navCtrl.push(ProfilePage);
+  }
+
+  timeline()
+  {
+  this.navCtrl.push(CoinTimelinePage);
+  }
+
+  message(){
+    this.navCtrl.push(MessageMainPage);
+  }
+
 }

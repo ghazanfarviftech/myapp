@@ -1,0 +1,75 @@
+page-ranking {
+.toolbar-background-md{
+    background: #ffaa14;
+  
+  }
+  .back-button.show-back-button, .toolbar-title {
+    color:white;
+    text-align: center;
+    font-size: 16px;
+  } 
+  .toolbar-md{
+    min-height: auto;
+  }
+.imageicon{
+	width: 30px;
+	height: 30px;
+}
+#bar{
+	background-color: #ffaa14;
+	height: 30px;
+}
+#bannercenter{
+	width:100%;
+	height: 15%;
+    padding: 10px 40px 10px 40px;
+}
+.maincontentbg{
+	background-color: #f0f0f0;
+
+}
+#white{
+	background-color: #ffffff;
+
+}
+
+ion-list {
+width: 100%;
+    ion-item {
+      background-color: transparent;
+      padding-left: 0;
+      position: relative;
+    }
+.label-md{
+      margin:0px;
+    }
+    .lbl-rank{
+      margin-top: 5%;
+      display:inline-block;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    
+  }
+
+  .badge{
+    width:35px;
+  }
+  .badge-title{
+    color: #ffaa14;
+    font-weight:bold;
+  }
+
+.btn-app{
+	background:#ffaa14;
+	border: white 1px solid;
+	width: 100%;
+  text-transform:none;
+}
+.btn-app:hover{
+	background-color: #ffaa14;
+	background: #ffaa14;
+	opacity:0.6;
+	
+}
+}

@@ -1,0 +1,29 @@
+page-profile-settings {
+	.toolbar-background-md{
+		background: #25b6b5;
+		
+	}
+	.back-button.show-back-button, .toolbar-title {
+		color:white;
+		text-align: center;
+		    font-size: 16px;
+	}	
+	.toolbar-md{
+		min-height: auto;
+	}
+
+
+
+.btn-app{
+	background:#25b6b5;
+	border: white 1px solid;
+	width: 100%;
+	text-transform:none;
+}
+.btn-app:hover{
+	background-color: #25b6b5;
+	background: #25b6b5;
+	opacity:0.6;
+	
+}
+}

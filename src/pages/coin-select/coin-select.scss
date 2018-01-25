@@ -1,0 +1,28 @@
+page-coin-select {
+	.toolbar-background-md{
+    background: #ffaa14;
+  
+  }
+  .back-button.show-back-button, .toolbar-title {
+    color:white;
+    text-align: center;
+    font-size: 16px;
+  } 
+  .toolbar-md{
+    min-height: auto;
+  }
+
+
+.btn-app{
+	background:#ffaa14;
+	border: white 1px solid;
+	width: 100%;
+	text-transform:none;
+}
+.btn-app:hover{
+	background-color: #ffaa14;
+	background: #ffaa14;
+	opacity:0.6;
+	
+}
+}

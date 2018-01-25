@@ -1,16 +1,31 @@
 page-coin-timeline {
-	.coin-content{
-		background: #f0f0f0;
-	}
+.toolbar-background-md{
+		background: #ffaa14;
 	
-	.tab-bar{
-		background:white;
+	}
+	.back-button.show-back-button, .toolbar-title {
+		color:white;
+		text-align: center;
+		font-size: 16px;
+	}	
+	.toolbar-md{
+		min-height: auto;
 	}
 	.coin{
-		width:50px;
-		height:50px;
+		width:40px;
+		height:40px;
 	}
 
+	.arrow{
+		width: 15px;
+		height:40px;
+	}
+	.displaystyle{
+	display:flex;
+	}
+	img{
+		max-width:initial;
+	}
 	.profile{
 		width:40px;
 		height:40px;
@@ -31,23 +46,26 @@ page-coin-timeline {
 		position:absolute;
 	   	bottom:0;
 	   	width:100%;
-	   	background-color: #25b6b5;
+	   	background-color: #ffaa14;
 	   
 	}
-.title-bar{
-		background-color: #ffaa14;
-		height: 30px;
+
+	.btn-app{
+		background:#ffaa14;
+		border: white 1px solid;
+		width: 100%;
+		text-transform:none;
 	}
-.btn-app{
-	background:#25b6b5;
-	border: white 1px solid;
-	width: 100%;
-}
-.btn-app:hover{
-	background-color: #25b6b5;
-	background: #25b6b5;
-	opacity:0.6;
-	
-}
+	.btn-app:hover{
+		background-color: #ffaa14;
+		background: #ffaa14;
+		opacity:0.6;
+		
+	}
+
+	.datetime{
+	text-align: right;
+	font-size: 1.0rem;
+	}
 
 }

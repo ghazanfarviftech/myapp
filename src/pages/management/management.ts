@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController,MenuController } from 'ionic-angular';
 import { ProfilePage } from "../mypageprofile/profile";
+import { MessageMainPage } from "../message-main/message-main";
 
 /**
  * Generated class for the ManagementPage page.
@@ -26,12 +27,14 @@ export class ManagementPage {
     this.questionList.push("second");
     this.questionList.push("second");
   }
-   /*
     menu(){
     this.menuCtrl.open();
-  }*/
+  }
   profile(){
     this.navCtrl.push(ProfilePage);
   }
 
+message(){
+    this.navCtrl.push(MessageMainPage);
+  }
 }

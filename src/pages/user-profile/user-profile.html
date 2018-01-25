@@ -1,0 +1,150 @@
+<ion-nav #mycontent [root]="ProfilePage"></ion-nav>
+<ion-header>
+  <ion-row style="    box-shadow: 0px 0px 3px grey;">
+    <ion-col col-4>
+ 
+    </ion-col>
+    <ion-col col-6><span class="logo" (click)="dashboard()">Logo Logo</span></ion-col>
+    <ion-col col-2>
+      <img item-right src="assets/dashboard/Pic (4).png" menuToggle="right"  style="height: 30px; width:30px">
+    </ion-col>
+  </ion-row>
+  <ion-row>
+ <ion-col col-3>
+    <img class="tabIcon" (click)="myProfile()" src="assets/profile.png" />
+  </ion-col>
+  <ion-col col-3>
+    <img class="tabIcon" (click)="contacts()" src="assets/contact.png" />
+    <ion-badge class="notification">2</ion-badge>
+  </ion-col>
+  <ion-col col-3>
+    <img class="tabIcon" (click)="dailyNews()"src="assets/daily.png"  />
+    <ion-badge class="notification">26</ion-badge>
+  </ion-col>
+  <ion-col col-3>
+    <img class="tabIcon" (click)="timeline()"  src="assets/coin.png"/>
+  </ion-col>
+</ion-row>
+  <ion-navbar >
+      <ion-title>User Profile</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+
+
+<ion-row>
+  <ion-col col-4>
+    <img src="assets/1.jpg" style="height: 100px;" />
+  </ion-col>
+  <ion-col col-8>
+    <p>Fazila Mehtab</p>
+    <p>@fazila</p>
+    <p class="lbl-gray">team department store</p>
+  </ion-col>
+<ion-col col-4>
+   
+</ion-col>
+<ion-col col-3>
+  <img src="assets/special.png">
+  <span class="lbl-gray" style="display: block; text-align: center;">sdsF</span>
+</ion-col>
+<ion-col col-3>
+<img src="assets/strong.png"/>
+<span class="lbl-gray" style="display: block; text-align: center;">sdfs</span>
+</ion-col>
+<ion-col col-4>
+  <span class="lbl-gray">Catch Copy</span>
+</ion-col>
+<ion-col col-8>
+  <span class="lbl-gray">Catch Copy somthing goes here</span>
+</ion-col>
+<ion-col col-4>
+  <span class="lbl-gray">My rules</span>
+</ion-col>
+<ion-col col-8>
+  <span class="lbl-gray">Catch Copy my rules goes here</span>
+</ion-col>
+</ion-row>
+<ion-row>
+  <ion-col col-12>
+    <img src="assets/Pic.png" />
+  </ion-col>
+</ion-row>
+
+<ion-row>
+ <ion-col col-6>
+  <span class="lbl-gray">Number I got today</span>
+</ion-col>
+<ion-col col-6>
+  <span class="lbl-gray">got 22 / rank 222</span>
+</ion-col>
+<ion-col col-6>
+  <span class="lbl-gray">Number I sent today</span>
+</ion-col>
+<ion-col col-6>
+  <span class="lbl-gray">got 22 / rank 222</span>
+</ion-col>
+ <ion-col col-6>
+  <span class="lbl-gray">Number I got since joined the company</span>
+</ion-col>
+<ion-col col-6>
+  <span class="lbl-gray">got 22 / rank 222</span>
+</ion-col>
+<ion-col col-6>
+  <span class="lbl-gray">Number I sent since joined the company</span>
+</ion-col>
+<ion-col col-6>
+  <span class="lbl-gray">got 22 / rank 222</span>
+</ion-col>
+</ion-row>
+<ion-row style="text-align: center">
+  <ion-col col-3>
+    <img src="assets/special.png" />
+    <span class="lbl-gray" >sdsF</span>
+  </ion-col>
+  <ion-col col-3>
+    <img src="assets/pic (1).png" />
+    <span class="lbl-gray" >sdsF</span>
+  </ion-col>
+  <ion-col col-3>
+    <img src="assets/pic (2).png" />
+    <span class="lbl-gray">sdsF</span>
+  </ion-col>
+  <ion-col col-3>
+    <img src="assets/pic (3).png"/>
+    <span class="lbl-gray" >sdsF</span>
+  </ion-col>
+  <ion-col col-3>
+    <img src="assets/pic (5).png" />
+    <span class="lbl-gray">sdsF</span>
+  </ion-col>
+  <ion-col col-3>
+    <img src="assets/pic (7).png" />
+    <span class="lbl-gray">sdsF</span>
+  </ion-col>
+  <ion-col col-3>
+    <img src="assets/strong.png" />
+    <span class="lbl-gray" >sdsF</span>
+  </ion-col>
+ 
+</ion-row>
+
+</ion-content>
+<ion-footer>
+
+  <ion-row class="toolbar-background-md" >
+      <ion-col col-3>
+      <button ion-button round class="btn-app" (click)="ranking()">TimeLine</button>
+    </ion-col>
+    <ion-col col-3>
+      <button ion-button round class="btn-app" (click)="ranking()">Ranking</button>
+    </ion-col>
+    <ion-col col-3>
+      <button ion-button round class="btn-app" (click)="coinsintro()">Introduction</button>
+    </ion-col>
+
+    <ion-col col-3>
+      <button ion-button round class="btn-app" (click)="coinSend()">Send Coins</button>
+    </ion-col>
+  </ion-row>  
+ </ion-footer>

@@ -1,0 +1,35 @@
+page-msg-write {
+	.toolbar-background-md{
+		background: #fa6414;
+		
+	}
+	.back-button.show-back-button, .toolbar-title {
+		color:white;
+		text-align: center;
+	}
+	.toolbar-md{
+		min-height: auto;
+	}
+	.btn-app{
+		background:#fa6414;
+		border: white 1px solid;
+		width: 100%;
+		text-transform:none
+	}
+	.btn-app:hover{
+		background-color: #fa6414;
+		background: #fa6414;
+		opacity:0.6;
+		
+	}
+	#file-input {
+	  opacity: 0;
+	  background: #CCC;
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 100%;
+	  left: 0;
+	  z-index: 999;
+	}
+}

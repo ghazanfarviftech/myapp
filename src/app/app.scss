@@ -14,3 +14,72 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+@media screen and (min-width: 678px) {
+    #revoapp{
+		width:33%;
+		margin-left:33%
+	}
+}
+ion-header{
+    background:white;
+}
+.alert-md .alert-head{
+    text-align:center;
+}
+    .notification{
+        background:red;
+        position: absolute;
+        left:50%;
+        top:50%;
+        border-radius:50%;
+       
+    }
+.gray-content{
+        background:#f0f0f0;
+    }
+.lbl-gray{
+        color: #666666;
+    }
+    .tabIcon{
+        
+        margin:auto;
+        display:block;
+    }
+.menu-item{
+	cursor:pointer;
+}
+    .logo{
+        padding:5px;
+        display:inline-block;
+        color:#cccccc;
+    }
+
+ .toolbar-title{
+    text-align: center;
+    color: #b3b3b4;
+    font-weight: 400;
+    }
+
+
+	.footercopyright{
+	 	text-align: center;
+	    color : #b3b3b4;
+	    font-size: 1rem;
+	    font-weight: 800;
+    }
+    .logout{
+        padding:0 20px;
+    }
+    .btn-logout{
+        width:100%;
+    }
+    #menuiconswidth{
+    width: 55px;
+    }
+.ios{
+    .footercopyright{
+        margin-top: 58px;
+    }
+}
+    

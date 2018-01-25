@@ -1,0 +1,36 @@
+page-write-contact {
+	.toolbar-background-md{
+		background: #73aa19;
+	
+	}
+	.back-button.show-back-button, .toolbar-title {
+		color:white;
+		text-align: center;
+		font-size: 16px;
+	}	
+	.toolbar-md{
+		min-height: auto;
+	}
+	#file-input {
+	  opacity: 0;
+	  background: #CCC;
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 100%;
+	  left: 0;
+	  z-index: 999;
+	}
+	.btn-app{
+		background:#73aa19;
+		border: white 1px solid;
+		width: 100%;
+		text-transform: none;
+	}
+	.btn-app:hover{
+		background-color: #73aa19;
+		background: #73aa19;
+		opacity:0.6;
+		
+	}
+}

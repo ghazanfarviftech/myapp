@@ -1,6 +1,15 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,MenuController } from 'ionic-angular';
+import { NavController, NavParams, MenuController  } from 'ionic-angular';
 import { CommentEditPage } from "../comment-edit/comment-edit";
+import { ManagementPage } from "../management/management";
+import { CoinReceivedPage } from "../coin-received/coin-received";
+import { ProfilePage } from "../mypageprofile/profile";
+
+import { DailyNewsReceptBoxPage } from "../daily-news-recept-box/daily-news-recept-box";
+import { ContactNotesPage } from "../contact-notes-received/contact-notes";
+import { CoinTimelinePage } from "../coin-timeline/coin-timeline";
+import { MessageMainPage } from "../message-main/message-main";
+
 /**
  * Generated class for the CoinSentPage page.
  *
@@ -28,13 +37,47 @@ export class CoinSentPage {
     this.personList.push("second");
   }
 
-menu(){
-    this.menuCtrl.open();
-  }
 
 commentedit()
 {
 	this.navCtrl.push(CommentEditPage);
 }
+  menu(){
+    this.menuCtrl.open();
+  }
 
+  management(){
+    this.navCtrl.push(ManagementPage);
+  }
+  coinsSent(){
+    this.navCtrl.push(CoinSentPage);
+  }
+  coinReceived(){
+    this.navCtrl.push(CoinReceivedPage);
+  }
+   profile(){
+    this.navCtrl.push(ProfilePage);
+  }
+
+
+dailyNews(){
+    this.navCtrl.push(DailyNewsReceptBoxPage);
+  }
+
+   contacts(){
+    this.navCtrl.push(ContactNotesPage);
+  }
+
+ myProfile(){
+    this.navCtrl.push(ProfilePage);
+  }
+
+  timeline()
+  {
+  this.navCtrl.push(CoinTimelinePage);
+  }
+
+  message(){
+    this.navCtrl.push(MessageMainPage);
+  }
 }

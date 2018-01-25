@@ -1,15 +1,29 @@
 page-profile{
+.toolbar-background-md{
+		background: #25b6b5;
+		
+	}
+	.back-button.show-back-button, .toolbar-title {
+		color:white;
+		text-align: center;
+		    font-size: 16px;
+	}	
+	.toolbar-md{
+		min-height: auto;
+	}
 
-ion-icon
-{
-	float: right;
+
+
+.btn-app{
+	background:#25b6b5;
+	border: white 1px solid;
+	width: 100%;
+	text-transform:none;
 }
-.greybg{
-	border-style: solid;
-    border-width: 1px 0px 0px 0px;	
-}
-.imageicon{
-	width: 30px;
-	height: 30px;
+.btn-app:hover{
+	background-color: #25b6b5;
+	background: #25b6b5;
+	opacity:0.6;
+	
 }
 }

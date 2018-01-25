@@ -3,19 +3,24 @@
 
     <ion-list style="margin-top: 20%;">
     <ion-item (click)="management()">
-        <p><img src="assets/menu.png"/><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Management Philosophy</span></p>
+        <ion-avatar item-start><img id="menuiconswidth" src="assets/menu.png"/></ion-avatar>
+        <span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Management Philosophy</span>
     </ion-item>
-    <ion-item >
-        <p><img src="assets/menu (1).png"/><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Contact Note Reception Box</span></p>
+    <ion-item (click)="contacts()" >
+        <ion-avatar item-start><img  id="menuiconswidth" src="assets/contactActive.png"/></ion-avatar>
+        <span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Contact Note Reception Box</span>
     </ion-item>
-    <ion-item>
-        <p><img src="assets/menu (2).png"/><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Daily Note Reception Box</span></p>
+    <ion-item (click)="dailyNews()">
+        <ion-avatar  item-start><img  id="menuiconswidth" src="assets/dailyActive.png"/>
+        </ion-avatar>
+        <span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Daily Note Reception Box</span>
     </ion-item>
     <ion-item (click)="profile()">
-        <p><img src="assets/menu (3).png"/><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> My Page Profile</span></p>
+        <ion-avatar item-start><img id="menuiconswidth"  src="assets/profile.png"/></ion-avatar>
+        <span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> My Page Profile</span>
     </ion-item>
     <ion-item (click)="coinTimeline()">
-        <p><img src="assets/menu (4).png"/><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Coins Time Line</span></p>
+        <ion-avatar item-start><img id="menuiconswidth" src="assets/coinActive.png"/></ion-avatar><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Coins Time Line</span>
     </ion-item>
     <ion-item class="logout">
      
@@ -28,5 +33,5 @@
   </ion-content>
 
 </ion-menu>
-
 <ion-nav #mycontent [root]="rootPage"></ion-nav>
+

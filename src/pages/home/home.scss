@@ -3,7 +3,7 @@ page-home {
 
     input{
         width: 90%;
-        height: 30px;
+        height: 35px;
         margin-left: 5%;
         text-align: left;
         padding-left: 5px;
@@ -31,34 +31,22 @@ page-home {
 
     button{
         width: 90%;
-        height: 30px;
+        height: 35px;
        margin-left: 5%;
         background-color: #25b6b5;
         color: white;
     }
 
 
-    p{
+    .forgotPassword{
         text-align: center;
-        font-size: 20px;
+        font-size: 16px;
         color:#25b6b5;
+        cursor:pointer;
     }
 
-    .toolbar-title{
-    text-align: center;
-    color: #b3b3b4;
-    font-weight: 400;
-    }
+   
 
-    .ion-footer
-    {
-    background:#f0f0f0;
-    }
 
-    .footercopyright{
-    color : #b3b3b4;
-    font-size: 1rem;
-    font-weight: 800;
-    }
 
 }
