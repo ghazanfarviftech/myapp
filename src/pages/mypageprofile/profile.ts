@@ -99,7 +99,7 @@ coinsSent(){
   this.navCtrl.push(CoinSentPage, { 'alldata': this.alldata});
   }
 coinsReceived(){
-    this.navCtrl.push(CoinReceivedPage);
+  this.navCtrl.push(CoinReceivedPage, { 'alldata': this.alldata });
   }
 
 

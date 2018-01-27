@@ -28,9 +28,11 @@ export class CoinSentPage {
   personList : Array<Object>;
   alldata: any;
   response: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public params: NavParams, public authService: RevoService, public loadingCtrl: LoadingController,
+  overallresponseData : Array<Object>;
+  responseNotification: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public authService: RevoService, public loadingCtrl: LoadingController,
     private toastCtrl: ToastController) {
-    this.alldata = params.get('alldata');
+    this.alldata = navParams.get('alldata');
   }
 
   ionViewDidLoad() {
@@ -41,6 +43,8 @@ export class CoinSentPage {
       console.log("response :" + my);
       var dataoverall = JSON.parse(my);
       if (dataoverall.success) {
+        this.overallresponseData = dataoverall.responseData;
+        this.responseNotification = dataoverall.responseData[0];
         //this.EmployeeNames = dataoverall.responseData[0].EmployeeName;
        // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
        // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
@@ -80,7 +84,7 @@ commentedit()
     this.navCtrl.push(CoinSentPage);
   }
   coinReceived(){
-    this.navCtrl.push(CoinReceivedPage);
+    this.navCtrl.push(CoinReceivedPage ,{ 'alldata': this.alldata });
   }
    profile(){
     this.navCtrl.push(ProfilePage);
