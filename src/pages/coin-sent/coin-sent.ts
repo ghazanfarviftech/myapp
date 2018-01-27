@@ -29,13 +29,14 @@ export class CoinSentPage {
   alldata: any;
   response: any;
   overallresponseData : Array<Object>;
-  responseNotification: any;
+  ContactBook: any;
+  DailyNews: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public authService: RevoService, public loadingCtrl: LoadingController,
     private toastCtrl: ToastController) {
     this.alldata = navParams.get('alldata');
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.authService.coinsent(this.alldata).then((result) => {
       this.response = result;
 
@@ -44,7 +45,8 @@ export class CoinSentPage {
       var dataoverall = JSON.parse(my);
       if (dataoverall.success) {
         this.overallresponseData = dataoverall.responseData;
-        this.responseNotification = dataoverall.responseData[0];
+        this.ContactBook = dataoverall.responseData[0].ContactBook;
+        this.DailyNews = dataoverall.responseData[0].DailyNews;
         //this.EmployeeNames = dataoverall.responseData[0].EmployeeName;
        // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
        // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
@@ -69,9 +71,13 @@ export class CoinSentPage {
   }
 
 
-commentedit()
+  commentedit(commentToEdit, GivenCoinId)
 {
-	this.navCtrl.push(CommentEditPage);
+    var commentData = {
+      Comment: commentToEdit,
+      GivenCoinID: GivenCoinId
+    }
+    this.navCtrl.push(CommentEditPage, { 'alldata': this.alldata, 'comment': commentData});
 }
   menu(){
     this.menuCtrl.open();

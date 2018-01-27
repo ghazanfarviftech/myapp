@@ -85,7 +85,7 @@ commentedit()
     this.navCtrl.push(ManagementPage);
   }
   coinsSent(){
-    this.navCtrl.push(CoinSentPage);
+    this.navCtrl.push(CoinSentPage, { 'alldata': this.alldata });
   }
   coinReceived(){
     this.navCtrl.push(CoinReceivedPage);

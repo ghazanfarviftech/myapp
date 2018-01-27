@@ -16,11 +16,11 @@
   </ion-col>
   <ion-col col-3>
     <img class="tabIcon" (click)="contacts()" src="assets/contact.png" />
-    <ion-badge class="notification">2</ion-badge>
+    <ion-badge class="notification">{{ContactBook}}</ion-badge>
   </ion-col>
   <ion-col col-3>
     <img class="tabIcon" (click)="dailyNews()" src="assets/daily.png"  />
-    <ion-badge class="notification">26</ion-badge>
+    <ion-badge class="notification">{{DailyNews}}</ion-badge>
   </ion-col>
   <ion-col col-3>
     <img class="tabIcon" (click)="timeline()" src="assets/coin.png"/>
@@ -62,7 +62,7 @@
   		<ion-col col-12 style="border: 1px solid #cccccc;display: flex; ">
   			<p col-10>{{item.Comments}}</p>
   			
-  			<img col-2 src="assets/coins/edit.png" (click)="commentedit()" style="height: 40px; margin-bottom:10px" />
+  			<img col-2 src="assets/coins/edit.png" (click)="commentedit(item.Comments,item.GivenCoinID)" style="height: 40px; margin-bottom:10px" />
   		
   		</ion-col>
   		

@@ -6,20 +6,18 @@
 <ion-content >
 
 
-  <ion-textarea name="edit" placeholder="This is me testing" id="myInput" rows="10" maxLength="500"  [(ngModel)]="model"></ion-textarea>
+  <ion-textarea name="edit" placeholder="Enter your comments" id="myInput" rows="10" maxLength="500"  [(ngModel)]="comment.Comment"></ion-textarea>
 
 </ion-content>
 <ion-footer>
   <ion-row class="toolbar-background-md">
-    <ion-col col-4 >
-        <button ion-button round class="btn-app" (click)="coinsSent()" >
-        {{ 'Coin Sent' | translate }}</button>
+    <ion-col col-6 >
+        <button ion-button round class="btn-app" (click)="cancel()"  >
+        {{ 'Cancel' | translate }}</button>
       </ion-col>
-      <ion-col col-4 >
-        <button ion-button round class="btn-app" >{{ 'Coin Received' | translate }}</button>
+      <ion-col col-6 >
+        <button ion-button round class="btn-app" (click)="update(comment)" >{{ 'Apply' | translate }}</button>
       </ion-col>
-      <ion-col col-4 >
-        <button ion-button round class="btn-app" >{{ 'Profile'  | translate }}</button>
-      </ion-col>
+      
   </ion-row>  
  </ion-footer>

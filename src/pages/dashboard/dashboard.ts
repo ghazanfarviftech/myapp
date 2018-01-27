@@ -29,7 +29,7 @@ export class DashboardPage {
     this.navCtrl.setRoot(ManagementPage);
   }
   coinTimeline(){
-    this.navCtrl.setRoot(CoinTimelinePage);
+    this.navCtrl.setRoot(CoinTimelinePage, { 'alldata': this.alldata });
   }
   message(){
     this.navCtrl.setRoot(MessageMainPage);

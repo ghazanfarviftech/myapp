@@ -132,7 +132,7 @@ coinsReceived(){
 
   timeline()
   {
-  this.navCtrl.push(CoinTimelinePage);
+    this.navCtrl.push(CoinTimelinePage, { 'alldata': this.alldata });
   }
 
   message(){

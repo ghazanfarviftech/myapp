@@ -17,11 +17,11 @@
   </ion-col>
   <ion-col col-3>
        <img class="tabIcon" (click)="contacts()" src="assets/contact.png" />
-    <ion-badge class="notification">2</ion-badge>
+    <ion-badge class="notification">{{ContactBook}}</ion-badge>
   </ion-col>
   <ion-col col-3>
         <img  (click)="dailyNews()"  class="tabIcon" src="assets/daily.png"  />
-    <ion-badge class="notification">26</ion-badge>
+    <ion-badge class="notification">{{DailyNews}}</ion-badge>
   </ion-col>
   <ion-col col-3>
        <img class="tabIcon" (click)="timeline()" src="assets/coinActive.png"/>
@@ -34,14 +34,14 @@
 <ion-content class="gray-content">
 
 <ion-row >
-<ion-card *ngFor="let item of coinList">
+<ion-card *ngFor="let item of overallresponseData">
   <ion-card-content>
     <ion-row>
     <ion-col col-2 >
     <img src="assets/coins/Pic (6).png" class="profile" (click)="userProfile()" />
     </ion-col>
     <ion-col col-3>
-      <span>username1</span>
+      <span>{{item.SenderName}}</span>
     </ion-col>
     <ion-col col-2 class="displaystyle">
     <img src="assets/coins/Pic (5).png" class="coin"  />
@@ -49,7 +49,7 @@
    </ion-col> 
  
   <ion-col col-3>
-      <span>username1</span>
+      <span>{{item.ReciepentName}}</span>
     </ion-col>
    <ion-col col-2>
         <img src="assets/coins/Pic (6).png" class="profile" (click)="userProfile()"/>
@@ -59,7 +59,7 @@
     </ion-row>
     <ion-row>
       <ion-col col-12 style="border: 1px solid #cccccc;display: flex; ">
-        <p col-10>this is me testing</p>
+        <p col-10>{{item.Comments}}</p>
         
       
       </ion-col>
@@ -74,7 +74,7 @@
   </ion-col>
 
   <ion-col col-6 class="datetime">
-    2018/01/15 5:04 PM
+    {{item.DateAdded}}
   </ion-col>
     </ion-row>
   </ion-card-content>
