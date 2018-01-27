@@ -11,24 +11,43 @@ import { AppPreferences } from '@ionic-native/app-preferences';
 })
 export class HomePage {
 
-  loading: any;
   data: any;
   mydata: any;
   loginData = { EmailAddress:'ryouellc@tuttocitta.it', Password:'rose123' };
   response : any;
+  sessionData: any;
   constructor(public navCtrl: NavController,public menuCtrl:MenuController,
-    public authService: RevoService, public loadingCtrl: LoadingController,
-     private toastCtrl: ToastController
-    ,private appPreferences: AppPreferences) {
+    public authService: RevoService,private appPreferences: AppPreferences) {
+    
+    this.authService.checkSession().then((result) => { 
+      if (result == null) {
+        //this.navCtrl.setRoot(HomePage);
+      } else {
+        this.authService.checkCompanyId();
+        this.authService.checkEmployeeId();
+        this.navCtrl.setRoot(DashboardPage);
+      }
+    }, (err) => {
+     // this.navCtrl.setRoot(HomePage);
+     });
+     /*
+    if (this.sessionData != null) {
+       this.navCtrl.setRoot(DashboardPage);
+    } else {
+      //this.authService.presentToast("Not Authorized Kindly Login Again");
+      this.navCtrl.setRoot(HomePage);
+    }
+    */
+
 }
 
   login(){
     
     if(this.loginData.EmailAddress.trim().length == 0 || this.loginData.EmailAddress.trim() == ''|| this.loginData.Password.trim().length == 0 || this.loginData.Password.trim() == '')
 {
-  this.presentToast("Please Fill the Required Fields");
+      this.authService.presentToast("Please Fill the Required Fields");
 }else{
-this.showLoader();
+      this.authService.showLoader();
 
    this.authService.login(this.loginData).then((result) => {
      // this.loading.dismiss();
@@ -41,11 +60,12 @@ this.response = my;
   console.log("json data : " +my);
      console.log("json data : " +dataoverall.success);
 
-     this.loading.dismiss();
+     this.authService.loading.dismiss();
 
      if(dataoverall.success)
      {
       
+       this.authService.setSession(dataoverall.responseData);
       console.log("json dataallesponse : " +dataoverall.responseData.EmployeeID); 
      /*
       this.appPreferences.store('EmployeeID',dataoverall.responseData.EmployeeID);
@@ -56,19 +76,21 @@ this.response = my;
       this.appPreferences.store('SessionID',dataoverall.responseData.SessionID);
       this.appPreferences.store('Role',dataoverall.responseData.Role);
       */
-      this.presentToast("Login Successfully");
+       this.authService.presentToast("Login Successfully");
       this.navCtrl.setRoot(DashboardPage,{
         param1: dataoverall.responseData
     });
      }else{
 
-      
-      this.presentToast(dataoverall.message);
+       this.authService.removeSession();
+       this.authService.presentToast(dataoverall.message);
       //this.presentToast("Email or Password Incorrect");
      }
     }, (err) => {
-       this.loading.dismiss();
-       this.presentToast(err);
+
+      this.authService.removeSession();
+      this.authService.loading.dismiss();
+      this.authService.presentToast(err);
       //this.response = err;
       console.log("errrorr " + err);
     });
@@ -82,26 +104,5 @@ this.response = my;
   	this.navCtrl.push(ForgetPasswordPage);
   }
 
-  showLoader(){
-    this.loading = this.loadingCtrl.create({
-        content: 'Authenticating...'
-    });
-
-    this.loading.present();
-  }
-
-  presentToast(msg) {
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: 3000,
-      position: 'bottom',
-      dismissOnPageChange: true
-    });
-
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
-
-    toast.present();
-  }
+  
 }

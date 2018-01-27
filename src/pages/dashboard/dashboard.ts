@@ -6,7 +6,8 @@ import { CoinTimelinePage } from "../coin-timeline/coin-timeline";
 import { MessageMainPage } from "../message-main/message-main";
 import { DailyNewsReceptBoxPage } from "../daily-news-recept-box/daily-news-recept-box";
 import { ContactNotesPage } from "../contact-notes-received/contact-notes";
-
+import { RevoService } from "../../providers/revoservices";
+import { HomePage } from "../home/home";
 
 @Component({
   selector: 'page-dashboard',
@@ -14,9 +15,34 @@ import { ContactNotesPage } from "../contact-notes-received/contact-notes";
 })
 export class DashboardPage {
   alldata : any;
-  constructor(public navCtrl: NavController,public params: NavParams,public menuCtrl:MenuController) {
+  sessionData: any;
+  constructor(public navCtrl: NavController, public params: NavParams, public menuCtrl: MenuController,
+    public authService: RevoService) {
 
+    this.authService.checkSession().then((result) => {
+      if (result == null)
+      {
+        this.authService.presentToast("Not Authorized Kindly Login");
+        this.navCtrl.setRoot(HomePage);
+      }else{
+        this.authService.checkCompanyId();
+        this.authService.checkEmployeeId();
+        this.alldata = params.get('param1');
+     // this.navCtrl.setRoot(DashboardPage);
+      }
+    }, (err) => {
+      this.navCtrl.setRoot(HomePage);
+    });
+      /*
+    this.sessionData = this.authService.checkSession();
+    if(this.sessionData != null)
+    {
     this.alldata = params.get('param1');
+    }else{
+      this.authService.presentToast("Not Authorized Kindly Login");
+      this.navCtrl.setRoot(HomePage);
+    }
+    */
   }
 
   menu(){

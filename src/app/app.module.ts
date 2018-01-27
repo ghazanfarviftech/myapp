@@ -42,6 +42,7 @@ import { Globalization } from '@ionic-native/globalization';
 import { ChartsModule } from 'ng2-charts';
 import { AppPreferences } from '@ionic-native/app-preferences';
 import { RevoService } from '../providers/revoservices';
+import { IonicStorageModule } from '@ionic/storage';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -83,6 +84,7 @@ export function createTranslateLoader(http: HttpClient) {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     TranslateModule.forChild(),
     BrowserModule,
     HttpClientModule,
