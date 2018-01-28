@@ -39,7 +39,7 @@
   <ion-card-content>
     <ion-row>
     <ion-col col-2 >
-    <img src="{{item.SenderImage}}" class="profile" (click)="userProfile()" />
+    <img src="{{item.SenderImage}}" class="profile" (click)="userProfile(item.SenderID)" />
     </ion-col>
     <ion-col col-3>
       <span>{{item.SenderName}}</span>
@@ -53,7 +53,7 @@
       <span>{{item.ReciepentName}}</span>
     </ion-col>
    <ion-col col-2>
-        <img src="{{item.ReciepentImage}}" class="profile" (click)="userProfile()"/>
+        <img src="{{item.ReciepentImage}}" class="profile" (click)="userProfile(item.ReciepentID)"/>
     
   </ion-col>
     

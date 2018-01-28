@@ -36,35 +36,31 @@
 
 <ion-row>
   <ion-col col-4>
-    <img src="assets/1.jpg" style="height: 100px;" />
+    <img src="{{ProfileImage}}" style="height: 100px;" />
   </ion-col>
   <ion-col col-8>
-    <p>Fazila Mehtab</p>
-    <p>@fazila</p>
-    <p class="lbl-gray">team department store</p>
+    <p>{{EmployeeNames}}</p>
+    <p>{{CompanyName}}</p>
+    <p class="lbl-gray">{{StoreName}}-{{DepartmentName}}</p>
   </ion-col>
 <ion-col col-4>
    
 </ion-col>
-<ion-col col-3>
-  <img src="assets/special.png">
-  <span class="lbl-gray" style="display: block; text-align: center;">sdsF</span>
-</ion-col>
-<ion-col col-3>
-<img src="assets/strong.png"/>
-<span class="lbl-gray" style="display: block; text-align: center;">sdfs</span>
+<ion-col col-3 *ngFor="let specialcoin of SpecialCoins">
+  <img src="{{specialcoin.CoinImage}}">
+  <span class="lbl-gray" style="display: block; text-align: center;">{{specialcoin.CoinName}}</span>
 </ion-col>
 <ion-col col-4>
   <span class="lbl-gray">Catch Copy</span>
 </ion-col>
 <ion-col col-8>
-  <span class="lbl-gray">Catch Copy somthing goes here</span>
+  <span class="lbl-gray">{{Catchpharase}}</span>
 </ion-col>
 <ion-col col-4>
   <span class="lbl-gray">My rules</span>
 </ion-col>
 <ion-col col-8>
-  <span class="lbl-gray">Catch Copy my rules goes here</span>
+  <span class="lbl-gray">{{Goal}}</span>
 </ion-col>
 </ion-row>
 <ion-row>
@@ -78,57 +74,32 @@
   <span class="lbl-gray">Number I got today</span>
 </ion-col>
 <ion-col col-6>
-  <span class="lbl-gray">got 22 / rank 222</span>
+  <span class="lbl-gray">got {{Igot}} / rank {{Rigot}}</span>
 </ion-col>
 <ion-col col-6>
   <span class="lbl-gray">Number I sent today</span>
 </ion-col>
 <ion-col col-6>
-  <span class="lbl-gray">got 22 / rank 222</span>
+  <span class="lbl-gray">got {{Isent}} / rank {{Risent}}</span>
 </ion-col>
  <ion-col col-6>
   <span class="lbl-gray">Number I got since joined the company</span>
 </ion-col>
 <ion-col col-6>
-  <span class="lbl-gray">got 22 / rank 222</span>
+  <span class="lbl-gray">got {{Igotsc}} / rank {{Rigotsc}}</span>
 </ion-col>
 <ion-col col-6>
   <span class="lbl-gray">Number I sent since joined the company</span>
 </ion-col>
 <ion-col col-6>
-  <span class="lbl-gray">got 22 / rank 222</span>
+  <span class="lbl-gray">got {{Isentsc}} / rank {{RIsentsc}}</span>
 </ion-col>
 </ion-row>
 <ion-row style="text-align: center">
-  <ion-col col-3>
-    <img src="assets/special.png" />
-    <span class="lbl-gray" >sdsF</span>
+  <ion-col col-3 *ngFor="let coin of Coins">
+    <img src="{{coin.CoinImage}}" />
+    <span class="lbl-gray">{{coin.TotalCoinsgot}}</span>
   </ion-col>
-  <ion-col col-3>
-    <img src="assets/pic (1).png" />
-    <span class="lbl-gray" >sdsF</span>
-  </ion-col>
-  <ion-col col-3>
-    <img src="assets/pic (2).png" />
-    <span class="lbl-gray">sdsF</span>
-  </ion-col>
-  <ion-col col-3>
-    <img src="assets/pic (3).png"/>
-    <span class="lbl-gray" >sdsF</span>
-  </ion-col>
-  <ion-col col-3>
-    <img src="assets/pic (5).png" />
-    <span class="lbl-gray">sdsF</span>
-  </ion-col>
-  <ion-col col-3>
-    <img src="assets/pic (7).png" />
-    <span class="lbl-gray">sdsF</span>
-  </ion-col>
-  <ion-col col-3>
-    <img src="assets/strong.png" />
-    <span class="lbl-gray" >sdsF</span>
-  </ion-col>
- 
 </ion-row>
 
 </ion-content>

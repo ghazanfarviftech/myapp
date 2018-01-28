@@ -102,7 +102,6 @@ export class CoinsintroductionPage {
         this.navCtrl.setRoot(HomePage);
         console.log("errrorr " + err.status);
       } else {
-        this.authService.loading.dismiss();
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
       }

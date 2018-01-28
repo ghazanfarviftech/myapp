@@ -47,14 +47,11 @@
  <button ion-button round class="btn-app">{{ 'Set Profile' | translate }}</button>
 
 </ion-col>
-<ion-col col-3>
-  <img src="assets/special.png">
-  <span class="lbl-gray" style="display: block; text-align: center;">sdsF</span>
+<ion-col col-3 *ngFor="let specialcoin of SpecialCoins">
+  <img src="{{specialcoin.CoinImage}}">
+  <span class="lbl-gray" style="display: block; text-align: center;">{{specialcoin.CoinName}}</span>
 </ion-col>
-<ion-col col-3>
-<img src="assets/strong.png"/>
-<span class="lbl-gray" style="display: block; text-align: center;">sdfs</span>
-</ion-col>
+
 <ion-col col-4>
   <span class="lbl-gray">Catch Copy</span>
 </ion-col>

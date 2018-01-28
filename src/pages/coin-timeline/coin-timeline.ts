@@ -94,7 +94,7 @@ export class CoinTimelinePage {
         this.navCtrl.setRoot(HomePage);
         console.log("errrorr " + err.status);
       } else {
-        this.authService.loading.dismiss();
+       
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
       }
@@ -187,9 +187,9 @@ coinSend()
   this.navCtrl.push(CoinSendPage);
 
 }
-userProfile()
+userProfile(employeeId)
 {
-  this.navCtrl.push(UserProfilePage);
+  this.navCtrl.push(UserProfilePage, { 'EmployeeID': employeeId });
 
 }
  dailyNews(){
