@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DailyNewsMsgDetailsPage } from "../daily-news-msg-details/daily-news-msg-details";
 
 /**
  * Generated class for the SeenPeoplePage page.
@@ -20,6 +21,10 @@ export class SeenPeoplePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SeenPeoplePage');
+  }
+
+    close(){
+     this.navCtrl.push(DailyNewsMsgDetailsPage);
   }
 
 }

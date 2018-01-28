@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MessageMainPage } from "../message-main/message-main";
+import { DashboardPage } from "../dashboard/dashboard";
 
 /**
  * Generated class for the MsgWritePage page.
@@ -28,5 +29,8 @@ export class MsgWritePage {
   	}	
     cancel(){
   		this.navCtrl.push(MessageMainPage);
-  	}	
+  	}
+        dashboard(){
+     this.navCtrl.push(DashboardPage);
+  }	
 }

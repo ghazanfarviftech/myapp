@@ -9,7 +9,9 @@ import { DailyNewsReceptBoxPage } from "../daily-news-recept-box/daily-news-rece
 import { ContactNotesPage } from "../contact-notes-received/contact-notes";
 import { ProfilePage } from "../mypageprofile/profile";
 import { MessageMainPage } from "../message-main/message-main";
-
+import { RevoService } from "../../providers/revoservices";
+import { HomePage } from '../home/home';
+import { DashboardPage } from "../dashboard/dashboard";
 /**
  * Generated class for the CoinSendPage page.
  *
@@ -24,11 +26,77 @@ import { MessageMainPage } from "../message-main/message-main";
 })
 export class CoinSendPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  response: any;
+  overallresponseData: Array<Object>;
+  overallData: any;
+  ContactBook: any;
+  DailyNews: any;
+  CompanyID: any;
+  CompanyName: any;
+  Department: Array<Object>;
+  Employees: Array<Object>;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: RevoService) {
+
+    this.authService.checkSession().then((result) => {
+      if (result == null) {
+        this.authService.presentToast("Not Authorized Kindly Login");
+        this.navCtrl.setRoot(HomePage);
+      } else {
+        this.authService.checkCompanyId();
+        this.authService.checkEmployeeId();
+        //this.alldata = navParams.get('param1');
+        // this.navCtrl.setRoot(DashboardPage);
+      }
+    }, (err) => {
+      this.authService.presentToast("Something went wrong");
+      this.navCtrl.setRoot(HomePage);
+    });
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CoinSendPage');
+  ionViewWillEnter() {
+    this.authService.showLoader("Loading ...");
+    this.authService.coinsendsearch().then((result) => {
+      this.response = result;
+
+      var my = JSON.stringify(this.response);
+      console.log("response :" + my);
+      var dataoverall = JSON.parse(my);
+      if (dataoverall.success) {
+        this.overallresponseData = dataoverall.responseData;
+        this.overallData = this.overallresponseData[0];
+        this.CompanyID = this.overallData.CompanyID;
+        this.CompanyName = this.overallData.CompanyName;
+        
+        this.Department = this.overallData.Department;
+        this.Employees = this.overallData.Employees;
+        
+        this.authService.loading.dismiss();
+      } else {
+        this.authService.loading.dismiss();
+        this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast("Something went wrong");
+      }
+
+    }, (err) => {
+      this.authService.loading.dismiss();
+      var my = JSON.stringify(err);
+      if (err.error.message == "Unrecognized Session.") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+      } else {
+        this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast("Something went wrong");
+        console.log("errrorr " + err.status);
+      }
+
+    });
+
+    console.log('ionViewDidLoad CoinSentPage');
+
   }
    coinSelect(){
   	this.navCtrl.push(CoinSelectPage);
@@ -72,5 +140,25 @@ userProfile()
 
 message(){
     this.navCtrl.push(MessageMainPage);
+  }
+
+  getItems(ev: any) {
+    // Reset items back to all of the items
+   // this.initializeItems();
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    /*
+    if (val && val.trim() != '') {
+      this.items = this.items.filter((item) => {
+        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+    */
+  }
+ dashboard(){
+     this.navCtrl.push(DashboardPage);
   }
 }

@@ -10,6 +10,7 @@ import { ContactNotesPage } from "../contact-notes-received/contact-notes";
 import { ProfilePage } from "../mypageprofile/profile";
 import { MessageMainPage } from "../message-main/message-main";
 import { RevoService } from "../../providers/revoservices";
+import { HomePage } from '../home/home';
 /**
  * Generated class for the CoinTimelinePage page.
  *
@@ -30,14 +31,34 @@ export class CoinTimelinePage {
   overallresponseData: Array<Object>;
   ContactBook: any;
   DailyNews: any;
+  total_rows: any;
+  Cuurentpage = 1;
+  TotalNumber: any;
+  PerPage: any = 10;
+  MaxPage: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public authService: RevoService, public loadingCtrl: LoadingController,
     private toastCtrl: ToastController) {
-    this.alldata = navParams.get('alldata');
+    this.authService.checkSession().then((result) => {
+      if (result == null) {
+        this.authService.presentToast("Not Authorized Kindly Login");
+        this.navCtrl.setRoot(HomePage);
+      } else {
+        this.authService.checkCompanyId();
+        this.authService.checkEmployeeId();
+        this.alldata = navParams.get('param1');
+        // this.navCtrl.setRoot(DashboardPage);
+      }
+    }, (err) => {
+      this.authService.presentToast("Something went wrong");
+      this.navCtrl.setRoot(HomePage);
+    });
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
 
-    this.authService.coinemptimelime(this.alldata).then((result) => {
+    this.authService.showLoader("Loading ...");
+    this.authService.coinemptimelime(this.Cuurentpage, this.PerPage).then((result) => {
       this.response = result;
 
       var my = JSON.stringify(this.response);
@@ -46,30 +67,104 @@ export class CoinTimelinePage {
       if (dataoverall.success) {
         this.overallresponseData = dataoverall.responseData;
 
+        this.total_rows = dataoverall.total_rows;
+        this.TotalNumber = this.total_rows.TotalNumber;
+        this.PerPage = this.total_rows.PerPage;
+        this.MaxPage = this.total_rows.MaxPage;
+
         this.ContactBook = dataoverall.responseData[0].ContactBook;
         this.DailyNews = dataoverall.responseData[0].DailyNews;
         //this.EmployeeNames = dataoverall.responseData[0].EmployeeName;
         // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
         // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
         // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
-
+        this.authService.loading.dismiss();
       } else {
-
+        this.authService.loading.dismiss();
+        this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast("Something went wrong");
       }
+ 
     }, (err) => {
-      // this.loading.dismiss();
-      // this.presentToast(err);
-      //this.response = err;
-      console.log("errrorr " + err);
+      this.authService.loading.dismiss();
+      var my = JSON.stringify(err);
+      if (err.error.message == "Unrecognized Session.") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+      } else {
+        this.authService.loading.dismiss();
+        this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast("Something went wrong");
+      }
     });
 
     console.log('ionViewDidLoad CoinSentPage');
-    this.coinList = [];
-    this.coinList.push("first");
-    this.coinList.push("second");
-    this.coinList.push("second");
-    this.coinList.push("second");
+    
   }
+
+
+  doInfinite(infiniteScroll) {
+    this.Cuurentpage = this.Cuurentpage + 1;
+    setTimeout(() => {
+      this.authService.coinemptimelime(this.Cuurentpage, this.PerPage)
+        .then((result) => {
+          this.response = result;
+
+          var my = JSON.stringify(this.response);
+          console.log("response :" + my);
+          var dataoverall = JSON.parse(my);
+          if (dataoverall.success) {
+           // this.overallresponseData = dataoverall.responseData;
+
+            this.total_rows = dataoverall.total_rows;
+            this.TotalNumber = this.total_rows.TotalNumber;
+            this.PerPage = this.total_rows.PerPage;
+            this.MaxPage = this.total_rows.MaxPage;
+
+            this.ContactBook = dataoverall.responseData[0].ContactBook;
+            this.DailyNews = dataoverall.responseData[0].DailyNews;
+            
+            for (let i = 0; i < dataoverall.responseData.length; i++) {
+              this.overallresponseData.push(dataoverall.responseData[i]);
+            }
+
+
+            this.authService.loading.dismiss();
+          }else{
+            if (dataoverall.message == 'No data found.')
+            {
+            
+              this.authService.presentToast("No data found.");
+            }else{
+              this.authService.loading.dismiss();
+              this.navCtrl.setRoot(DashboardPage);
+              this.authService.presentToast("Something went wrong");
+            }
+          }
+        },
+        (err) => {
+          this.authService.loading.dismiss();
+          var my = JSON.stringify(err);
+          if (err.error.message == "Unrecognized Session.") {
+            this.authService.removeSession();
+            this.authService.presentToast("Please Login Again");
+            this.navCtrl.setRoot(HomePage);
+            console.log("errrorr " + err.status);
+          } else {
+            this.authService.loading.dismiss();
+            this.navCtrl.setRoot(DashboardPage);
+            this.authService.presentToast("Something went wrong");
+          }
+        });
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 2000);
+  }
+
+
   dashboard(){
     this.navCtrl.push(DashboardPage);
   }

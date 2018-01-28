@@ -4,13 +4,13 @@ import { CommentEditPage } from "../comment-edit/comment-edit";
 import { ManagementPage } from "../management/management";
 import { CoinReceivedPage } from "../coin-received/coin-received";
 import { ProfilePage } from "../mypageprofile/profile";
-
+import { DashboardPage } from "../dashboard/dashboard";
 import { DailyNewsReceptBoxPage } from "../daily-news-recept-box/daily-news-recept-box";
 import { ContactNotesPage } from "../contact-notes-received/contact-notes";
 import { CoinTimelinePage } from "../coin-timeline/coin-timeline";
 import { MessageMainPage } from "../message-main/message-main";
 import { RevoService } from "../../providers/revoservices";
-
+import { HomePage } from '../home/home';
 /**
  * Generated class for the CoinSentPage page.
  *
@@ -33,10 +33,25 @@ export class CoinSentPage {
   DailyNews: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public authService: RevoService, public loadingCtrl: LoadingController,
     private toastCtrl: ToastController) {
-    this.alldata = navParams.get('alldata');
+    this.authService.checkSession().then((result) => {
+      if (result == null) {
+        this.authService.presentToast("Not Authorized Kindly Login");
+        this.navCtrl.setRoot(HomePage);
+      } else {
+        this.authService.checkCompanyId();
+        this.authService.checkEmployeeId();
+        this.alldata = navParams.get('param1');
+        // this.navCtrl.setRoot(DashboardPage);
+      }
+    }, (err) => {
+      this.authService.presentToast("Something went wrong");
+      this.navCtrl.setRoot(HomePage);
+    });
   }
 
   ionViewWillEnter() {
+
+    this.authService.showLoader("Loading ...");
     this.authService.coinsent(this.alldata).then((result) => {
       this.response = result;
 
@@ -51,23 +66,31 @@ export class CoinSentPage {
        // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
        // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
        // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
-
+        this.authService.loading.dismiss();
       } else {
-
+        this.authService.loading.dismiss();
+        this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast("Something went wrong");
       }
+      
     }, (err) => {
-      // this.loading.dismiss();
-      // this.presentToast(err);
-      //this.response = err;
-      console.log("errrorr " + err);
+      this.authService.loading.dismiss();
+      var my = JSON.stringify(err);
+      if (err.error.message == "Unrecognized Session.") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+      } else {
+        this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast("Something went wrong");
+        console.log("errrorr " + err.status);
+      }
+     
     });
 
     console.log('ionViewDidLoad CoinSentPage');
-    this.personList = [];
-    this.personList.push("first");
-    this.personList.push("second");
-    this.personList.push("second");
-    this.personList.push("second");
+    
   }
 
 
@@ -116,5 +139,8 @@ dailyNews(){
 
   message(){
     this.navCtrl.push(MessageMainPage);
+  }
+      dashboard(){
+     this.navCtrl.push(DashboardPage);
   }
 }

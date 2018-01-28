@@ -1,5 +1,5 @@
 page-coin-timeline {
-.toolbar-background-md{
+.toolbar-background-md,  .header-ios .toolbar-ios:last-child .toolbar-background-ios{
 		background: #ffaa14;
 	
 	}
@@ -7,9 +7,13 @@ page-coin-timeline {
 		color:white;
 		text-align: center;
 		font-size: 16px;
+		padding:5px;
 	}	
 	.toolbar-md{
 		min-height: auto;
+	}
+	.back-button.show-back-button{
+		display:none
 	}
 	.coin{
 		width:40px;
@@ -63,9 +67,17 @@ page-coin-timeline {
 		
 	}
 
-	.datetime{
+	.seen{
 	text-align: right;
 	font-size: 1.0rem;
+	padding:5px 0px;
+	color:#666666;
+	}
+	 .datetime{
+	text-align: right;
+	font-size: 1.0rem;
+	padding:10px 0px;
+	color:#666666;
 	}
 
 }

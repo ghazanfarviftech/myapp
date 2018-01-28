@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController,MenuController } from 'ionic-angular';
 import { ProfilePage } from "../mypageprofile/profile";
 import { MessageMainPage } from "../message-main/message-main";
+import { DashboardPage } from "../dashboard/dashboard";
 
 /**
  * Generated class for the ManagementPage page.
@@ -36,5 +37,9 @@ export class ManagementPage {
 
 message(){
     this.navCtrl.push(MessageMainPage);
+  }
+
+        dashboard(){
+     this.navCtrl.push(DashboardPage);
   }
 }

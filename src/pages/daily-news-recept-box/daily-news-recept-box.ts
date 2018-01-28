@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, ToastController, NavParams, MenuController } from 'ionic-angular';
 import { DailyNewsMsgDetailsPage } from "../daily-news-msg-details/daily-news-msg-details";
 import { WriteDailyNewsPage } from "../write-daily-news/write-daily-news";
 import { DashboardPage } from "../dashboard/dashboard";
@@ -8,6 +8,11 @@ import { ProfilePage } from "../mypageprofile/profile";
 import { ContactNotesPage } from "../contact-notes-received/contact-notes";
 import { CoinTimelinePage } from "../coin-timeline/coin-timeline";
 import { MessageMainPage } from "../message-main/message-main";
+
+import { AppPreferences } from '@ionic-native/app-preferences';
+import { RevoService } from "../../providers/revoservices";
+
+
 
 /**
  * Generated class for the DailyNewsReceptBoxPage page.
@@ -23,7 +28,15 @@ import { MessageMainPage } from "../message-main/message-main";
 })
 export class DailyNewsReceptBoxPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  personList: Array<Object>;
+  alldata: any;
+  response: any;
+  overallresponseData: Array<Object>;
+  ContactBook: any;
+  DailyNews: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public authService: RevoService, public loadingCtrl: LoadingController,
+    private toastCtrl: ToastController) {
+    this.alldata = navParams.get('alldata');
   }
 
   ionViewDidLoad() {

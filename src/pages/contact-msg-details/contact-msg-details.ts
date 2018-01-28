@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SeenPeopleMsgPage } from "../seen-people-msg/seen-people-msg";
+import { DashboardPage } from "../dashboard/dashboard";
 
 /**
  * Generated class for the DailyNewsMsgDetailsPage page.
@@ -44,5 +45,7 @@ export class ContactMsgDetailsPage {
         data.icon = 'assets/ranking/Pic (8).png';
     }
   }
-
+    dashboard(){
+     this.navCtrl.push(DashboardPage);
+  }
 }

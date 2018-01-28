@@ -31,6 +31,7 @@ export class DashboardPage {
      // this.navCtrl.setRoot(DashboardPage);
       }
     }, (err) => {
+      this.authService.presentToast("Something went wrong");
       this.navCtrl.setRoot(HomePage);
     });
       /*
@@ -65,5 +66,8 @@ export class DashboardPage {
   }
   contacts(){
     this.navCtrl.setRoot(ContactNotesPage);
+  }
+      dashboard(){
+     this.navCtrl.push(DashboardPage);
   }
 }

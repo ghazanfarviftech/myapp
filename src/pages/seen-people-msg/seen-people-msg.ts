@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ContactMsgDetailsPage } from "../contact-msg-details/contact-msg-details";
+
 
 /**
  * Generated class for the SeenPeoplePage page.
@@ -21,5 +23,7 @@ export class SeenPeopleMsgPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SeenPeoplePage');
   }
-  
+      close(){
+     this.navCtrl.push(ContactMsgDetailsPage);
+  }
 }

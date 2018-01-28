@@ -21,6 +21,15 @@
 		margin-left:33%
 	}
 }
+.button-inner{
+    font-size:11px;
+}
+.back-button.show-back-button{
+    display:none;
+    }
+    .toolbar-title {
+    padding:5px;
+    }
 ion-header{
     background:white;
 }
@@ -72,10 +81,32 @@ ion-header{
         padding:0 20px;
     }
     .btn-logout{
-        width:100%;
+        width:60%;
     }
     #menuiconswidth{
-    width: 55px;
+        width: auto;
+        height:auto;
+        border-radius:inherit;
+    }
+    .menu-icon{
+        min-width:auto !important;
+        min-Height:auto !important;
+    }
+    .md .menu-inner{
+        opacity:0.9;
+    }
+    .menu-inner{
+        width:100%;
+    }
+    .menu-item{
+        border-bottom: 1px solid #dedede;
+        padding: 0px 10% !important;
+    }
+    .button-outline-md-dark{
+        border-color:#666666;
+        color:#666666;
+        padding: 24px 0px;
+        margin: auto;
     }
 .ios{
     .footercopyright{

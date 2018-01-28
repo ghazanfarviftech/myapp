@@ -8,6 +8,7 @@ import { DailyNewsReceptBoxPage } from "../daily-news-recept-box/daily-news-rece
 import { ContactNotesPage } from "../contact-notes-received/contact-notes";
 import { ProfilePage } from "../mypageprofile/profile";
 import { MessageMainPage } from "../message-main/message-main";
+import { DashboardPage } from "../dashboard/dashboard";
 
 /**
  * Generated class for the RankingPage page.
@@ -93,5 +94,8 @@ dailyNews(){
   }
 message(){
     this.navCtrl.push(MessageMainPage);
+  }
+      dashboard(){
+     this.navCtrl.push(DashboardPage);
   }
 }

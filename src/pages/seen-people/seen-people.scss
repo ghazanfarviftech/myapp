@@ -2,16 +2,37 @@ page-seen-people {
 	.gray-content{
 		background:#f0f0f0;
 	}
-	.toolbar-background-md{
+	.toolbar-background-md,  .header-ios .toolbar-ios:last-child .toolbar-background-ios{
 		background: #b957a0;
 	
 	}
-	.back-button.show-back-button, .toolbar-title {
+	.back-button.show-back-button{
+		display:none;
+	}
+	 .toolbar-title {
 		color:white;
 		text-align: center;
 		font-size: 16px;
+				padding:5px;
 	}	
 	.toolbar-md{
 		min-height: auto;
+	}
+	.item-md{
+		padding-left:0px;
+	}
+	.item-md.item-block .item-inner{
+		padding-right:0px;
+	}
+	.item-md ion-thumbnail{
+		min-width:auto;
+		min-height:auto;
+		img{
+			width:50px;
+			height:50px;
+		}
+	}
+	.item-md ion-avatar[item-left], .item-md ion-thumbnail[item-left], .item-md ion-avatar[item-start], .item-md ion-thumbnail[item-start]{
+		margin: 8px 2px 8px 0px;
 	}
 }

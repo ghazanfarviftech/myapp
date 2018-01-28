@@ -47,7 +47,7 @@ export class HomePage {
 {
       this.authService.presentToast("Please Fill the Required Fields");
 }else{
-      this.authService.showLoader();
+      this.authService.showLoader("Authenticating");
 
    this.authService.login(this.loginData).then((result) => {
      // this.loading.dismiss();

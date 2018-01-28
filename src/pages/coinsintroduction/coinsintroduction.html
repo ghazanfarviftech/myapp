@@ -6,10 +6,11 @@
 -->
 <ion-nav #mycontent [root]="CoinsintroductionPage"></ion-nav>
 <ion-header>
-  <ion-row style="    box-shadow: 0px 0px 3px grey;">
+ <ion-row style="box-shadow: 0px 0px 3px #ccc;">
     <ion-col col-4>
-      <img src="assets/dashboard/Pic (5).png" (click)="message()" style="height: 30px; width:40px">
-  
+      <img src="assets/dashboard/Pic (5).png"  (click)="message()" style="height: 30px; width:40px">
+      <ion-badge class="notification" style="left:15%">26</ion-badge>
+      <img src="assets/dashboard/Pic (3).png" style="height: 30px; width:40px">
     </ion-col>
     <ion-col col-6><span class="logo" (click)="dashboard()">Logo Logo</span></ion-col>
     <ion-col col-2>
@@ -45,13 +46,13 @@
     <ion-card-title>
       <h2>{{ 'Special Coin' | translate }}</h2>
     </ion-card-title>
-  <ion-card-content  id="contentbg">
-    <h3>  Anthena</h3>
+  <ion-card-content  id="contentbg" *ngFor="let coin of SpecialCoins">
+    <h3>{{coin.Name}}</h3>
 
-    <img src="assets/coinsintroduction/Pic (4).png" id="imgspecial"/>
+    <img src="{{coin.Image}}" id="imgspecial"/>
 
     <p>
-      this is an special coin name anthena
+     {{coin.Description}}
     </p>
 
  </ion-card-content>
@@ -66,19 +67,17 @@
 </ion-row>
 <ion-row style="background: white" padding>
   
-    <h3 >
-      Special Coin
+    <h3>
+    {{CoinofMonthName}}
    </h3>
  
      <ion-row>
     
     <ion-col col-3>
-      <img item-right src="assets/coinsintroduction/Pic (5).png"  />
+      <img item-right src="{{CoinofMonthCoinImage}}"  />
     </ion-col>
         <ion-col col-9>
-         <p> this is the coin of this month . this is the coin of this month 
-          this is the coin of this month 
-          this is the coin of this month </p>
+         <p>{{CoinofMonthDescription}}</p>
     </ion-col>
     </ion-row>
 
@@ -87,85 +86,18 @@
 <ion-row padding>
    {{ 'Coins' | translate }}
 </ion-row>
-<ion-item >
+<ion-item>
   
-     <ion-row>
-    <ion-col col-3>
+     <ion-row >
+    <ion-col col-3 *ngFor="let coin of coins">
     <ion-row >
-      <img  src="assets/coinsintroduction/Pic (6).png" (click)="presentAlert()" width="75px" height="75px" />
+      <img  src="{{coin.CoinImage}}" (click)="presentAlert(coin.CoinID)" width="75px" height="75px" />
     </ion-row>
         <ion-row >
-          why thinking
+          {{coin.Name}}
     </ion-row>
     </ion-col>
-
-        <ion-col col-3>
-    <ion-row >
-      <img  src="assets/coinsintroduction/Pic (1).png" (click)="presentAlert()" width="75px" height="75px" />
     </ion-row>
-        <ion-row >
-          why thinking
-    </ion-row>
-    </ion-col>
-        <ion-col col-3>
-          <ion-row >
-            <img  src="assets/coinsintroduction/Pic (2).png" width="75px" height="75px" />
-          </ion-row>
-        <ion-row >
-          why thinking
-    </ion-row>
-    </ion-col>
-
- <ion-col col-3>
-    <ion-row >
-      <img  src="assets/coinsintroduction/Pic (3).png" (click)="presentAlert()" width="75px" height="75px" />
-    </ion-row>
-        <ion-row >
-          why thinking
-    </ion-row>
-    </ion-col>
-
-
-
-    </ion-row>
-
-
-     <ion-row>
-    <ion-col col-4>
-    <ion-row >
-      <img  src="assets/coinsintroduction/Pic (6).png" (click)="presentAlert()" width="75px" height="75px" />
-    </ion-row>
-        <ion-row >
-          why thinking
-    </ion-row>
-    </ion-col>
-
-        <ion-col col-4>
-    <ion-row >
-      <img  src="assets/coinsintroduction/Pic (7).png" (click)="presentAlert()" width="75px" height="75px" />
-    </ion-row>
-        <ion-row >
-          why thinking
-    </ion-row>
-    </ion-col>
-
-
-        <ion-col col-4>
-    <ion-row >
-      <img src="assets/coinsintroduction/Pic (8).png" (click)="presentAlert()" width="75px" height="75px" />
-    </ion-row>
-        <ion-row >
-          why thinking
-    </ion-row>
-    </ion-col>
-
-
-
-
-    </ion-row>
-    
-
-
 </ion-item>
 
 </ion-content>

@@ -109,6 +109,7 @@ this.http.post("http://chainayena.net/revo/api/revo-employee-login",  credential
       
       
   console.log("data to be send to service : "+alldata);
+  
 this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
   { headers: new HttpHeaders().set('Content-Type', 'application/json')
     .set('sessionid', this.SesssionID.toString())
@@ -167,12 +168,12 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
     });
   }
 
-  public coinemptimelime(alldata) {
+  public coinemptimelime(Cuurentpage,PerPage) {
 
     return new Promise((resolve, reject) => {
 
-      console.log("data to be send to service : " + alldata);
-      this.http.get("http://chainayena.net/revo/api/revo-emp-coin-timeline?PageID=1&PageSize=6",
+      console.log("data to be send to service : " + Cuurentpage);
+      this.http.get("http://chainayena.net/revo/api/revo-emp-coin-timeline?PageID=" + Cuurentpage + "&PageSize=" +PerPage,
         { headers: new HttpHeaders().set('Content-Type', 'application/json')
           .set('sessionid', this.SesssionID.toString())
           .set('employeeid', this.EmployeeID.toString())
@@ -209,6 +210,121 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
     });
   }
   
+  public coinintroduction() {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : " );
+      this.http.get("http://chainayena.net/revo/api/revo-emp-coin-intro?PageID=1&PageSize=8",
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
+  public coinsdetails(coinsdata) {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : " + coinsdata);
+      this.http.post("http://chainayena.net/revo/api/revo-emp-coin-description", coinsdata,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
+
+  public coinsendsearch() {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : " );
+      this.http.get("http://chainayena.net/revo/api/revo-search-employee-default",
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
+  public dailyNewsMsgReceived(alldata) {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : " + alldata);
+      this.http.get("http://chainayena.net/revo/api/revo-news-received?PageID=1&PageSize=1",
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
+  public dailyNewsMsgDetails(alldata, msgId) {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : " + alldata);
+      this.http.post("http://chainayena.net/revo/api/revo-news-message", msgId,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
 
 
   setSession(session)
@@ -298,9 +414,9 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
   }
 
 
-  showLoader() {
+  showLoader(textToShow) {
     this.loading = this.loadingCtrl.create({
-      content: 'Authenticating...'
+      content: textToShow
     });
 
     this.loading.present();

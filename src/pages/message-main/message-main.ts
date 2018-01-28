@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MsgDetailedPage } from "../msg-detailed/msg-detailed";
 import { MsgWritePage } from "../msg-write/msg-write";
+import { DashboardPage } from "../dashboard/dashboard";
 
 /**
  * Generated class for the MessageMainPage page.
@@ -28,5 +29,8 @@ export class MessageMainPage {
   }
   editMsg(){
     this.navCtrl.push(MsgWritePage);
+  }
+      dashboard(){
+     this.navCtrl.push(DashboardPage);
   }
 }

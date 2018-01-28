@@ -12,6 +12,7 @@ import { CoinTimelinePage } from "../coin-timeline/coin-timeline";
 import { MessageMainPage } from "../message-main/message-main";
 import { AppPreferences } from '@ionic-native/app-preferences';
 import { RevoService } from "../../providers/revoservices";
+import { HomePage } from '../home/home';
 
 @Component({
   selector: 'page-profile',
@@ -39,18 +40,32 @@ export class ProfilePage {
   Isentsc: string;
   Risent: string;
   Rigotsc: string;
+  Coins: Array<Object>;
+  SpecialCoins: Array<Object>;
   constructor(public navCtrl: NavController,public menuCtrl:MenuController 
     ,public authService: RevoService, public loadingCtrl: LoadingController,
      private toastCtrl: ToastController,private appPreferences: AppPreferences,public params: NavParams) {
-      this.alldata = params.get('alldata');
-
+     
+    this.authService.checkSession().then((result) => {
+      if (result == null) {
+        this.authService.presentToast("Not Authorized Kindly Login");
+        this.navCtrl.setRoot(HomePage);
+      } else {
+        this.authService.checkCompanyId();
+        this.authService.checkEmployeeId();
+        this.alldata = params.get('param1');
+        // this.navCtrl.setRoot(DashboardPage);
+      }
+    }, (err) => {
+      this.authService.presentToast("Something went wrong");
+      this.navCtrl.setRoot(HomePage);
+    });
     
   }
 
-  ionViewWillEnter()
-  {
-  }
-  ionViewDidLoad() {
+  
+  ionViewWillEnter() {
+    this.authService.showLoader("Loading Profile");
     this.authService.profile(this.alldata).then((result) => {
       this.response = result;
 
@@ -75,14 +90,35 @@ export class ProfilePage {
         this.Risent = dataoverall.responseData[0].Risent;
         this.Rigotsc = dataoverall.responseData[0].Rigotsc;
         this.RIsentsc = dataoverall.responseData[0].RIsentsc;
+        this.Coins = dataoverall.responseData[0].Coins;
+        this.SpecialCoins = dataoverall.responseData[0].SpecialCoins;
+        
+        this.authService.loading.dismiss();
       } else {
-
+        this.authService.loading.dismiss();
+        this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast("Something went wrong");
       }
+     
     }, (err) => {
-      // this.loading.dismiss();
+      this.authService.loading.dismiss();
+
+      var my = JSON.stringify(err);
+      if (err.error.message =="Unrecognized Session.")
+      {
+        this.authService.removeSession();
+      this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+      }else
+      {
+        this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast("Something went wrong");
+        console.log("errrorr " + err.status);
+      }
       // this.presentToast(err);
       //this.response = err;
-      console.log("errrorr " + err);
+      
     });
     console.log('ionViewDidLoad ProfilePage');
   }
@@ -138,5 +174,5 @@ coinsReceived(){
   message(){
     this.navCtrl.push(MessageMainPage);
   }
-
+   
 }

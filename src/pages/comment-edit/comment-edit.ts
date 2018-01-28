@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { RevoService } from "../../providers/revoservices";
+import { HomePage } from '../home/home';
+import { DashboardPage } from "../dashboard/dashboard";
 /**
  * Generated class for the CommentEditPage page.
  *
@@ -16,10 +18,29 @@ export class CommentEditPage {
   alldata: any;
   comment: any;
   response: any;
+  commentData = { Comment: '', GivenCoinID: '' };
+  commentId: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: RevoService, public loadingCtrl: LoadingController,
     private toastCtrl: ToastController) {
-    this.alldata = navParams.get('alldata');
-    this.comment = navParams.get('comment');
+    this.authService.checkSession().then((result) => {
+      if (result == null) {
+        this.authService.presentToast("Not Authorized Kindly Login");
+        this.navCtrl.setRoot(HomePage);
+      } else {
+        this.authService.checkCompanyId();
+        this.authService.checkEmployeeId();
+        this.comment = navParams.get('comment');
+        this.commentData = { Comment: this.comment.Comment, GivenCoinID: this.comment.GivenCoinID};
+        //this.commentId = this.comment;
+        this.alldata = navParams.get('alldata');
+        
+        // this.navCtrl.setRoot(DashboardPage);
+      }
+    }, (err) => {
+      this.authService.presentToast("Something went wrong");
+      this.navCtrl.setRoot(HomePage);
+    });
+    
   }
 
   ionViewDidLoad() {
@@ -34,6 +55,12 @@ export class CommentEditPage {
 
   update(comment)
   {
+    if (this.comment.Comment.trim().length == 0 || this.comment.Comment.trim() == '')
+    {
+      this.authService.presentToast("Fill the comment or Text Limit Reached");
+    }else{
+
+      this.authService.showLoader("Updating Comment ...");
     this.authService.commentedit(this.alldata, comment).then((result) => {
     this.response = result;
 
@@ -42,6 +69,8 @@ export class CommentEditPage {
     var dataoverall = JSON.parse(my);
     if (dataoverall.success) {
 
+      this.authService.presentToast("Updated Successfully");
+      this.navCtrl.pop();
     /*   this.EmployeeNames = dataoverall.responseData[0].EmployeeName;
       this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
       this.DepartmentName = dataoverall.responseData[0].DepartmentName;
@@ -59,15 +88,28 @@ export class CommentEditPage {
       this.Risent = dataoverall.responseData[0].Risent;
       this.Rigotsc = dataoverall.responseData[0].Rigotsc;
       this.RIsentsc = dataoverall.responseData[0].RIsentsc; */
+      this.authService.loading.dismiss();
     } else {
-
+      this.authService.loading.dismiss();
+      this.navCtrl.setRoot(DashboardPage);
+      this.authService.presentToast("Something went wrong");
     }
+      
   }, (err) => {
-    // this.loading.dismiss();
-    // this.presentToast(err);
-    //this.response = err;
-    console.log("errrorr " + err);
+    this.authService.loading.dismiss();
+    var my = JSON.stringify(err);
+    if (err.error.message == "Unrecognized Session.") {
+      this.authService.removeSession();
+      this.authService.presentToast("Please Login Again");
+      this.navCtrl.setRoot(HomePage);
+      console.log("errrorr " + err.status);
+    } else {
+      this.authService.loading.dismiss();
+      this.navCtrl.setRoot(DashboardPage);
+      this.authService.presentToast("Something went wrong");
+    }
   });
-  this.navCtrl.pop();
+  
   }
+}
 }

@@ -1,5 +1,5 @@
 page-coin-sent {
-	.toolbar-background-md{
+	.toolbar-background-md,  .header-ios .toolbar-ios:last-child .toolbar-background-ios{
 		background: #25b6b5;
 		
 	}
@@ -7,11 +7,14 @@ page-coin-sent {
 		color:white;
 		text-align: center;
 		    font-size: 16px;
+		    padding:5px;
 	}	
 	.toolbar-md{
 		min-height: auto;
 	}
-
+	.back-button.show-back-button{
+		display:none;
+	}
 	ion-card {
 		img{
 			width:75%;
@@ -21,7 +24,10 @@ page-coin-sent {
 			padding-top:10px;
 		}
 	}
-
+	.arrow {
+    width: 15px;
+    height: 50px;
+}
 .btn-app{
 	background:#25b6b5;
 	border: white 1px solid;
@@ -55,9 +61,16 @@ page-coin-sent {
 	    font-size: 1.4rem;
 	    line-height: 1.5;
 	}
-	.datetime{
+		.seen{
 	text-align: right;
 	font-size: 1.0rem;
+	padding:5px 0px;
+	color:#666666;
 	}
-
+	 .datetime{
+	text-align: right;
+	font-size: 1.0rem;
+	padding:10px 0px;
+	color:#666666;
+	}
 }

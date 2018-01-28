@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DashboardPage } from "../dashboard/dashboard";
 
 /**
  * Generated class for the CoinSelectPage page.
@@ -19,6 +20,10 @@ export class CoinSelectPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CoinSelectPage');
+  }
+
+      dashboard(){
+     this.navCtrl.push(DashboardPage);
   }
 
 }

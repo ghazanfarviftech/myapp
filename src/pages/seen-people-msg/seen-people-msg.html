@@ -6,8 +6,8 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content class="gray-content">
-	<ion-list style="background: white">
+<ion-content class="gray-content" padding>
+	<ion-list style="background: white" >
 		<ion-row>
 			<ion-col col-6>
 				<ion-item >
@@ -35,5 +35,5 @@
 			</ion-col>
 		</ion-row>
 	</ion-list>
-	 <p style="text-align: center"> <img  src="assets/close.png" width="25px" height="25px"></p>
+	 <p style="text-align: center"> <img (click)="close()" src="assets/close.png" width="25px" height="25px"></p>
 </ion-content>

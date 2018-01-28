@@ -1,26 +1,30 @@
 <ion-menu side="right" [content]="mycontent">
   <ion-content>
 
-    <ion-list style="margin-top: 20%;">
-    <ion-item (click)="management()">
-        <ion-avatar item-start><img id="menuiconswidth" src="assets/menu.png"/></ion-avatar>
-        <span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Management Philosophy</span>
+    <ion-list >
+    <ion-item >
+        <img menuClose item-end src="assets/cross.png" width="75px"/>
+
     </ion-item>
-    <ion-item (click)="contacts()" >
-        <ion-avatar item-start><img  id="menuiconswidth" src="assets/contactActive.png"/></ion-avatar>
-        <span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Contact Note Reception Box</span>
+    <ion-item (click)="management()" class="menu-item">
+        <ion-avatar item-start class="menu-icon"><img id="menuiconswidth" src="assets/menu.png"/></ion-avatar>
+        <span style="font-size: 15px;line-height: 20px;color:#333333" class="menu-item"> Management Philosophy</span>
     </ion-item>
-    <ion-item (click)="dailyNews()">
-        <ion-avatar  item-start><img  id="menuiconswidth" src="assets/dailyActive.png"/>
+    <ion-item (click)="contacts()" class="menu-item">
+        <ion-avatar item-start class="menu-icon"><img  id="menuiconswidth" src="assets/contactActive.png"/></ion-avatar>
+        <span style="font-size: 15px;line-height: 20px;color:#333333" class="menu-item"> Contact Note Reception Box</span>
+    </ion-item>
+    <ion-item (click)="dailyNews()" class="menu-item">
+        <ion-avatar  item-start class="menu-icon"><img  id="menuiconswidth" src="assets/dailyActive.png"/>
         </ion-avatar>
-        <span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Daily Note Reception Box</span>
+        <span style="font-size: 15px;line-height: 20px;color:#333333" class="menu-item"> Daily Note Reception Box</span>
     </ion-item>
-    <ion-item (click)="profile()">
-        <ion-avatar item-start><img id="menuiconswidth"  src="assets/profile.png"/></ion-avatar>
-        <span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> My Page Profile</span>
+    <ion-item (click)="profile()" class="menu-item">
+        <ion-avatar item-start class="menu-icon"><img id="menuiconswidth"  src="assets/profile.png"/></ion-avatar>
+        <span style="font-size: 15px;line-height: 20px;color:#333333" class="menu-item"> My Page Profile</span>
     </ion-item>
-    <ion-item (click)="coinTimeline()">
-        <ion-avatar item-start><img id="menuiconswidth" src="assets/coinActive.png"/></ion-avatar><span style="font-size: 15px;font-weight: bold;line-height: 20px;color:#333333" class="menu-item"> Coins Time Line</span>
+    <ion-item (click)="coinTimeline()" class="menu-item">
+        <ion-avatar item-start class="menu-icon"><img id="menuiconswidth" src="assets/coinActive.png"/></ion-avatar><span style="font-size: 15px;line-height: 20px;color:#333333" class="menu-item"> Coins Time Line</span>
     </ion-item>
     <ion-item class="logout">
      

@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, ToastController, NavParams, MenuController } from 'ionic-angular';
 import { SeenPeoplePage } from "../seen-people/seen-people";
+import { DashboardPage } from "../dashboard/dashboard";
+
+import { AppPreferences } from '@ionic-native/app-preferences';
+import { RevoService } from "../../providers/revoservices";
 
 /**
  * Generated class for the DailyNewsMsgDetailsPage page.
@@ -16,16 +20,19 @@ import { SeenPeoplePage } from "../seen-people/seen-people";
 export class DailyNewsMsgDetailsPage {
   data: Array<{name: string, msg: string, img: string, showDetails: boolean}> = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-      for(let i = 0; i < 3; i++ ){
-      this.data.push({
-          name: 'Title '+i,
-          msg: 'msg goes here',
-          img: 'assets/ranking/Pic (6).png',
-          showDetails: false
-        });
-    }
+
+  personList: Array<Object>;
+  alldata: any;
+  response: any;
+  overallresponseData: Array<Object>;
+  ContactBook: any;
+  DailyNews: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public authService: RevoService, public loadingCtrl: LoadingController,
+    private toastCtrl: ToastController) {
+    this.alldata = navParams.get('alldata');
   }
+
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DailyNewsMsgDetailsPage');
@@ -43,6 +50,9 @@ export class DailyNewsMsgDetailsPage {
         data.showDetails = true;
         data.icon = 'assets/ranking/Pic (8).png';
     }
+  }
+      dashboard(){
+     this.navCtrl.push(DashboardPage);
   }
 
 }

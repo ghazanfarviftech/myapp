@@ -1,10 +1,11 @@
 <ion-header>
-  <ion-row style="    box-shadow: 0px 0px 3px #CCC;">
+ <ion-row style="box-shadow: 0px 0px 3px #ccc;">
     <ion-col col-4>
-      <img src="assets/dashboard/Pic (5).png" (click)="message()" style="height: 30px; width:40px">
-  
+      <img src="assets/dashboard/Pic (5).png"  (click)="message()" style="height: 30px; width:40px">
+      <ion-badge class="notification" style="left:15%">26</ion-badge>
+      <img src="assets/dashboard/Pic (3).png" style="height: 30px; width:40px">
     </ion-col>
-    <ion-col col-6><span class="logo">Logo Logo</span></ion-col>
+    <ion-col col-6><span class="logo" (click)="dashboard()">Logo Logo</span></ion-col>
     <ion-col col-2>
       <img item-right src="assets/dashboard/Pic (4).png" menuToggle="right"  style="height: 30px; width:30px">
     </ion-col>
@@ -34,9 +35,9 @@
 <ion-content class="gary-content">
 	<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 		<ion-item>
-	  		<ion-label>Select a group</ion-label>
+	  		<ion-label>Select Company</ion-label>
 			  <ion-select [(ngModel)]="toppings" >
-			    <ion-option>Bacon</ion-option>
+			    <ion-option >Black Olives</ion-option>
 			    <ion-option>Black Olives</ion-option>
 			    <ion-option>Extra Cheese</ion-option>
 			    <ion-option>Mushrooms</ion-option>
@@ -45,18 +46,13 @@
 			  </ion-select>
 		</ion-item>
 		<ion-item>
-	  		<ion-label>Select a medium size group</ion-label>
+	  		<ion-label>Select Department</ion-label>
 			  <ion-select [(ngModel)]="toppings" >
-			    <ion-option>Bacon</ion-option>
-			    <ion-option>Black Olives</ion-option>
-			    <ion-option>Extra Cheese</ion-option>
-			    <ion-option>Mushrooms</ion-option>
-			    <ion-option>Pepperoni</ion-option>
-			    <ion-option>Sausage</ion-option>
+			    <ion-option *ngFor="let depart of Department" [value]="depart">{{depart.DepartmentName}}</ion-option>
 			  </ion-select>
 		</ion-item>
 		<ion-item>
-	  		<ion-label>Select a small size group</ion-label>
+	  		<ion-label>Select Store</ion-label>
 			  <ion-select [(ngModel)]="toppings" >
 			    <ion-option>Bacon</ion-option>
 			    <ion-option>Black Olives</ion-option>
@@ -67,28 +63,15 @@
 			  </ion-select>
 		</ion-item>
 		<ion-list>
-			<ion-item>
+			<ion-item *ngFor="let employes of Employees">
 				<ion-avatar item-start>
-		        	<img src="assets/Pic (6).png" (click)="userProfile">
+		        	<img src="{{employes.EmployeeImage}}" (click)="userProfile">
 			      </ion-avatar>
-			      <h3>arty McFly</h3>
+			      <h3>{{employes.EmployeeName}}</h3>
 
 			      <span item-end class="badge-title" (click)="coinSelect()"> <img src="assets/coinImg.png" class="tabIcon" />Send</span>
 			</ion-item>
-			<ion-item>
-				<ion-avatar item-start>
-		        	<img src="assets/Pic (6).png" (click)="userProfile">
-			      </ion-avatar>
-			      <h3>arty McFly</h3>
-			      <span item-end class="badge-title" (click)="coinSelect()"> <img src="assets/coinImg.png" class="tabIcon" />Send</span>
-			</ion-item>
-			<ion-item>
-				<ion-avatar item-start>
-		        	<img src="assets/Pic (6).png" (click)="userProfile">
-			      </ion-avatar>
-			      <h3>arty McFly</h3>
-			      <span item-end class="badge-title" (click)="coinSelect()"> <img src="assets/coinImg.png" class="tabIcon" />Send</span>
-			</ion-item>
+			
 		</ion-list>
 
 </ion-content>

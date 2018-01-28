@@ -1,5 +1,5 @@
 page-comment-edit {
-	.toolbar-background-md{
+	.toolbar-background-md,  .header-ios .toolbar-ios:last-child .toolbar-background-ios{
 		background: #25b6b5;
 		
 	}
@@ -7,9 +7,13 @@ page-comment-edit {
 		color:white;
 		text-align: center;
 		    font-size: 16px;
+		padding:5px;
 	}	
 	.toolbar-md{
 		min-height: auto;
+	}
+	.back-button.show-back-button{
+		display:none
 	}
 
 
