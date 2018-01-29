@@ -95,6 +95,12 @@ ion-header{
     .md .menu-inner{
         opacity:0.9;
     }
+    .menu-item .item-inner{
+        border:none !important;
+    }
+    .menu-item .list-ios .item-block .item-inner{
+        border: none !important;
+    }
     .menu-inner{
         width:100%;
     }
@@ -107,6 +113,16 @@ ion-header{
         color:#666666;
         padding: 24px 0px;
         margin: auto;
+    }
+    #file-input {
+      opacity: 0;
+      background: #CCC;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      z-index: 999;
     }
 .ios{
     .footercopyright{

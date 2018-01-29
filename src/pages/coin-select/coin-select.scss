@@ -8,8 +8,14 @@ page-coin-select {
     text-align: center;
     font-size: 16px;
   } 
+    .back-button.show-back-button{
+      display:block;
+    }
   .toolbar-md{
     min-height: auto;
+  }
+  .toolbar-title{
+    width:90%;
   }
 
 

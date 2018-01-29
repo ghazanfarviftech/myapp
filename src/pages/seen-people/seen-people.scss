@@ -6,15 +6,18 @@ page-seen-people {
 		background: #b957a0;
 	
 	}
-	.back-button.show-back-button{
-		display:none;
-	}
+
 	 .toolbar-title {
 		color:white;
 		text-align: center;
 		font-size: 16px;
 				padding:5px;
+		color:90%;
 	}	
+	.back-button.show-back-button{
+		display:block;
+		color:white;
+		}
 	.toolbar-md{
 		min-height: auto;
 	}

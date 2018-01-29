@@ -57,7 +57,7 @@ export class DailyNewsReceptBoxPage {
   }
 
   ionViewWillEnter() {
-    /* this.authService.showLoader("Loading ...");
+     this.authService.showLoader("Loading ...");
     this.authService.NewMessageReceived(this.Cuurentpage, this.PerPage).then((result) => {
       this.response = result;
 
@@ -71,9 +71,10 @@ export class DailyNewsReceptBoxPage {
         this.TotalNumber = this.total_rows.TotalNumber;
         this.PerPage = this.total_rows.PerPage;
         this.MaxPage = this.total_rows.MaxPage;
-
-        this.ContactBook = dataoverall.responseData[0].ContactBook;
-        this.DailyNews = dataoverall.responseData[0].DailyNews;
+        //console.log("Daily News", this.dataoverall);
+     //   this.ContactBook = dataoverall.responseData[0].ContactBook;
+       // this.DailyNews = dataoverall.responseData[0].DailyNews;
+        
         //this.EmployeeNames = dataoverall.responseData[0].EmployeeName;
         // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
         // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
@@ -100,7 +101,7 @@ export class DailyNewsReceptBoxPage {
         this.authService.presentToast("Something went wrong");
       }
     });
- */
+ 
 
     console.log('ionViewDidLoad DailyNewsReceptBoxPage');
   }

@@ -20,6 +20,13 @@ import { HomePage } from '../home/home';
 })
 export class ProfilePage {
 
+  public radarChartLabels: string[] = ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'];
+
+  public radarChartData: any = [
+    { data: [65, 59, 90, 81, 56, 55, 40], label: 'Series A' }
+  ];
+  public radarChartType: string = 'radar';
+
   loginData:  any;
   alldata : any;
   response : any;
@@ -94,6 +101,7 @@ export class ProfilePage {
         this.SpecialCoins = dataoverall.responseData[0].SpecialCoins;
         
         this.authService.loading.dismiss();
+        
       } else {
         this.authService.loading.dismiss();
         this.navCtrl.setRoot(DashboardPage);
@@ -147,7 +155,7 @@ coinsReceived(){
     this.navCtrl.push(ManagementPage);
   }
   profileSettings(){
-     this.navCtrl.push(ProfileSettingsPage);
+     this.navCtrl.push(ProfileSettingsPage, { 'alldata': this.alldata, profile:{'name':this.EmployeeNames, 'department':this.DepartmentName, 'store':this.StoreName, 'company': this.CompanyName, 'goal': this.Goal, 'copyCatch': this.Catchpharase, 'profileImage':this.ProfileImage} });
   }
   dashboard(){
      this.navCtrl.push(DashboardPage);
@@ -175,4 +183,12 @@ coinsReceived(){
     this.navCtrl.push(MessageMainPage);
   }
    
+  // events
+  public chartClicked(e: any): void {
+    console.log(e);
+  }
+
+  public chartHovered(e: any): void {
+    console.log(e);
+  }
 }

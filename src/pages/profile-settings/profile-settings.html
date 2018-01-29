@@ -8,8 +8,10 @@
 <ion-content class="gray-content">
 
 	<ion-item style="text-align: center">
-		<img src="assets/Pic (6).png" width="125px" height="125px" />
-		<img src="assets/camera.png"> 
+		<img src="{{profileImage}}" width="125px" height="125px" />
+		
+		<!-- <input type="file" (click)="fileUpload($event)" id="file-input" style="opacity: 0" #fileInp> -->
+        <img src="assets/camera.png" (click)="openGallery()"  >
 		<p>{{ 'Photo should be uploaded as 240x240 and the file size' | translate }} <br/>{{ 'should be smaller than 5mb.' | translate }}</p>
 	</ion-item>
 	<br/>
@@ -17,35 +19,35 @@
 		<ion-item>
 			<ion-row>
 				<ion-col col-4>{{ 'Department' | translate }} </ion-col>
-				<ion-col col-6>RETOWN HUMAN</ion-col>
+				<ion-col col-6>{{department}}</ion-col>
 				<ion-col col-2><img src="assets/lock.png" width="40px" height="40px"></ion-col>
 			</ion-row>
 		</ion-item>
 		<ion-item>
 			<ion-row>
 				<ion-col col-4>{{ 'Name' | translate }}</ion-col>
-				<ion-col col-6>Name</ion-col>
+				<ion-col col-6>{{name}}</ion-col>
 				<ion-col col-2><img src="assets/lock.png" width="40px" height="40px"></ion-col>
 			</ion-row>
 		</ion-item>
 		<ion-item>
 			<ion-row>
 				<ion-col col-4>{{ 'Name Spelling' | translate }}</ion-col>
-				<ion-col col-6>RETOWN HUMAN</ion-col>
+				<ion-col col-6>{{name}}</ion-col>
 				<ion-col col-2><img src="assets/lock.png" width="40px" height="40px"></ion-col>
 			</ion-row>
 		</ion-item>
 		<ion-item>
 			<ion-row>
 				<ion-col col-4>{{ 'Team' | translate }}</ion-col>
-				<ion-col col-6>RETOWN HUMAN</ion-col>
+				<ion-col col-6>{{company}}</ion-col>
 				<ion-col col-2><img src="assets/lock.png" width="40px" height="40px"></ion-col>
 			</ion-row>
 		</ion-item>
 		<ion-item>
 			<ion-row>
 				<ion-col col-4></ion-col>
-				<ion-col col-6>RETOWN HUMAN</ion-col>
+				<ion-col col-6>{{store}}</ion-col>
 				<ion-col col-2><img src="assets/lock.png" width="40px" height="40px"></ion-col>
 			</ion-row>
 		</ion-item>
@@ -58,13 +60,15 @@
 		</ion-item>
 	</ion-list>
 	<br/>
+	<h2>{{ 'Catch Copy' | translate }}</h2>
 	<ion-item>
-		<h2>{{ 'Catch Copy' | translate }}</h2>
-		<p>some text here</p>
+		
+		<ion-input type="text" placeholder="some text here" [(ngModel)]="copyCatch"></ion-input>
 	</ion-item>
+	<h2>{{ 'My rules' | translate }}</h2>
 	<ion-item>
-		<h2>{{ 'My rules' | translate }}</h2>
-		<p>some text here</p>
+		
+		<ion-input type="text" placeholder="some text here" [(ngModel)]="goal"></ion-input>
 	</ion-item>
 	<br/>
 	<ion-item>
@@ -72,10 +76,10 @@
 
 	</ion-item>
 			<ion-item>
-		<ion-input type="password" placeholder="{{ 'Current password' | translate }}"></ion-input>
+		<ion-input type="password" placeholder="{{ 'Current password' | translate }}" [(ngModel)]="currentPassword"></ion-input>
 	</ion-item>
 	<ion-item>
-		<ion-input type="password" placeholder="{{ 'New password' | translate }}"></ion-input>
+		<ion-input type="password" placeholder="{{ 'New password' | translate }}" [(ngModel)]="newPassword"></ion-input>
 	</ion-item>
 </ion-content>
 <ion-footer>
@@ -85,7 +89,7 @@
         <button ion-button round class="btn-app" >{{ 'Cancel' | translate }}</button>
       </ion-col>
       <ion-col col-6 >
-        <button ion-button round class="btn-app" >{{ 'Apply' | translate }}</button>
+        <button ion-button round class="btn-app" (click)="update()" >{{ 'Apply' | translate }}</button>
       </ion-col>
   </ion-row>  
  </ion-footer>

@@ -196,4 +196,7 @@ coinsintro()
  myProfile(){
     this.navCtrl.push(ProfilePage);
   }
+  dashboard(){
+    this.navCtrl.push(DashboardPage);
+  }
 }

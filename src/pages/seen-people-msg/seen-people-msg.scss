@@ -8,13 +8,15 @@ page-seen-people-msg {
 	
 	}
 	.back-button.show-back-button{
-		display:none;
+		display:block;
+		color:white;
 	}
 	 .toolbar-title {
 		color:white;
 		text-align: center;
 		font-size: 16px;
 				padding:5px;
+		width:90%;
 	}	
 	.toolbar-md{
 		min-height: auto;

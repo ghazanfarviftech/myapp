@@ -29,6 +29,8 @@ import { ContactNotesSavedPage } from "../pages/contact-notes-saved/contact-note
 import { ContactNotesSentPage } from "../pages/contact-notes-sent/contact-notes-sent";
 import { ContactMsgDetailsPage } from "../pages/contact-msg-details/contact-msg-details";
 import { DailyNewsReceptBoxPage } from "../pages/daily-news-recept-box/daily-news-recept-box";
+import { DailyNewsSaveBoxPage } from "../pages/daily-news-save-box/daily-news-save-box";
+import { DailyNewsSentBoxPage } from "../pages/daily-news-sent-box/daily-news-sent-box";
 import { DailyNewsMsgDetailsPage } from "../pages/daily-news-msg-details/daily-news-msg-details";
 import { ProfileSettingsPage } from "../pages/profile-settings/profile-settings";
 import { CoinReceivedPage } from "../pages/coin-received/coin-received";
@@ -43,6 +45,7 @@ import { ChartsModule } from 'ng2-charts';
 import { AppPreferences } from '@ionic-native/app-preferences';
 import { RevoService } from '../providers/revoservices';
 import { IonicStorageModule } from '@ionic/storage';
+import { Camera } from '@ionic-native/camera';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -136,6 +139,7 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     Globalization,
     RevoService,
+    Camera,
     AppPreferences,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
