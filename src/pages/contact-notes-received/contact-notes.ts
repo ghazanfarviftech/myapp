@@ -163,8 +163,8 @@ export class ContactNotesPage {
     dashboard(){
      this.navCtrl.push(DashboardPage);
   }
-  detailed(){
-  	 this.navCtrl.push(ContactMsgDetailsPage);
+  detailed(messageId){
+    this.navCtrl.push(ContactMsgDetailsPage, {"MessageID": messageId});
   }
   write(){
    

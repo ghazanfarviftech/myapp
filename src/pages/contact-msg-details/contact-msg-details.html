@@ -20,14 +20,14 @@
 
 	    <ion-item>
 	      <ion-avatar item-start>
-	        <img src="assets/Pic (6).png">
+	        <img src="{{SenderImage}}">
 	      </ion-avatar>
-	      <h2>Marty McFly</h2>
-	      <span item-end class="item-date">November 5, 1955</span>
-	      <p>ute. Wait a </p>
+	      <h2>{{SenderName}}</h2>
+	      <span item-end class="item-date">{{DateAdded}}</span>
+	      <p>{{MessageTitle}}</p>
 	    </ion-item>
 		  <ion-card-content>
-		    <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+		    <p>{{MessageDescription}}</p>
 		    <ion-item>
 			 
 			  <input type="file" (change)="fileUpload($event)" id="file-input" style="opacity: 0" #fileInp>
@@ -59,22 +59,22 @@
 	<ion-row>
 
 		<ion-col col-9>
-			<ion-input  type="text" placeholder="Write comment(less than 100 characters)" ></ion-input>
+			<ion-input  type="text" placeholder="Write comment(less than 100 characters)" rows="10" maxLength="100" [(ngModel)]="CommentMessage"></ion-input>
 		</ion-col>
 		<ion-col col-3>
-			 <button ion-button round class="btn-app" >Send</button>
+			 <button ion-button round class="btn-app" (click)="sendComment(CommentMessage)">Send</button>
 		</ion-col>
 	</ion-row>
 
 
 <ion-list class="comment"  >
-	<div *ngFor="let d of data">
+	<div *ngFor="let d of Comments">
     <ion-item >
       <ion-avatar item-start>
-        <img [src]="d.img">
+        <img [src]="d.EmployeeImage">
       </ion-avatar>
-      <h2>{{d.name}}</h2>
-      <p>{{d.msg}}</p>
+      <h2>{{d.EmployeeName}}</h2>
+      <p>{{d.Comment}}</p>
       <img (click)="toggleDetails(d)" item-right src="assets/edit.png" width="30px" height="35px"  />
 
 

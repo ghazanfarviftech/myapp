@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, LoadingController, ToastController, NavParams, MenuController } from 'ionic-angular';
 import { DailyNewsMsgDetailsPage } from "../daily-news-msg-details/daily-news-msg-details";
 import { DailyNewsReceptBoxPage } from "../daily-news-recept-box/daily-news-recept-box";
+import { DailyNewsSaveBoxPage } from "../daily-news-save-box/daily-news-save-box";
 import { WriteDailyNewsPage } from "../write-daily-news/write-daily-news";
 import { DashboardPage } from "../dashboard/dashboard";
 
@@ -197,4 +198,13 @@ message(){
     this.navCtrl.push(MessageMainPage);
   }
 
+  dailynewsreceived() {
+    this.navCtrl.setRoot(DailyNewsReceptBoxPage);
+  }
+  dailynewssaved() {
+    this.navCtrl.setRoot(DailyNewsSaveBoxPage);
+  }
+  dailynewssent() {
+    this.navCtrl.setRoot(DailyNewsSentBoxPage);
+  }
 }

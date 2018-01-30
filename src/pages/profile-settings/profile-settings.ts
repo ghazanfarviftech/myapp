@@ -121,13 +121,20 @@ export class ProfileSettingsPage {
       quality: 100,
       targetWidth: 1000,
       targetHeight: 1000,
-      encodingType: this.camera.EncodingType.JPEG,
+      encodingType: this.camera.EncodingType.PNG,
       correctOrientation: true
     }
 
-    this.camera.getPicture(cameraOptions)
+
+    this.camera.getPicture(cameraOptions).then((imageData) => {
+        // imageData is a base64 encoded string
+      this.profileImage = "data:image/jpeg;base64," + imageData;
+      }, (err) => {
+        console.log(err);
+      });
+    /* this.camera.getPicture(cameraOptions)
       .then(file_uri => this.profileImage = 'data:image/jpeg;base64,' + file_uri,
-      err => console.log(err));
+      err => console.log(err)); */
   }
 
 

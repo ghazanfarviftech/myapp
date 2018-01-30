@@ -82,7 +82,9 @@ export function createTranslateLoader(http: HttpClient) {
     SeenPeopleMsgPage,
     ContactMsgDetailsPage,
     CoinReceivedPage,
-    UserProfilePage
+    UserProfilePage,
+    DailyNewsSaveBoxPage,
+    DailyNewsSentBoxPage
   ],
   imports: [
     BrowserModule,
@@ -130,7 +132,9 @@ export function createTranslateLoader(http: HttpClient) {
     SeenPeopleMsgPage,
     ContactMsgDetailsPage,
     CoinReceivedPage,
-    UserProfilePage
+    UserProfilePage,
+    DailyNewsSaveBoxPage,
+    DailyNewsSentBoxPage
   ],
   providers: [
   LanguageService,

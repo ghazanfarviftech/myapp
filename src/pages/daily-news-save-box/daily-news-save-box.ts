@@ -12,7 +12,8 @@ import { MessageMainPage } from "../message-main/message-main";
 import { AppPreferences } from '@ionic-native/app-preferences';
 import { RevoService } from "../../providers/revoservices";
 import { HomePage } from '../home/home';
-
+import { DailyNewsSentBoxPage } from "../daily-news-sent-box/daily-news-sent-box";
+import { DailyNewsReceptBoxPage } from "../daily-news-recept-box/daily-news-recept-box";
 
 /**
  * Generated class for the DailyNewsReceptBoxPage page.
@@ -177,7 +178,7 @@ export class DailyNewsSaveBoxPage {
 
 
 dailyNews(){
-    this.navCtrl.push(DailyNewsSaveBoxPage);
+  this.navCtrl.setRoot(DailyNewsReceptBoxPage);
   }
 
    contacts(){
@@ -196,4 +197,14 @@ message(){
     this.navCtrl.push(MessageMainPage);
   }
 
+  dailynewsreceived()
+  {
+    this.navCtrl.setRoot(DailyNewsReceptBoxPage);
+  }
+  dailynewssaved() {
+    this.navCtrl.setRoot(DailyNewsSaveBoxPage);
+  }
+  dailynewssent() {
+    this.navCtrl.setRoot(DailyNewsSentBoxPage);
+  }
 }

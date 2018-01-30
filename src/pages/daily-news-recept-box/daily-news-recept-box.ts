@@ -12,6 +12,8 @@ import { MessageMainPage } from "../message-main/message-main";
 import { AppPreferences } from '@ionic-native/app-preferences';
 import { RevoService } from "../../providers/revoservices";
 import { HomePage } from '../home/home';
+import { DailyNewsSaveBoxPage } from "../daily-news-save-box/daily-news-save-box";
+import { DailyNewsSentBoxPage } from "../daily-news-sent-box/daily-news-sent-box";
 
 
 /**
@@ -196,5 +198,11 @@ dailyNews(){
 message(){
     this.navCtrl.push(MessageMainPage);
   }
-
+  dailynewssaved()
+  {
+    this.navCtrl.setRoot(DailyNewsSaveBoxPage);
+  }
+  dailynewssent() {
+    this.navCtrl.setRoot(DailyNewsSentBoxPage);
+  }
 }

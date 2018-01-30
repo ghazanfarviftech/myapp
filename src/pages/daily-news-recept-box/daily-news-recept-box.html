@@ -124,10 +124,10 @@
        {{ 'Received' | translate }}  </button>
       </ion-col>
       <ion-col col-4 >
-        <button ion-button round class="btn-app" >{{ 'Saved' | translate }}</button>
+        <button ion-button round class="btn-app" (click) = "dailynewssaved()">{{ 'Saved' | translate }}</button>
       </ion-col>
       <ion-col col-4 >
-        <button ion-button round class="btn-app" >{{ 'Sent' | translate }}</button>
+        <button ion-button round class="btn-app" (click) = "dailynewssent()" >{{ 'Sent' | translate }}</button>
       </ion-col>
   </ion-row>  
  </ion-footer>
