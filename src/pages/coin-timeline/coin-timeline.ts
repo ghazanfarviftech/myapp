@@ -36,6 +36,7 @@ export class CoinTimelinePage {
   TotalNumber: any;
   PerPage: any = 10;
   MaxPage: any;
+  Logos: any;
   theColor = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public authService: RevoService, public loadingCtrl: LoadingController,
     private toastCtrl: ToastController) {
@@ -47,6 +48,9 @@ export class CoinTimelinePage {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
         this.alldata = navParams.get('param1');
+        if (this.authService.getlogo() != null) {
+          this.Logos = this.authService.Logo;
+        }
         // this.navCtrl.setRoot(DashboardPage);
       }
     }, (err) => {

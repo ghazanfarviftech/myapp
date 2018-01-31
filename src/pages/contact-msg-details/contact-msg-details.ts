@@ -38,6 +38,7 @@ export class ContactMsgDetailsPage {
   DateAdded: any;
   MessageStatus: any;
   CommentUpdateText:any;
+  Logos:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: RevoService) {
 
     this.authService.checkSession().then((result) => {
@@ -47,6 +48,9 @@ export class ContactMsgDetailsPage {
       } else {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
+        if (this.authService.getlogo() != null) {
+          this.Logos = this.authService.Logo;
+        }
         this.alldata = navParams.get('MessageID');
         // this.navCtrl.setRoot(DashboardPage);
       }

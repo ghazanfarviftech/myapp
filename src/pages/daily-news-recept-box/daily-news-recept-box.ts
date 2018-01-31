@@ -40,6 +40,7 @@ export class DailyNewsReceptBoxPage {
   TotalNumber: any;
   PerPage: any = 10;
   MaxPage: any;
+  Logos: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public authService: RevoService, public loadingCtrl: LoadingController,
     private toastCtrl: ToastController) {
     this.authService.checkSession().then((result) => {
@@ -49,7 +50,11 @@ export class DailyNewsReceptBoxPage {
       } else {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
+        if (this.authService.getlogo() != null) {
+          this.Logos = this.authService.Logo;
+        }
         this.alldata = navParams.get('param1');
+        
         // this.navCtrl.setRoot(DashboardPage);
       }
     }, (err) => {

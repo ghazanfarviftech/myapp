@@ -35,7 +35,7 @@ export class CoinSendPage {
   CompanyName: any;
   Department: Array<Object>;
   Employees: Array<Object>;
-
+Logos:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: RevoService) {
 
     this.authService.checkSession().then((result) => {
@@ -45,6 +45,9 @@ export class CoinSendPage {
       } else {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
+        if (this.authService.getlogo() != null) {
+          this.Logos = this.authService.Logo;
+        }
         //this.alldata = navParams.get('param1');
         // this.navCtrl.setRoot(DashboardPage);
       }
@@ -98,8 +101,8 @@ export class CoinSendPage {
     console.log('ionViewDidLoad CoinSentPage');
 
   }
-   coinSelect(){
-  	this.navCtrl.push(CoinSelectPage);
+   coinSelect(employeeData){
+     this.navCtrl.push(CoinSelectPage, { EmployeeData: employeeData});
 
   }
 

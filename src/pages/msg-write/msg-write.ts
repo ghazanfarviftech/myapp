@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MessageMainPage } from "../message-main/message-main";
 import { DashboardPage } from "../dashboard/dashboard";
+import { RevoService } from '../../providers/revoservices';
 
 /**
  * Generated class for the MsgWritePage page.
@@ -17,7 +18,11 @@ import { DashboardPage } from "../dashboard/dashboard";
 })
 export class MsgWritePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  Logos:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public authService: RevoService) {
+    if (this.authService.getlogo() != null) {
+      this.Logos = this.authService.Logo;
+    }
   }
 
   ionViewDidLoad() {

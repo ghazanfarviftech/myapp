@@ -34,6 +34,7 @@ export class RevoService {
   EmployeeID: any = null;
   CompanyID: any = null;
   SesssionID: any = null;
+  Logo: any = null;
   constructor(public http: HttpClient, public appPreferences: AppPreferences, public loadingCtrl: LoadingController,
     private toastCtrl: ToastController,public storage: Storage) {}
 
@@ -249,10 +250,10 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
             .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
         })
         .subscribe(res => {
-          console.log("data : " + res);
+          console.log("data dash : success " + res);
           resolve(res);
         }, (err) => {
-          console.log("error " + err);
+          console.log("data dash error " + err);
           reject(err);
         });
     });
@@ -657,6 +658,29 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
     });
   }
 
+  public employeeCoinSend(commentData) {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : ");
+      this.http.post("http://chainayena.net/revo/api/revo-emp-coin-send", commentData,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
 
   setSession(session)
   {
@@ -674,6 +698,7 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
     this.storage.set('SessionID', session.SessionID.toString());
     this.storage.set('Role', session.Role.toString());
     this.session = session;
+    console.log("session set");
   }
   removeSession()
   {
@@ -702,18 +727,45 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
     });
   }
 
+  setLogo(session) {
+
+    this.storage.set('Logo', session);
+    
+    console.log("logo set");
+  }
+
+  getlogo()
+  {
+    this.storage.get('Logo').then((val) => {
+      console.log('Your Logo is', val);
+      this.Logo = val;
+     // resolve(val);
+
+    }), (err) => {
+      this.Logo = null;
+     // reject(err);
+      // this.sessionData = nullreject(err);
+    }
+    // return this.storage.get("SessionID");
+    //return this.session;
+
+  
+    /* let mylogo = this.storage.get('Logo');
+    return mylogo; */
+  }
   checkEmployeeId() {
 
 
     return new Promise((resolve, reject) => {
 
       this.storage.get('EmployeeID').then((val) => {
-        console.log('Your EmployeeID is', val);
+        console.log('Your EmployeeID is'+ val);
         this.EmployeeID = val;
         resolve(val);
         //
       }), (err) => {
         this.EmployeeID = null;
+        console.log('Your EmployeeID err' + err);
         reject(err);
         // this.sessionData = nullreject(err);
       }
@@ -729,12 +781,13 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
     return new Promise((resolve, reject) => {
 
       this.storage.get('CompanyID').then((val) => {
-        console.log('Your CompanyID is', val);
+        console.log('Your CompanyID is'+ val);
         this.CompanyID = val;
         resolve(val);
         //
       }), (err) => {
         this.CompanyID = null;
+        console.log('Your CompanyID err' + err);
         reject(err);
         // this.sessionData = nullreject(err);
       }

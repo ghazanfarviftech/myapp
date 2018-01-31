@@ -3,7 +3,7 @@ import { NavController,MenuController } from 'ionic-angular';
 import { ProfilePage } from "../mypageprofile/profile";
 import { MessageMainPage } from "../message-main/message-main";
 import { DashboardPage } from "../dashboard/dashboard";
-
+import { RevoService } from "../../providers/revoservices";
 /**
  * Generated class for the ManagementPage page.
  *
@@ -18,7 +18,11 @@ import { DashboardPage } from "../dashboard/dashboard";
 })
 export class ManagementPage {
   questionList : Array<Object>;
-  constructor(public navCtrl: NavController,public menuCtrl:MenuController) {
+  Logos : any;
+  constructor(public navCtrl: NavController, public menuCtrl: MenuController, public authService: RevoService) {
+    if (this.authService.getlogo() != null) {
+      this.Logos = this.authService.Logo;
+    }
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad CoinSentPage');

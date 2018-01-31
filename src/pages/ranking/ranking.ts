@@ -9,6 +9,7 @@ import { ContactNotesPage } from "../contact-notes-received/contact-notes";
 import { ProfilePage } from "../mypageprofile/profile";
 import { MessageMainPage } from "../message-main/message-main";
 import { DashboardPage } from "../dashboard/dashboard";
+import { RevoService } from '../../providers/revoservices';
 
 /**
  * Generated class for the RankingPage page.
@@ -26,9 +27,11 @@ export class RankingPage {
 
 	data: Array<{title: string, details: string, icon: string, showDetails: boolean}> = [];
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-
+Logos:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public authService: RevoService) {
+    if (this.authService.getlogo() != null) {
+      this.Logos = this.authService.Logo;
+    }
 
   for(let i = 0; i < 10; i++ ){
       this.data.push({

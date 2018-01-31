@@ -49,6 +49,7 @@ export class ProfilePage {
   Rigotsc: string;
   Coins: Array<Object>;
   SpecialCoins: Array<Object>;
+  Logos: any;
   constructor(public navCtrl: NavController,public menuCtrl:MenuController 
     ,public authService: RevoService, public loadingCtrl: LoadingController,
      private toastCtrl: ToastController,private appPreferences: AppPreferences,public params: NavParams) {
@@ -61,6 +62,10 @@ export class ProfilePage {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
         this.alldata = params.get('param1');
+        if(this.authService.getlogo() != null)
+        {
+          this.Logos = this.authService.Logo;
+        }
         // this.navCtrl.setRoot(DashboardPage);
       }
     }, (err) => {

@@ -30,17 +30,23 @@ export class DashboardPage {
     this.authService.checkSession().then((result) => {
       if (result == null)
       {
+        console.log("constructor Unauthorizer " + result);
         this.authService.presentToast("Not Authorized Kindly Login");
         this.navCtrl.setRoot(HomePage);
+       
       }else{
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
         this.alldata = params.get('param1');
+        console.log("constructor Emp Name " );
      // this.navCtrl.setRoot(DashboardPage);
+        this.loadingLogo();
       }
     }, (err) => {
+      console.log("constructor Errr " + err);
       this.authService.presentToast("Something went wrong");
       this.navCtrl.setRoot(HomePage);
+
     });
       /*
     this.sessionData = this.authService.checkSession();
@@ -54,41 +60,46 @@ export class DashboardPage {
     */
   }
 
-    ionViewWillEnter() {
+    loadingLogo() {
 
 
-    //   this.authService.showLoader("Loading");
+      this.authService.showLoader("Loading");
 
-    //   this.authService.getDashboard().then((result) => {
-    //     // this.loading.dismiss();
-    //     this.response = result;
-    //   var my= JSON.stringify(this.response);
-    //  var dataoverall = JSON.parse(my);
-     
-    //     this.authService.loading.dismiss();
-   
-    //     if(dataoverall.success)
-    //     {
-    //       this.overallresponseData = dataoverall.responseData;
-    //      this.overallData = this.overallresponseData[0];
-    //      this.CompanySlider1 = this.overallData.CompanySlider1;
-    //      this.CompanySlider2 = this.overallData.CompanySlider2;
-    //      this.CompanySlider3 = this.overallData.CompanySlider3;
-    //      this.Logo = this.overallData.CompanyLogo;
-        
-    //     }else{
-   
-    //       this.authService.presentToast("Something went wrong");
+      this.authService.getDashboard().then((result) => {
+        // this.loading.dismiss();
+
        
-    //     }
-    //    }, (err) => {
+        this.response = result;
+      var my= JSON.stringify(this.response);
+     var dataoverall = JSON.parse(my);
+        console.log("ionViewWillEnter  response " + dataoverall);
+        this.authService.loading.dismiss();
    
-    //      this.authService.removeSession();
-    //      this.authService.loading.dismiss();
-    //      this.authService.presentToast(err);
-    //      //this.response = err;
-    //      console.log("errrorr " + err);
-    //    });
+        if(dataoverall.success)
+        {
+          console.log("ionViewWillEnter  success " + dataoverall);
+          this.overallresponseData = dataoverall.responseData;
+         this.overallData = this.overallresponseData[0];
+         this.CompanySlider1 = this.overallData.CompanySlider1;
+         this.CompanySlider2 = this.overallData.CompanySlider2;
+         this.CompanySlider3 = this.overallData.CompanySlider3;
+         this.Logo = this.overallData.CompanyLogo;
+        this.authService.setLogo(this.Logo);
+        }else{
+   
+          console.log("ionViewWillEnter  else " + dataoverall);
+          this.authService.presentToast("Something went wrong");
+       
+        }
+       }, (err) => {
+   
+         console.log("ionViewWillEnter  error " + err);
+         this.authService.removeSession();
+         this.authService.loading.dismiss();
+         this.authService.presentToast(err);
+         //this.response = err;
+         console.log("errrorr " + err);
+       });
        
     //  this.authService.showLoader("Loading ...");
     //   this.authService.getDashboard().then((result) => {

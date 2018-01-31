@@ -39,6 +39,7 @@ export class UserProfilePage {
   Rigotsc: string;
   Coins: Array<Object>;
   SpecialCoins: Array<Object>;
+  Logos:any;
   constructor(public navCtrl: NavController, public menuCtrl: MenuController, public authService: RevoService, public params: NavParams) {
     this.authService.checkSession().then((result) => {
       if (result == null) {
@@ -48,6 +49,9 @@ export class UserProfilePage {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
         this.alldata = params.get('EmployeeID');
+        if (this.authService.getlogo() != null) {
+          this.Logos = this.authService.Logo;
+        }
         // this.navCtrl.setRoot(DashboardPage);
       }
     }, (err) => {
@@ -88,9 +92,17 @@ export class UserProfilePage {
 
         this.authService.loading.dismiss();
       } else {
+
         this.authService.loading.dismiss();
+        if (dataoverall.message == "no employee found.")
+        {
+          this.authService.presentToast(dataoverall.message);
+        }else{
+       
+     
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
+        }
       }
 
     }, (err) => {
