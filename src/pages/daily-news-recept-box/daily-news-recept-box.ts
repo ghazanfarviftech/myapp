@@ -137,11 +137,16 @@ export class DailyNewsReceptBoxPage {
 
             this.authService.loading.dismiss();
           } else {
+            this.authService.loading.dismiss();
             if (dataoverall.message == 'No data found.') {
 
               this.authService.presentToast("No data found.");
-            } else {
-              this.authService.loading.dismiss();
+            } else if(dataoverall.message == 'No recieved news message found.')
+            {
+              this.authService.presentToast(dataoverall.message);
+              this.navCtrl.setRoot(DashboardPage);
+            }else {
+             
               this.navCtrl.setRoot(DashboardPage);
               this.authService.presentToast("Something went wrong");
             }

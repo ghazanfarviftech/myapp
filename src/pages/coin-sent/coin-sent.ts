@@ -40,7 +40,7 @@ export class CoinSentPage {
       } else {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
-        this.alldata = navParams.get('param1');
+       // this.alldata = navParams.get('param1');
         // this.navCtrl.setRoot(DashboardPage);
       }
     }, (err) => {
@@ -69,8 +69,14 @@ export class CoinSentPage {
         this.authService.loading.dismiss();
       } else {
         this.authService.loading.dismiss();
+        if(dataoverall.message == "No data found.")
+        {
+          this.authService.presentToast(dataoverall.message);
+        }else{
+        
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
+        }
       }
       
     }, (err) => {

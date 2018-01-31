@@ -48,7 +48,7 @@
 
 </ion-col>
 <ion-col col-3 *ngFor="let specialcoin of SpecialCoins">
-  <img src="{{specialcoin.CoinImage}}">
+  <img src="{{specialcoin.CoinImage}}" style="width:60px">
   <span class="lbl-gray" style="display: block; text-align: center;">{{specialcoin.CoinName}}</span>
 </ion-col>
 
@@ -67,10 +67,7 @@
 </ion-row>
 <ion-row>
   <ion-col col-12>
-    <div style="display: block">
-      <canvas baseChart [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType" (chartHover)="chartHovered($event)"
-        (chartClick)="chartClicked($event)"></canvas>
-    </div>
+    <img src="assets/Pic.png" />
   </ion-col>
 </ion-row>
 
@@ -102,7 +99,7 @@
 </ion-row>
 <ion-row style="text-align: center">
   <ion-col col-3 *ngFor="let coin of Coins">
-    <img src="{{coin.CoinImage}}" />
+    <img src="{{coin.CoinImage}}" class="coin" />
     <span class="lbl-gray" >{{coin.TotalCoinsgot}}</span>
   </ion-col>
    

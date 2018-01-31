@@ -88,13 +88,14 @@ export class ProfileSettingsPage {
       var dataoverall = JSON.parse(my);
       if (dataoverall.success) {
 
-        this.authService.presentToast("Profile Set Successfully");
+        this.authService.presentToast("Profile Update Successfully");
         this.navCtrl.pop();
         this.authService.loading.dismiss();
       } else {
+        
         this.authService.loading.dismiss();
-        this.navCtrl.setRoot(DashboardPage);
-        this.authService.presentToast("Something went wrong");
+       // this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast(dataoverall.message);
       }
       
   }, (err) => {
@@ -127,14 +128,19 @@ export class ProfileSettingsPage {
 
 
     this.camera.getPicture(cameraOptions).then((imageData) => {
-        // imageData is a base64 encoded string
-      this.profileImage = "data:image/jpeg;base64," + imageData;
-      }, (err) => {
-        console.log(err);
-      });
-    /* this.camera.getPicture(cameraOptions)
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64:
+      console.log(imageData);
+      this.profileImage = 'data:image/jpeg;base64,' + imageData;
+     }, (err) => {
+      // Handle error
+      console.log(err);
+     });
+    /*
+    this.camera.getPicture(cameraOptions)
       .then(file_uri => this.profileImage = 'data:image/jpeg;base64,' + file_uri,
-      err => console.log(err)); */
+      err => console.log(err));
+      */
   }
 
 

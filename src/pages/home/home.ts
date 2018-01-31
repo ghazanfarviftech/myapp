@@ -78,12 +78,12 @@ this.response = my;
       */
        this.authService.presentToast("Login Successfully");
       this.navCtrl.setRoot(DashboardPage,{
-        param1: dataoverall.responseData
-    });
+        param1: dataoverall.responseData});
      }else{
 
        this.authService.removeSession();
-       this.authService.presentToast(dataoverall.message);
+       this.authService.presentToast("Email or Password Incorrect");
+       //this.authService.presentToast(dataoverall.message);
       //this.presentToast("Email or Password Incorrect");
      }
     }, (err) => {

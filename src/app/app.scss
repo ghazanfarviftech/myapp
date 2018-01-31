@@ -37,12 +37,16 @@ ion-header{
     text-align:center;
 }
     .notification{
-        background:red;
+        background: red;
         position: absolute;
-        left:50%;
-        top:50%;
-        border-radius:50%;
-       
+        left: 50%;
+        top: 44%;
+        border-radius: 100%;
+        width: 20px;
+        height: 20px;
+        padding: 5px 0px;
+        font-size: 11px;
+           
     }
 .gray-content{
         background:#f0f0f0;
@@ -59,9 +63,11 @@ ion-header{
 	cursor:pointer;
 }
     .logo{
-        padding:5px;
-        display:inline-block;
-        color:#cccccc;
+        padding: 0px;
+        display: inline-block;
+        color: #cccccc;
+        width: 75px;
+        height: 30px;
     }
 
  .toolbar-title{

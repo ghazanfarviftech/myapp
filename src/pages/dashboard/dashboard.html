@@ -4,10 +4,10 @@
   <ion-row style="box-shadow: 0px 0px 3px #ccc;">
     <ion-col col-4>
       <img src="assets/dashboard/Pic (5).png"  (click)="message()" style="height: 30px; width:40px">
-      <ion-badge class="notification" style="left:15%">26</ion-badge>
+      <ion-badge class="notification" style="left:27%">26</ion-badge>
       <img src="assets/dashboard/Pic (3).png" style="height: 30px; width:40px">
     </ion-col>
-    <ion-col col-6><span class="logo" (click)="dashboard()">Logo Logo</span></ion-col>
+    <ion-col col-6><img class="logo" (click)="dashboard()" src="{{Logo}}"/></ion-col>
     <ion-col col-2>
       <img item-right src="assets/dashboard/Pic (4).png" menuToggle="right"  style="height: 30px; width:30px">
     </ion-col>
@@ -20,13 +20,13 @@
 
       <ion-slides>
         <ion-slide>
-         <img src="assets/dashboard/Pic (6).png">
+         <img src="{{CompanySlider1}}">
       </ion-slide>
         <ion-slide>
-      <img src="assets/2.jpg">
+      <img src="{{CompanySlider2}}">
         </ion-slide>
         <ion-slide>
-         <img src="assets/3.jpg">
+         <img src="{{CompanySlider3}}">
          
         </ion-slide>
       </ion-slides>
@@ -41,14 +41,14 @@
     </ion-col>
     <ion-col col-4>
         <img src="assets/dashboard/contact.png" class="btn-dashboard" (click)="contacts()"/>
-        <ion-badge class="notification">26</ion-badge>
+        <ion-badge class="notification" style="left:60%; top:58%;">26</ion-badge>
 
          <span class="lbl-dashboard" >{{ 'Contact Box' | translate }}</span>
 
     </ion-col>
     <ion-col col-4>
         <img src="assets/dashboard/news.png" class="btn-dashboard" (click)="dailyNews()"/>
-        <ion-badge class="notification">26</ion-badge>
+        <ion-badge class="notification" style="left:60%; top:58%;">26</ion-badge>
         <span class="lbl-dashboard">{{ 'Daily News' | translate }}</span>
     </ion-col>
 </ion-row>
@@ -56,7 +56,7 @@
 <ion-row style="margin-left: 7%; text-align: center">
     <ion-col col-4>
         <img src="assets/dashboard/msg.png" class="btn-dashboard" (click)="message()"/>
-        <ion-badge class="notification">26</ion-badge>
+        <ion-badge class="notification" style="left:60%; top:58%;">26</ion-badge>
         <span class="lbl-dashboard">{{ 'Message' | translate }}</span>
     </ion-col>
     <ion-col col-4>
