@@ -38,9 +38,38 @@ export class DashboardPage {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
         this.alldata = params.get('param1');
+
+        if(this.alldata != null)
+        {
+
+          this.overallData = this.alldata;
+          this.CompanySlider1 = this.overallData.CompanySlider1;
+          this.CompanySlider2 = this.overallData.CompanySlider2;
+          this.CompanySlider3 = this.overallData.CompanySlider3;
+          this.Logo = this.overallData.CompanyLogo;
+          this.authService.setLogo(this.Logo);
+          this.authService.setSlide1(this.CompanySlider1);
+          this.authService.setSlide2(this.CompanySlider2);
+          this.authService.setSlide3(this.CompanySlider3);
+
+        }else{
+          this.authService.getlogo();
+          this.authService.getSlide1();
+          this.authService.getSlide2();
+          this.authService.getSlide3();
+          setTimeout(() => {
+            this.CompanySlider1 = this.authService.Slide1;
+            this.CompanySlider2 = this.authService.Slide2;
+            this.CompanySlider3 = this.authService.Slide3;
+            this.Logo = this.authService.Logo;
+
+          }, 1000);
+         
+        }
+        
         console.log("constructor Emp Name " );
      // this.navCtrl.setRoot(DashboardPage);
-        this.loadingLogo();
+        //this.loadingLogo();
       }
     }, (err) => {
       console.log("constructor Errr " + err);
@@ -60,10 +89,10 @@ export class DashboardPage {
     */
   }
 
-    loadingLogo() {
+  ionViewWillEnter() {
 
 
-      this.authService.showLoader("Loading");
+     /*  this.authService.showLoader("Loading");
 
       this.authService.getDashboard().then((result) => {
         // this.loading.dismiss();
@@ -99,7 +128,7 @@ export class DashboardPage {
          this.authService.presentToast(err);
          //this.response = err;
          console.log("errrorr " + err);
-       });
+       }); */
        
     //  this.authService.showLoader("Loading ...");
     //   this.authService.getDashboard().then((result) => {

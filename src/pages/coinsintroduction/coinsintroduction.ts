@@ -38,7 +38,7 @@ export class CoinsintroductionPage {
   CoinDetailName : string;
   CoinDetailDescription: string;
   CoinDetailCoinImage: string;
-  
+  Logos:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public authService: RevoService) {
     this.authService.checkSession().then((result) => {
       if (result == null) {
@@ -47,6 +47,9 @@ export class CoinsintroductionPage {
       } else {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
+        if (this.authService.getlogo() != null) {
+          this.Logos = this.authService.Logo;
+        }
         this.alldata = navParams.get('param1');
         // this.navCtrl.setRoot(DashboardPage);
       }

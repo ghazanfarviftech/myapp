@@ -55,7 +55,7 @@ export class CommentEditPage {
 
   update(comment)
   {
-    if (this.comment.Comment.trim().length == 0 || this.comment.Comment.trim() == '')
+    if (comment.Comment.trim().length == 0 || comment.Comment.trim() == '')
     {
       this.authService.presentToast("Fill the comment or Text Limit Reached");
     }else{

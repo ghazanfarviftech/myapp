@@ -18,14 +18,17 @@ export class HomePage {
   sessionData: any;
   constructor(public navCtrl: NavController,public menuCtrl:MenuController,
     public authService: RevoService,private appPreferences: AppPreferences) {
-    
+    console.log("home constructor " );
     this.authService.checkSession().then((result) => { 
       if (result == null) {
+        console.log("home constructor session check ");
         //this.navCtrl.setRoot(HomePage);
       } else {
+        
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
         this.navCtrl.setRoot(DashboardPage);
+        console.log("home constructor session check session found");
       }
     }, (err) => {
      // this.navCtrl.setRoot(HomePage);
@@ -48,7 +51,7 @@ export class HomePage {
       this.authService.presentToast("Please Fill the Required Fields");
 }else{
       this.authService.showLoader("Authenticating");
-
+ 
    this.authService.login(this.loginData).then((result) => {
      // this.loading.dismiss();
       this.data = result;
@@ -76,9 +79,18 @@ this.response = my;
       this.appPreferences.store('SessionID',dataoverall.responseData.SessionID);
       this.appPreferences.store('Role',dataoverall.responseData.Role);
       */
+       this.authService.checkCompanyId();
+       this.authService.checkEmployeeId();
+
        this.authService.presentToast("Login Successfully");
+       this.navCtrl.setRoot(DashboardPage, {
+         param1: dataoverall.responseData
+       });
+      /*  setTimeout(() => {
       this.navCtrl.setRoot(DashboardPage,{
         param1: dataoverall.responseData});
+
+       }, 5000); */
      }else{
 
        this.authService.removeSession();

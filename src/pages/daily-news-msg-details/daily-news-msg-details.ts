@@ -27,8 +27,12 @@ export class DailyNewsMsgDetailsPage {
   overallresponseData: Array<Object>;
   ContactBook: any;
   DailyNews: any;
+  Logos:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public authService: RevoService, public loadingCtrl: LoadingController,
     private toastCtrl: ToastController) {
+    if (this.authService.getlogo() != null) {
+      this.Logos = this.authService.Logo;
+    }
     this.alldata = navParams.get('alldata');
   }
 

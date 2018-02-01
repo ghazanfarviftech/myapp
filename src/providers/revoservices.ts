@@ -35,6 +35,10 @@ export class RevoService {
   CompanyID: any = null;
   SesssionID: any = null;
   Logo: any = null;
+  Slide1: any = null;
+  Slide2: any = null;
+  Slide3: any = null;
+  
   constructor(public http: HttpClient, public appPreferences: AppPreferences, public loadingCtrl: LoadingController,
     private toastCtrl: ToastController,public storage: Storage) {}
 
@@ -753,6 +757,84 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
     /* let mylogo = this.storage.get('Logo');
     return mylogo; */
   }
+
+  setSlide1(session) {
+
+    this.storage.set('Slider1', session);
+
+    console.log("logo set");
+  }
+
+  getSlide1() {
+    this.storage.get('Slider1').then((val) => {
+      console.log('Your Logo is', val);
+      this.Slide1 = val;
+      // resolve(val);
+
+    }), (err) => {
+      this.Slide1 = null;
+      // reject(err);
+      // this.sessionData = nullreject(err);
+    }
+    // return this.storage.get("SessionID");
+    //return this.session;
+
+
+    /* let mylogo = this.storage.get('Logo');
+    return mylogo; */
+  }
+  setSlide2(session) {
+
+    this.storage.set('Slider2', session);
+
+    console.log("logo set");
+  }
+
+  getSlide2() {
+    this.storage.get('Slider2').then((val) => {
+      console.log('Your Logo is', val);
+      this.Slide2 = val;
+      // resolve(val);
+
+    }), (err) => {
+      this.Slide2 = null;
+      // reject(err);
+      // this.sessionData = nullreject(err);
+    }
+    // return this.storage.get("SessionID");
+    //return this.session;
+
+
+    /* let mylogo = this.storage.get('Logo');
+    return mylogo; */
+  }
+
+  setSlide3(session) {
+
+    this.storage.set('Slider3', session);
+
+    console.log("logo set");
+  }
+
+  getSlide3() {
+    this.storage.get('Slider3').then((val) => {
+      console.log('Your Logo is', val);
+      this.Slide3 = val;
+      // resolve(val);
+
+    }), (err) => {
+      this.Slide3 = null;
+      // reject(err);
+      // this.sessionData = nullreject(err);
+    }
+    // return this.storage.get("SessionID");
+    //return this.session;
+
+
+    /* let mylogo = this.storage.get('Logo');
+    return mylogo; */
+  }
+
   checkEmployeeId() {
 
 
