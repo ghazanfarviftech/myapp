@@ -29,40 +29,21 @@
 <ion-list>
   <ion-item>
           <ion-label>{{ 'Select Date' | translate }}</ion-label>
-          <ion-datetime displayFormat="MMM DD YYYY" ></ion-datetime>
+          <ion-datetime displayFormat="YYYY-MM-DD"(ionChange)="updateonDate(myDate)" [(ngModel)]="myDate"></ion-datetime>
         </ion-item>
 </ion-list>
 <ion-list>
-  <ion-item (click)="msgDetail()">
+  <ion-item (click)="msgDetail(item)" *ngFor="let item of overallresponseData">
     <ion-thumbnail item-start>
-      <img src="assets/Pic (6).png">
+      <img src="{{item.ProfilePicture}}">
     </ion-thumbnail>
-    <h2>My Neighbor Totoro</h2>
-    <h3>Don't Know What To Do!</h3>
-    <p>Hayao Miyazaki • 1988</p>
+    <h2>{{item.EmployeeName}}</h2>
+    <h3>{{item.Title}}</h3>
+    <p>{{item.Message}}</p>
     <!-- <button ion-button clear item-end>View</button> -->
-    <span class="item-date" item-end>Date</span>
+    <span class="item-date" item-end>{{item.DateAdded}}</span>
   </ion-item>
-   <ion-item (click)="msgDetail()">
-    <ion-thumbnail item-start>
-      <img src="assets/Pic (6).png">
-    </ion-thumbnail>
-    <h2>My Neighbor Totoro</h2>
-    <h3>Don't Know What To Do!</h3>
-    <p>Hayao Miyazaki • 1988</p>
-    <!-- <button ion-button clear item-end>View</button> -->
-    <span class="item-date" item-end>Date</span>
-  </ion-item>
-   <ion-item (click)="msgDetail()">
-    <ion-thumbnail item-start>
-      <img src="assets/Pic (6).png">
-    </ion-thumbnail>
-    <h2>My Neighbor Totoro</h2>
-    <h3>Don't Know What To Do!</h3>
-    <p>Hayao Miyazaki • 1988</p>
-    <!-- <button ion-button clear item-end>View</button> -->
-    <span class="item-date" item-end>Date</span>
-  </ion-item>
+   
 </ion-list>
 
 </ion-content>

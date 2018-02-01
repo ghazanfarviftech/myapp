@@ -686,6 +686,76 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
   }
 
 
+  public messageDefault() {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : ");
+      this.http.get("http://chainayena.net/revo/api/revo-message-default",
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
+  public messageByDay(Date) {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : ");
+      this.http.post("http://chainayena.net/revo/api/revo-message-day", Date,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
+  public messageDetail(messageId) {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : ");
+      this.http.post("http://chainayena.net/revo/api/revo-message-detail", messageId,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
+
   setSession(session)
   {
     
