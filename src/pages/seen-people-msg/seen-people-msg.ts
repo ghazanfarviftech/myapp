@@ -78,15 +78,15 @@ export class SeenPeopleMsgPage {
         // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
         // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
         // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
       } else {
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
       }
 
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
       var my = JSON.stringify(err);
       if (err.error.message == "Unrecognized Session.") {
         this.authService.removeSession();
@@ -138,15 +138,15 @@ export class SeenPeopleMsgPage {
             // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
             // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
             // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
-            this.authService.loading.dismiss();
+            this.authService.dismissLoading();
           } else {
-            this.authService.loading.dismiss();
+            this.authService.dismissLoading();
             this.navCtrl.setRoot(DashboardPage);
             this.authService.presentToast("Something went wrong");
           }
         },
         (err) => {
-          this.authService.loading.dismiss();
+          this.authService.dismissLoading();
       var my = JSON.stringify(err);
       if (err.error.message == "Unrecognized Session.") {
         this.authService.removeSession();

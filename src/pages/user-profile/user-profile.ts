@@ -49,9 +49,19 @@ export class UserProfilePage {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
         this.alldata = params.get('EmployeeID');
-        if (this.authService.getlogo() != null) {
+        this.authService.getlogo();
+        setTimeout(() => {
+
           this.Logos = this.authService.Logo;
-        }
+
+        }, 1000);
+        /* if (this.authService.getlogo() != null) {
+          setTimeout(() => {
+
+            this.Logos = this.authService.Logo;
+
+          }, 1000);
+        } */
         // this.navCtrl.setRoot(DashboardPage);
       }
     }, (err) => {
@@ -90,10 +100,10 @@ export class UserProfilePage {
         this.Coins = dataoverall.responseData[0].Coins;
         this.SpecialCoins = dataoverall.responseData[0].SpecialCoins;
 
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
       } else {
 
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         if (dataoverall.message == "no employee found.")
         {
           this.authService.presentToast(dataoverall.message);
@@ -106,7 +116,7 @@ export class UserProfilePage {
       }
 
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
 
       var my = JSON.stringify(err);
       if (err.error.message == "Unrecognized Session.") {

@@ -30,6 +30,7 @@ export class ContactNotesPage {
   overallresponseData: Array<Object>;
   ContactBook: any;
   DailyNews: any;
+  Messages:any;
   total_rows: any;
   Cuurentpage = 1;
   TotalNumber: any;
@@ -44,9 +45,20 @@ export class ContactNotesPage {
       } else {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
-        if (this.authService.getlogo() != null) {
+        this.authService.getlogo();
+        setTimeout(() => {
+          
           this.Logos = this.authService.Logo;
-        }
+
+        }, 1000);
+       /*  if (this.authService.getlogo() != null) {
+          this.Logos = this.authService.Logo;
+          setTimeout(() => {
+
+            this.Logos = this.authService.Logo;
+
+          }, 1000);
+        } */
         this.alldata = navParams.get('param1');
 
         // this.navCtrl.setRoot(DashboardPage);
@@ -66,8 +78,11 @@ export class ContactNotesPage {
       console.log("response :" + my);
       var dataoverall = JSON.parse(my);
       if (dataoverall.success) {
+        this.authService.dismissLoading();
         this.overallresponseData = dataoverall.responseData;
 
+        if (dataoverall.responseData != null)
+        {
         this.total_rows = dataoverall.total_rows;
         this.TotalNumber = this.total_rows.TotalNumber;
         this.PerPage = this.total_rows.PerPage;
@@ -75,19 +90,33 @@ export class ContactNotesPage {
 
         this.ContactBook = dataoverall.responseData[0].ContactBook;
         this.DailyNews = dataoverall.responseData[0].DailyNews;
+        this.Messages = dataoverall.responseData[0].Messages;
+        }else{
+          this.authService.presentToast("No Data Found");
+        }
         //this.EmployeeNames = dataoverall.responseData[0].EmployeeName;
         // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
         // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
         // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
-        this.authService.loading.dismiss();
+       
       } else {
-        this.authService.loading.dismiss();
+
+        this.authService.dismissLoading();
+        if (dataoverall.message == "Unrecognized Session.") {
+          this.authService.removeSession();
+          this.authService.presentToast("Please Login Again");
+          this.navCtrl.setRoot(HomePage);
+          
+
+        }else{
+        //this.authService.dismissLoading();
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
+        }
       }
 
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
       var my = JSON.stringify(err);
       if (err.error.message == "Unrecognized Session.") {
         this.authService.removeSession();
@@ -133,20 +162,20 @@ export class ContactNotesPage {
             }
 
 
-            this.authService.loading.dismiss();
+            this.authService.dismissLoading();
           } else {
             if (dataoverall.message == 'No data found.') {
 
               this.authService.presentToast("No data found.");
             } else {
-              this.authService.loading.dismiss();
+              this.authService.dismissLoading();
               this.navCtrl.setRoot(DashboardPage);
               this.authService.presentToast("Something went wrong");
             }
           }
         },
         (err) => {
-          this.authService.loading.dismiss();
+          this.authService.dismissLoading();
           var my = JSON.stringify(err);
           if (err.error.message == "Unrecognized Session.") {
             this.authService.removeSession();
@@ -154,7 +183,7 @@ export class ContactNotesPage {
             this.navCtrl.setRoot(HomePage);
             console.log("errrorr " + err.status);
           } else {
-            this.authService.loading.dismiss();
+            this.authService.dismissLoading();
             this.navCtrl.setRoot(DashboardPage);
             this.authService.presentToast("Something went wrong");
           }

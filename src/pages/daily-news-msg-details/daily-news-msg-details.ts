@@ -30,9 +30,20 @@ export class DailyNewsMsgDetailsPage {
   Logos:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public authService: RevoService, public loadingCtrl: LoadingController,
     private toastCtrl: ToastController) {
-    if (this.authService.getlogo() != null) {
+
+    this.authService.getlogo();
+    setTimeout(() => {
+
       this.Logos = this.authService.Logo;
-    }
+
+    }, 1000);
+    /* if (this.authService.getlogo() != null) {
+      setTimeout(() => {
+
+        this.Logos = this.authService.Logo;
+
+      }, 1000);
+    } */
     this.alldata = navParams.get('alldata');
   }
 

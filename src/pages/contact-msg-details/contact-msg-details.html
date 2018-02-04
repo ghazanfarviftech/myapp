@@ -44,18 +44,18 @@
 		    <span class="lbl-gray">Send Coin Now</span>
 
 		</ion-col>
-		<ion-col col-4 (click)="seenPeople()">
+		<ion-col col-4 (click)="IsSeen ? seenPeople() : noclick()">
 			<ion-thumbnail item-start>
 		      <img src="assets/eyeGreen.png" class="icon">
 		    </ion-thumbnail>
-		    <span class="lbl-gray">Seen</span>
+		    <span class="lbl-gray">Seen {{TotalSeen}}</span>
 		</ion-col>
 	</ion-row>
 </ion-card>
 
 
 	
-		<p class="lbl-gray" style="padding-left: 5px">3 Comments</p>
+		<p class="lbl-gray" style="padding-left: 5px">{{TotalComment}} Comments</p>
 
 	<ion-row>
 
@@ -99,11 +99,11 @@
 <ion-footer>
   <ion-row class="toolbar-background-md">
     <ion-col col-4 >
-        <button ion-button round class="btn-app" >
+        <button ion-button round class="btn-app" (click)="messageDelete()">
         Delete </button>
       </ion-col>
       <ion-col col-4 >
-        <button ion-button round class="btn-app" >Save</button>
+        <button ion-button round class="btn-app" (click)="messageSave()">Save</button>
       </ion-col>
       <ion-col col-4 >
         <button ion-button round class="btn-app" >Reply</button>

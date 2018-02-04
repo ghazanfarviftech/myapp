@@ -29,12 +29,12 @@
     <ion-list >
         <ion-item>
           <ion-label>{{ 'Select upload date' | translate }}</ion-label>
-          <ion-datetime displayFormat="MMM DD YYYY" ></ion-datetime>
+          <ion-datetime displayFormat="YYYY-MM-DD" (ionChange)="updateonDate(myDate)" [(ngModel)]="myDate"></ion-datetime>
         </ion-item>
          <ion-item>
        
         <input type="file" (change)="fileUpload($event)" id="file-input" style="opacity: 0" #fileInp>
-        <img src="assets/attach.png" (click)="onClick()" width="30px" height="30px" > <label>{{ 'Select File' | translate }}</label>
+        <img src="assets/attach.png" (click)="openGallery()" width="30px" height="30px" > <label>{{ 'Select File' | translate }}</label>
        
     </ion-item>
     <p class="lbl-gray" style="padding-left:10px">{{ 'Contents:(less than 1000 character)' | translate }}</p> 

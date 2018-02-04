@@ -9,7 +9,7 @@
 <ion-content >
 	<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 		<ion-item>
-	  		<ion-label>Select a group</ion-label>
+				<ion-label>Select Company</ion-label>
 			  <ion-select [(ngModel)]="toppings" >
 			    <ion-option>Bacon</ion-option>
 			    <ion-option>Black Olives</ion-option>
@@ -20,18 +20,13 @@
 			  </ion-select>
 		</ion-item>
 		<ion-item>
-	  		<ion-label>Select a medium size group</ion-label>
-			  <ion-select [(ngModel)]="toppings" >
-			    <ion-option>Bacon</ion-option>
-			    <ion-option>Black Olives</ion-option>
-			    <ion-option>Extra Cheese</ion-option>
-			    <ion-option>Mushrooms</ion-option>
-			    <ion-option>Pepperoni</ion-option>
-			    <ion-option>Sausage</ion-option>
-			  </ion-select>
+			<ion-label>Select Department</ion-label>
+				<ion-select [(ngModel)]="toppings">
+					<ion-option *ngFor="let depart of Department" [value]="depart">{{depart.DepartmentName}}</ion-option>
+				</ion-select>
 		</ion-item>
 		<ion-item>
-	  		<ion-label>Select a small size group</ion-label>
+				<ion-label>Select Store</ion-label>
 			  <ion-select [(ngModel)]="toppings" >
 			    <ion-option>Bacon</ion-option>
 			    <ion-option>Black Olives</ion-option>
@@ -42,30 +37,19 @@
 			  </ion-select>
 		</ion-item>
 		<ion-list>
-			<ion-item>
+
+			<ion-item *ngFor="let employes of Employees">
 				<ion-avatar item-start>
-		        	<img src="assets/Pic (6).png">
-			      </ion-avatar>
-			      <h3>arty McFly</h3>
-			      <img src="assets/check.png" item-end  class="tabIcon" />
+					<img src="{{employes.EmployeeImage}}" (click)="userProfile(employes.EmployeeID)">
+				</ion-avatar>
+				<h3>{{employes.EmployeeName}}</h3>
+			
+				<img src="assets/check.png" item-end class="tabIcon" />
 			</ion-item>
-			<ion-item>
-				<ion-avatar item-start>
-		        	<img src="assets/Pic (6).png">
-			      </ion-avatar>
-			      <h3>arty McFly</h3>
-			      <img src="assets/check.png" item-end  class="tabIcon" />
-			</ion-item>
-			<ion-item>
-				<ion-avatar item-start>
-		        	<img src="assets/Pic (6).png">
-			      </ion-avatar>
-			      <h3>arty McFly</h3>
-			      <img src="assets/check.png" class="tabIcon" item-end />
-			</ion-item>
+			
 		</ion-list>
 		<ion-item>
-			 
+			  
 			  <input type="file" (change)="fileUpload($event)" id="file-input" style="opacity: 0" #fileInp>
 			  <img src="assets/attach.png" (click)="onClick()" width="30px" height="30px" > <label>Select File</label>
 

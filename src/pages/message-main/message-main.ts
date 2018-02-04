@@ -38,10 +38,20 @@ export class MessageMainPage {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
         this.alldata = navParams.get('param1');
-        if(this.authService.getlogo() != null)
-        {
+        this.authService.getlogo();
+        setTimeout(() => {
+
           this.Logos = this.authService.Logo;
-        }
+
+        }, 1000);
+       /*  if(this.authService.getlogo() != null)
+        {
+          setTimeout(() => {
+
+            this.Logos = this.authService.Logo;
+
+          }, 1000);
+        } */
         // this.navCtrl.setRoot(DashboardPage);
       }
     }, (err) => {
@@ -84,16 +94,16 @@ export class MessageMainPage {
         // this.Coins = dataoverall.responseData[0].Coins;
         // this.SpecialCoins = dataoverall.responseData[0].SpecialCoins;
         
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         
       } else {
-        this.authService.loading.dismiss();
-        this.navCtrl.setRoot(DashboardPage);
-        this.authService.presentToast("Something went wrong");
+        this.authService.dismissLoading();
+        //this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast(dataoverall.message);
       }
      
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
 
       var my = JSON.stringify(err);
       if (err.error.message =="Unrecognized Session.")
@@ -150,16 +160,16 @@ export class MessageMainPage {
         // this.Coins = dataoverall.responseData[0].Coins;
         // this.SpecialCoins = dataoverall.responseData[0].SpecialCoins;
         
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         
       } else {
-        this.authService.loading.dismiss();
-        this.navCtrl.setRoot(DashboardPage);
-        this.authService.presentToast("Something went wrong");
+        this.authService.dismissLoading();
+        //this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast(dataoverall.message);
       }
      
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
 
       var my = JSON.stringify(err);
       if (err.error.message =="Unrecognized Session.")

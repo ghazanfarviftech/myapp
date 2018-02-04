@@ -45,7 +45,7 @@
       <p>{{item.DateAdded}}</p>
    
       
-      <img src="assets/attach.png" width="30px" style="margin-top: 10px" />
+      <img src="assets/attach.png" *ngIf="item.HaveAttachment" width="30px" style="margin-top: 10px" />
       <img [src]="item.IsSaved ? 'assets/saveActive.png' : 'assets/save.png'" width="30px" style="margin-top: 10px">
       <!-- <img src="assets/save.png" width="25px"  style="margin-top: 10px" /> -->
     </span>

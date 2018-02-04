@@ -39,6 +39,7 @@ export class ContactMsgDetailsPage {
   MessageStatus: any;
   CommentUpdateText:any;
   Logos:any;
+  TotalComment:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: RevoService) {
 
     this.authService.checkSession().then((result) => {
@@ -48,10 +49,21 @@ export class ContactMsgDetailsPage {
       } else {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
-        if (this.authService.getlogo() != null) {
+        this.authService.getlogo();
+        setTimeout(() => {
+
           this.Logos = this.authService.Logo;
-        }
+
+        }, 1000);
+       /*  if (this.authService.getlogo() != null) {
+          setTimeout(() => {
+
+            this.Logos = this.authService.Logo;
+
+          }, 1000);
+        } */
         this.alldata = navParams.get('MessageID');
+        this.loadingData();
         // this.navCtrl.setRoot(DashboardPage);
       }
     }, (err) => {
@@ -69,7 +81,7 @@ export class ContactMsgDetailsPage {
     }
   }
 
-  ionViewWillEnter() {
+  loadingData() {
     
     let MessageID = { MessageID: this.alldata };
 
@@ -98,21 +110,22 @@ export class ContactMsgDetailsPage {
         this.DateAdded = this.overallresponseData.DateAdded;
         this.MessageStatus = this.overallresponseData.MessageStatus;
 
+        this.TotalComment = this.Comments.length;
         //this.ContactBook = dataoverall.responseData[0].ContactBook;
         //this.DailyNews = dataoverall.responseData[0].DailyNews;
         //this.EmployeeNames = dataoverall.responseData[0].EmployeeName;
         // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
         // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
         // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
       } else {
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
       }
 
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
       var my = JSON.stringify(err);
       if (err.error.message == "Unrecognized Session.") {
         this.authService.removeSession();
@@ -163,9 +176,9 @@ export class ContactMsgDetailsPage {
         // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
         // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
         // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
       } else {
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         if (dataoverall.message == 'provide message ')
         {
           this.authService.presentToast("Error While Sending Comment");
@@ -180,7 +193,7 @@ export class ContactMsgDetailsPage {
       }
 
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
       var my = JSON.stringify(err);
       if (err.error.message == "Unrecognized Session.") {
         this.authService.removeSession();
@@ -230,9 +243,9 @@ export class ContactMsgDetailsPage {
         // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
         // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
         // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
       } else {
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         if (dataoverall.message == 'provide message ')
         {
           this.authService.presentToast("Error While Sending Comment");
@@ -247,7 +260,86 @@ export class ContactMsgDetailsPage {
       }
 
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
+      var my = JSON.stringify(err);
+      if (err.error.message == "Unrecognized Session.") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+      } else {
+
+        this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast("Something went wrong");
+      }
+    });
+  }
+
+  messageSave()
+  {
+    let MessageData = { "MessageID": this.MessageID};
+    this.authService.showLoader("Saving Message ...");
+    this.authService.contactBookMessageSaved(MessageData).then((result) => {
+      this.response = result;
+
+      var my = JSON.stringify(this.response);
+      console.log("response :" + my);
+      var dataoverall = JSON.parse(my);
+      if (dataoverall.success) {
+       
+        this.authService.presentToast("Message Saved Successfully");
+       
+        this.authService.dismissLoading();
+      } else {
+        this.authService.dismissLoading();
+        
+
+          this.navCtrl.setRoot(DashboardPage);
+          this.authService.presentToast("Something went wrong");
+        
+      }
+
+    }, (err) => {
+      this.authService.dismissLoading();
+      var my = JSON.stringify(err);
+      if (err.error.message == "Unrecognized Session.") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+      } else {
+
+        this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast("Something went wrong");
+      }
+    });
+  }
+
+  messageDelete() {
+    let MessageData = { "MessageID": this.MessageID };
+    this.authService.showLoader("Deleting Message ...");
+    this.authService.contactBookMessageDelete(MessageData).then((result) => {
+      this.response = result;
+
+      var my = JSON.stringify(this.response);
+      console.log("response :" + my);
+      var dataoverall = JSON.parse(my);
+      if (dataoverall.success) {
+
+        this.authService.presentToast("Message Deleted Successfully");
+
+        this.authService.dismissLoading();
+      } else {
+        this.authService.dismissLoading();
+
+
+        this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast("Something went wrong");
+
+      }
+
+    }, (err) => {
+      this.authService.dismissLoading();
       var my = JSON.stringify(err);
       if (err.error.message == "Unrecognized Session.") {
         this.authService.removeSession();
@@ -280,5 +372,9 @@ export class ContactMsgDetailsPage {
   }
     dashboard(){
      this.navCtrl.push(DashboardPage);
+  }
+  noclick()
+  {
+
   }
 }

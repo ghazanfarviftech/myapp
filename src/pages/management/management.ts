@@ -20,9 +20,20 @@ export class ManagementPage {
   questionList : Array<Object>;
   Logos : any;
   constructor(public navCtrl: NavController, public menuCtrl: MenuController, public authService: RevoService) {
-    if (this.authService.getlogo() != null) {
+    this.authService.getlogo();
+    setTimeout(() => {
+
       this.Logos = this.authService.Logo;
-    }
+
+    }, 1000);
+    /* if (this.authService.getlogo() != null) {
+      setTimeout(() => {
+
+        this.Logos = this.authService.Logo;
+
+      }, 1000);
+    } */
+    
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad CoinSentPage');

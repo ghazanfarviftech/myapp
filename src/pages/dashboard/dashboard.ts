@@ -95,14 +95,14 @@ export class DashboardPage {
      /*  this.authService.showLoader("Loading");
 
       this.authService.getDashboard().then((result) => {
-        // this.loading.dismiss();
+        // this.dismissLoading();
 
        
         this.response = result;
       var my= JSON.stringify(this.response);
      var dataoverall = JSON.parse(my);
         console.log("ionViewWillEnter  response " + dataoverall);
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
    
         if(dataoverall.success)
         {
@@ -124,7 +124,7 @@ export class DashboardPage {
    
          console.log("ionViewWillEnter  error " + err);
          this.authService.removeSession();
-         this.authService.loading.dismiss();
+         this.authService.dismissLoading();
          this.authService.presentToast(err);
          //this.response = err;
          console.log("errrorr " + err);
@@ -145,15 +145,15 @@ export class DashboardPage {
     //     this.CompanySlider3 = this.overallData.CompanySlider3;
     //     this.Logo = this.overallData.CompanyLogo;
         
-    //     this.authService.loading.dismiss();
+    //     this.authService.dismissLoading();
     //   } else {
-    //     this.authService.loading.dismiss();
+    //     this.authService.dismissLoading();
     //     this.navCtrl.setRoot(DashboardPage);
     //     this.authService.presentToast("Something went wrong");
     //   }
 
     // }, (err) => {
-    //   this.authService.loading.dismiss();
+    //   this.authService.dismissLoading();
     //   var my = JSON.stringify(err);
     //   if (err.error.message == "Unrecognized Session.") {
     //     this.authService.removeSession();

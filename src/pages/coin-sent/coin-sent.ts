@@ -31,6 +31,7 @@ export class CoinSentPage {
   overallresponseData : Array<Object>;
   ContactBook: any;
   DailyNews: any;
+  Messages:any;
   Logos: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public authService: RevoService, public loadingCtrl: LoadingController,
     private toastCtrl: ToastController) {
@@ -41,9 +42,19 @@ export class CoinSentPage {
       } else {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
-        if (this.authService.getlogo() != null) {
+        this.authService.getlogo();
+        setTimeout(() => {
+
           this.Logos = this.authService.Logo;
-        }
+
+        }, 1000);
+       /*  if (this.authService.getlogo() != null) {
+          setTimeout(() => {
+
+            this.Logos = this.authService.Logo;
+
+          }, 1000);
+        } */
        // this.alldata = navParams.get('param1');
         // this.navCtrl.setRoot(DashboardPage);
       }
@@ -56,7 +67,7 @@ export class CoinSentPage {
   ionViewWillEnter() {
 
     this.authService.showLoader("Loading ...");
-    this.authService.coinsent(this.alldata).then((result) => {
+    this.authService.coinsent().then((result) => {
       this.response = result;
 
       var my = JSON.stringify(this.response);
@@ -66,13 +77,14 @@ export class CoinSentPage {
         this.overallresponseData = dataoverall.responseData;
         this.ContactBook = dataoverall.responseData[0].ContactBook;
         this.DailyNews = dataoverall.responseData[0].DailyNews;
+        this.Messages = dataoverall.responseData[0].Messages;
         //this.EmployeeNames = dataoverall.responseData[0].EmployeeName;
        // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
        // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
        // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
       } else {
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         if(dataoverall.message == "No data found.")
         {
           this.authService.presentToast(dataoverall.message);
@@ -84,7 +96,7 @@ export class CoinSentPage {
       }
       
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
       var my = JSON.stringify(err);
       if (err.error.message == "Unrecognized Session.") {
         this.authService.removeSession();

@@ -80,7 +80,7 @@ export class ProfileSettingsPage {
 
 
         this.authService.showLoader("Updating Profile ...");
-   this.authService.setProfile(this.alldata, { 'ProfilePicture': this.profileImage, 'CurrentPassword': this.currentPassword, 'NewPassword': this.newPassword, 'Catchpharase': this.copyCatch, 'Goal': this.goal}).then((result) => {
+   this.authService.setProfile({ 'ProfilePicture': this.profileImage, 'CurrentPassword': this.currentPassword, 'NewPassword': this.newPassword, 'Catchpharase': this.copyCatch, 'Goal': this.goal}).then((result) => {
       this.response = result;
 
       var my = JSON.stringify(this.response);
@@ -90,16 +90,16 @@ export class ProfileSettingsPage {
 
         this.authService.presentToast("Profile Update Successfully");
         this.navCtrl.pop();
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
       } else {
         
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
        // this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast(dataoverall.message);
       }
       
   }, (err) => {
-    this.authService.loading.dismiss();
+    this.authService.dismissLoading();
     var my = JSON.stringify(err);
     if (err.error.message == "Unrecognized Session.") {
       this.authService.removeSession();

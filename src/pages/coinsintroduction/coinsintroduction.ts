@@ -47,9 +47,19 @@ export class CoinsintroductionPage {
       } else {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
-        if (this.authService.getlogo() != null) {
+        this.authService.getlogo();
+        setTimeout(() => {
+
           this.Logos = this.authService.Logo;
-        }
+
+        }, 1000);
+        /* if (this.authService.getlogo() != null) {
+          setTimeout(() => {
+
+            this.Logos = this.authService.Logo;
+
+          }, 1000);
+        } */
         this.alldata = navParams.get('param1');
         // this.navCtrl.setRoot(DashboardPage);
       }
@@ -81,7 +91,7 @@ export class CoinsintroductionPage {
         this.CoinDetailCoinImage = dataoverall.responseData[0].CoinImage;
         
         
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
 
         let alert = this.alertCtrl.create({
           title: this.CoinDetailName,
@@ -91,13 +101,13 @@ export class CoinsintroductionPage {
         });
         alert.present();
       } else {
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
       }
 
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
       var my = JSON.stringify(err);
       if (err.error.message == "Unrecognized Session.") {
         this.authService.removeSession();
@@ -138,15 +148,15 @@ export class CoinsintroductionPage {
         // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
         // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
         // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
       } else {
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
       }
      
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
       var my = JSON.stringify(err);
       if (err.error.message == "Unrecognized Session.") {
         this.authService.removeSession();
@@ -154,7 +164,7 @@ export class CoinsintroductionPage {
         this.navCtrl.setRoot(HomePage);
         console.log("errrorr " + err.status);
       } else {
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
       }

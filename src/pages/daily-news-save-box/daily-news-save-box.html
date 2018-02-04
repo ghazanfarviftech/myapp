@@ -36,83 +36,23 @@
     <ion-content class="gray-content">
     
       <ion-list>
-        <ion-item (click)="detailed()">
+        <ion-item (click)="detailed()" *ngFor="let item of overallresponseData">
           <ion-thumbnail item-start>
-            <img src="assets/Pic (6).png">
+            <img src="{{item.SenderImage}}">
           </ion-thumbnail>
-          <h2>My Neighbor Totoro</h2>
-          <h3>Don't Know What To Do!</h3>
-          <p>Hayao Miyazaki • 1988</p>
+          <h2>{{item.MessageTitle}}</h2>
+          <h3>{{item.MessageDescription}}</h3>
+          <p>{{item.SenderName}}</p>
           <span item-end>
-            <p>20-jan-1992</p>
+            <p>{{item.DateAdded}}</p>
     
-            <img src="assets/attach.png" width="30px" style="margin-top: 10px" />
+            <img src="assets/attach.png" *ngIf="item.HaveAttachment" width="30px" style="margin-top: 10px" />
             <img src="assets/save.png" width="25px" style="margin-top: 10px" />
+            
+            
           </span>
         </ion-item>
-        <ion-item (click)="detailed()">
-          <ion-thumbnail item-start>
-            <img src="assets/Pic (6).png">
-          </ion-thumbnail>
-          <h2>My Neighbor Totoro</h2>
-          <h3>Don't Know What To Do!</h3>
-          <p>Hayao Miyazaki • 1988</p>
-          <span item-end>
-            <p>20-jan-1992</p>
-    
-            <img src="assets/attach.png" width="30px" style="margin-top: 10px" />
-            <img src="assets/save.png" width="25px" style="margin-top: 10px" />
-          </span>
-        </ion-item>
-        <ion-item (click)="detailed()">
-          <ion-thumbnail item-start>
-            <img src="assets/Pic (6).png">
-          </ion-thumbnail>
-          <h2>My Neighbor Totoro</h2>
-          <h3>Don't Know What To Do!</h3>
-          <p>Hayao Miyazaki • 1988</p>
-          <!-- <button ion-button clear item-end>View</button> -->
-          <span item-end>
-            <p>20-jan-1992</p>
-    
-            <img src="assets/attach.png" width="30px" style="margin-top: 10px" />
-            <img src="assets/save.png" width="25px" style="margin-top: 10px" />
-          </span>
-        </ion-item>
-        <ion-item (click)="detailed()">
-          <ion-thumbnail item-start>
-            <img src="assets/Pic (6).png">
-          </ion-thumbnail>
-          <h2>My Neighbor Totoro</h2>
-          <h3>Don't Know What To Do!</h3>
-          <p>Hayao Miyazaki • 1988</p>
-          <span item-end>
-            <p>20-jan-1992</p>
-    
-            <img src="assets/attach.png" width="30px" style="margin-top: 10px" />
-            <img src="assets/save.png" width="25px" style="margin-top: 10px" />
-          </span>
-        </ion-item>
-        <ion-item (click)="detailed()">
-          <ion-thumbnail item-start>
-            <img src="assets/Pic (6).png">
-          </ion-thumbnail>
-          <h2>My Neighbor Totoro</h2>
-          <h3>Don't Know What To Do!</h3>
-          <p>Hayao Miyazaki • 1988</p>
-          <!-- <button ion-button clear item-end>View</button> -->
-          <span class="item-date" item-end>Date</span>
-        </ion-item>
-        <ion-item (click)="detailed()">
-          <ion-thumbnail item-start>
-            <img src="assets/Pic (6).png">
-          </ion-thumbnail>
-          <h2>My Neighbor Totoro</h2>
-          <h3>Don't Know What To Do!</h3>
-          <p>Hayao Miyazaki • 1988</p>
-          <!-- <button ion-button clear item-end>View</button> -->
-          <span class="item-date" item-end>Date</span>
-        </ion-item>
+       
       </ion-list>
     
     </ion-content>
@@ -126,10 +66,11 @@
             {{ 'Received' | translate }} </button>
         </ion-col>
         <ion-col col-4>
-          <button ion-button round class="btn-app" (click)="dailynewssaved()">{{ 'Saved' | translate }}</button>
-        </ion-col>
-        <ion-col col-4>
           <button ion-button round class="btn-app" (click)="dailynewssent()">{{ 'Sent' | translate }}</button>
         </ion-col>
+        <ion-col col-4>
+          <button ion-button round class="btn-app" (click)="dailynewssaved()">{{ 'Saved' | translate }}</button>
+        </ion-col>
+       
       </ion-row>
     </ion-footer>

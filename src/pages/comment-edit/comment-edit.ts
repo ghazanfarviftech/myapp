@@ -61,7 +61,7 @@ export class CommentEditPage {
     }else{
 
       this.authService.showLoader("Updating Comment ...");
-    this.authService.commentedit(this.alldata, comment).then((result) => {
+    this.authService.commentedit(comment).then((result) => {
     this.response = result;
 
     var my = JSON.stringify(this.response);
@@ -88,15 +88,15 @@ export class CommentEditPage {
       this.Risent = dataoverall.responseData[0].Risent;
       this.Rigotsc = dataoverall.responseData[0].Rigotsc;
       this.RIsentsc = dataoverall.responseData[0].RIsentsc; */
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
     } else {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
       this.navCtrl.setRoot(DashboardPage);
       this.authService.presentToast("Something went wrong");
     }
       
   }, (err) => {
-    this.authService.loading.dismiss();
+    this.authService.dismissLoading();
     var my = JSON.stringify(err);
     if (err.error.message == "Unrecognized Session.") {
       this.authService.removeSession();

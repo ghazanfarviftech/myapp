@@ -64,7 +64,7 @@ export class CoinSelectPage {
 
   ionViewDidLoad() {
     this.authService.showLoader("Loading Data");
-    this.authService.profile(this.alldata).then((result) => {
+    this.authService.profile().then((result) => {
       this.response = result;
 
       var my = JSON.stringify(this.response);
@@ -91,16 +91,16 @@ export class CoinSelectPage {
         this.Coins = dataoverall.responseData[0].Coins;
         this.SpecialCoins = dataoverall.responseData[0].SpecialCoins;
 
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
 
       } else {
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
        // this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
       }
 
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
 
       var my = JSON.stringify(err);
       if (err.error.message == "Unrecognized Session.") {
@@ -147,17 +147,17 @@ export class CoinSelectPage {
       var dataoverall = JSON.parse(my);
       if (dataoverall.success) {
        
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         this.authService.presentToast("coin send successfull");
         this.navCtrl.pop();
       } else {
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         // this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
       }
 
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
 
       var my = JSON.stringify(err);
       if (err.error.message == "Unrecognized Session.") {

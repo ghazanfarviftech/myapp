@@ -50,9 +50,19 @@ export class DailyNewsReceptBoxPage {
       } else {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
-        if (this.authService.getlogo() != null) {
+        this.authService.getlogo();
+        setTimeout(() => {
+
           this.Logos = this.authService.Logo;
-        }
+
+        }, 1000);
+       /*  if (this.authService.getlogo() != null) {
+          setTimeout(() => {
+
+            this.Logos = this.authService.Logo;
+
+          }, 1000);
+        } */
         this.alldata = navParams.get('param1');
         
         // this.navCtrl.setRoot(DashboardPage);
@@ -86,15 +96,15 @@ export class DailyNewsReceptBoxPage {
         // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
         // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
         // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
       } else {
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
       }
 
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
       var my = JSON.stringify(err);
       if (err.error.message == "Unrecognized Session.") {
         this.authService.removeSession();
@@ -140,9 +150,9 @@ export class DailyNewsReceptBoxPage {
             }
 
 
-            this.authService.loading.dismiss();
+            this.authService.dismissLoading();
           } else {
-            this.authService.loading.dismiss();
+            this.authService.dismissLoading();
             if (dataoverall.message == 'No data found.') {
 
               this.authService.presentToast("No data found.");
@@ -158,7 +168,7 @@ export class DailyNewsReceptBoxPage {
           }
         },
         (err) => {
-          this.authService.loading.dismiss();
+          this.authService.dismissLoading();
           var my = JSON.stringify(err);
           if (err.error.message == "Unrecognized Session.") {
             this.authService.removeSession();
@@ -166,7 +176,7 @@ export class DailyNewsReceptBoxPage {
             this.navCtrl.setRoot(HomePage);
             console.log("errrorr " + err.status);
           } else {
-            this.authService.loading.dismiss();
+            this.authService.dismissLoading();
             this.navCtrl.setRoot(DashboardPage);
             this.authService.presentToast("Something went wrong");
           }

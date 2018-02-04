@@ -31,6 +31,7 @@ export class CoinSendPage {
   overallData: any;
   ContactBook: any;
   DailyNews: any;
+  Messages: any;
   CompanyID: any;
   CompanyName: any;
   Department: Array<Object>;
@@ -45,9 +46,20 @@ Logos:any;
       } else {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
-        if (this.authService.getlogo() != null) {
+        this.authService.getlogo();
+        setTimeout(() => {
+
           this.Logos = this.authService.Logo;
-        }
+
+        }, 1000);
+       /*  if (this.authService.getlogo() != null) {
+          //this.Logos = this.authService.Logo;
+          setTimeout(() => {
+
+            this.Logos = this.authService.Logo;
+
+          }, 1000);
+        } */
         //this.alldata = navParams.get('param1');
         // this.navCtrl.setRoot(DashboardPage);
       }
@@ -75,15 +87,15 @@ Logos:any;
         this.Department = this.overallData.Department;
         this.Employees = this.overallData.Employees;
         
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
       } else {
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
       }
-
+ 
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
       var my = JSON.stringify(err);
       if (err.error.message == "Unrecognized Session.") {
         this.authService.removeSession();
@@ -124,11 +136,10 @@ coinsintro()
   this.navCtrl.push(CoinsintroductionPage);
 
 }
-userProfile()
-{
-  this.navCtrl.push(UserProfilePage);
+  userProfile(employeeId) {
+    this.navCtrl.push(UserProfilePage, { 'EmployeeID': employeeId });
 
-}
+  }
  dailyNews(){
     this.navCtrl.push(DailyNewsReceptBoxPage);
   }

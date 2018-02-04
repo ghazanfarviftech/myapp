@@ -46,6 +46,7 @@ import { AppPreferences } from '@ionic-native/app-preferences';
 import { RevoService } from '../providers/revoservices';
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera';
+import { Base64 } from '@ionic-native/base64';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -145,6 +146,7 @@ export function createTranslateLoader(http: HttpClient) {
     RevoService,
     Camera,
     AppPreferences,
+    Base64,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

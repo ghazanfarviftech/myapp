@@ -29,9 +29,19 @@ export class RankingPage {
 
 Logos:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public authService: RevoService) {
-    if (this.authService.getlogo() != null) {
+    this.authService.getlogo();
+    setTimeout(() => {
+
       this.Logos = this.authService.Logo;
-    }
+
+    }, 1000);
+    /*  if (this.authService.getlogo() != null) {
+      setTimeout(() => {
+
+        this.Logos = this.authService.Logo;
+
+      }, 1000);
+    } */
 
   for(let i = 0; i < 10; i++ ){
       this.data.push({

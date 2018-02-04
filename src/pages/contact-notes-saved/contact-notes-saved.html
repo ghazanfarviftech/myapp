@@ -2,7 +2,7 @@
  <ion-row style="box-shadow: 0px 0px 3px #ccc;">
     <ion-col col-4>
       <img src="assets/dashboard/Pic (5).png"  (click)="message()" style="height: 30px; width:40px">
-      <ion-badge class="notification" style="left:27%">26</ion-badge>
+      <ion-badge class="notification" style="left:27%">{{Messages}}</ion-badge>
      
     </ion-col>
     <ion-col col-6><img class="logo" (click)="dashboard()" src="{{Logos}}" />
@@ -37,16 +37,16 @@
 <ion-list>
   <ion-item (click)="detailed()" *ngFor="let item of overallresponseData">
     <ion-thumbnail item-start>
-      <img src="assets/Pic (6).png">
+      <img src="{{item.SenderImage}}">
     </ion-thumbnail>
-    <h2>My Neighbor Totoro</h2>
-    <h3>Don't Know What To Do!</h3>
-    <p>Hayao Miyazaki • 1988</p>
+    <h2>{{item.SenderName}}</h2>
+    <h3>{{item.MessageTitle}}</h3>
+    <p>{{item.MessageDescription}}</p>
         <span item-end>
-      <p>20-jan-1992</p>
+      <p>{{item.DateAdded}}</p>
    
-      <img src="assets/attach.png" width="30px" style="margin-top: 10px" />
-      <img src="assets/save.png" width="25px"  style="margin-top: 10px" />
+      <img src="assets/attach.png" *ngIf="item.HaveAttachment" width="30px" style="margin-top: 10px" />
+    <img [src]="item.IsSaved ? 'assets/saveActive.png' : 'assets/save.png'" width="30px" style="margin-top: 10px">
     </span>
   </ion-item>
   

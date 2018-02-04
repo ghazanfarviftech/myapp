@@ -53,7 +53,7 @@ export class HomePage {
       this.authService.showLoader("Authenticating");
  
    this.authService.login(this.loginData).then((result) => {
-     // this.loading.dismiss();
+     // this.dismissLoading();
       this.data = result;
    var my= JSON.stringify(this.data);//this.data[0];//Object.values(this.data)
   //this.mydata = my.replace("}", "").split(":")[1].split("~");
@@ -63,7 +63,7 @@ this.response = my;
   console.log("json data : " +my);
      console.log("json data : " +dataoverall.success);
 
-     this.authService.loading.dismiss();
+     this.authService.dismissLoading();
 
      if(dataoverall.success)
      {
@@ -101,7 +101,7 @@ this.response = my;
     }, (err) => {
 
       this.authService.removeSession();
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
       this.authService.presentToast(err.message);
       //this.response = err;
       console.log("errrorr " + err.message);

@@ -49,9 +49,19 @@ export class DailyNewsSaveBoxPage {
       } else {
         this.authService.checkCompanyId();
         this.authService.checkEmployeeId();
-        if (this.authService.getlogo() != null) {
+        this.authService.getlogo();
+        setTimeout(() => {
+
           this.Logos = this.authService.Logo;
-        }
+
+        }, 1000);
+       /*  if (this.authService.getlogo() != null) {
+          setTimeout(() => {
+
+            this.Logos = this.authService.Logo;
+
+          }, 1000);
+        } */
         this.alldata = navParams.get('param1');
         // this.navCtrl.setRoot(DashboardPage);
       }
@@ -62,8 +72,8 @@ export class DailyNewsSaveBoxPage {
   }
 
   ionViewWillEnter() {
-    /* this.authService.showLoader("Loading ...");
-    this.authService.NewMessageReceived(this.Cuurentpage, this.PerPage).then((result) => {
+    this.authService.showLoader("Loading ...");
+    this.authService.NewMessageSaved(this.Cuurentpage, this.PerPage).then((result) => {
       this.response = result;
 
       var my = JSON.stringify(this.response);
@@ -72,6 +82,7 @@ export class DailyNewsSaveBoxPage {
       if (dataoverall.success) {
         this.overallresponseData = dataoverall.responseData;
 
+        if (dataoverall.responseData != null) {
         this.total_rows = dataoverall.total_rows;
         this.TotalNumber = this.total_rows.TotalNumber;
         this.PerPage = this.total_rows.PerPage;
@@ -79,19 +90,22 @@ export class DailyNewsSaveBoxPage {
 
         this.ContactBook = dataoverall.responseData[0].ContactBook;
         this.DailyNews = dataoverall.responseData[0].DailyNews;
+        }else{
+          this.authService.presentToast("No Data Found");
+        }
         //this.EmployeeNames = dataoverall.responseData[0].EmployeeName;
         // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
         // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
         // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
       } else {
-        this.authService.loading.dismiss();
+        this.authService.dismissLoading();
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
       }
 
     }, (err) => {
-      this.authService.loading.dismiss();
+      this.authService.dismissLoading();
       var my = JSON.stringify(err);
       if (err.error.message == "Unrecognized Session.") {
         this.authService.removeSession();
@@ -105,7 +119,7 @@ export class DailyNewsSaveBoxPage {
         this.authService.presentToast("Something went wrong");
       }
     });
- */
+
 
     console.log('ionViewDidLoad DailyNewsReceptBoxPage');
   }
@@ -114,7 +128,7 @@ export class DailyNewsSaveBoxPage {
   doInfinite(infiniteScroll) {
     this.Cuurentpage = this.Cuurentpage + 1;
     setTimeout(() => {
-      this.authService.NewMessageReceived(this.Cuurentpage, this.PerPage)
+      this.authService.NewMessageSaved(this.Cuurentpage, this.PerPage)
         .then((result) => {
           this.response = result;
 
@@ -137,20 +151,20 @@ export class DailyNewsSaveBoxPage {
             }
 
 
-            this.authService.loading.dismiss();
+            this.authService.dismissLoading();
           } else {
             if (dataoverall.message == 'No data found.') {
 
               this.authService.presentToast("No data found.");
             } else {
-              this.authService.loading.dismiss();
+              this.authService.dismissLoading();
               this.navCtrl.setRoot(DashboardPage);
               this.authService.presentToast("Something went wrong");
             }
           }
         },
         (err) => {
-          this.authService.loading.dismiss();
+          this.authService.dismissLoading();
           var my = JSON.stringify(err);
           if (err.error.message == "Unrecognized Session.") {
             this.authService.removeSession();
@@ -158,7 +172,7 @@ export class DailyNewsSaveBoxPage {
             this.navCtrl.setRoot(HomePage);
             console.log("errrorr " + err.status);
           } else {
-            this.authService.loading.dismiss();
+            this.authService.dismissLoading();
             this.navCtrl.setRoot(DashboardPage);
             this.authService.presentToast("Something went wrong");
           }
