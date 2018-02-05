@@ -35,6 +35,7 @@ export class DailyNewsReceptBoxPage {
   overallresponseData: Array<Object>;
   ContactBook: any;
   DailyNews: any;
+  Messages: any;
   total_rows: any;
   Cuurentpage = 1;
   TotalNumber: any;
@@ -89,8 +90,9 @@ export class DailyNewsReceptBoxPage {
         this.PerPage = this.total_rows.PerPage;
         this.MaxPage = this.total_rows.MaxPage;
         //console.log("Daily News", this.dataoverall);
-     //   this.ContactBook = dataoverall.responseData[0].ContactBook;
-       // this.DailyNews = dataoverall.responseData[0].DailyNews;
+        this.ContactBook = dataoverall.responseData[0].ContactBook;
+        this.DailyNews = dataoverall.responseData[0].DailyNews;
+        this.Messages = dataoverall.responseData[0].Messages;
         
         //this.EmployeeNames = dataoverall.responseData[0].EmployeeName;
         // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
@@ -98,9 +100,17 @@ export class DailyNewsReceptBoxPage {
         // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
         this.authService.dismissLoading();
       } else {
+       
         this.authService.dismissLoading();
-        this.navCtrl.setRoot(DashboardPage);
-        this.authService.presentToast("Something went wrong");
+        if (dataoverall.message == 'No recieved news message found.') {
+
+          this.authService.presentToast("No data found.");
+        } else {
+          
+          this.navCtrl.setRoot(DashboardPage);
+          this.authService.presentToast("Something went wrong");
+        }
+       
       }
 
     }, (err) => {
@@ -144,6 +154,7 @@ export class DailyNewsReceptBoxPage {
 
             this.ContactBook = dataoverall.responseData[0].ContactBook;
             this.DailyNews = dataoverall.responseData[0].DailyNews;
+            this.Messages = dataoverall.responseData[0].Messages;
 
             for (let i = 0; i < dataoverall.responseData.length; i++) {
               this.overallresponseData.push(dataoverall.responseData[i]);
@@ -166,7 +177,7 @@ export class DailyNewsReceptBoxPage {
               this.authService.presentToast("Something went wrong");
             }
           }
-        },
+        }, 
         (err) => {
           this.authService.dismissLoading();
           var my = JSON.stringify(err);
@@ -190,8 +201,11 @@ export class DailyNewsReceptBoxPage {
     dashboard(){
      this.navCtrl.push(DashboardPage);
   }
-  detailed(){
+ /*  detailed(){
   	 this.navCtrl.push(DailyNewsMsgDetailsPage);
+  } */
+  detailed(messageId) {
+    this.navCtrl.push(DailyNewsMsgDetailsPage, { "MessageID": messageId });
   }
   write(){
    

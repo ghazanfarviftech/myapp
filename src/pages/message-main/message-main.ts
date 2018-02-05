@@ -6,6 +6,7 @@ import { MsgWritePage } from "../msg-write/msg-write";
 import { DashboardPage } from "../dashboard/dashboard";
 import { RevoService } from "../../providers/revoservices";
 import { HomePage } from '../home/home';
+import moment from 'moment';
 /**
  * Generated class for the MessageMainPage page.
  *
@@ -26,8 +27,8 @@ export class MessageMainPage {
   overallresponseData : Array<any>;
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: RevoService) {
     ///var currentDate = new Date();
-    
-    this.myDate = '2018-02-01';//currentDate.getFullYear()+"-"+currentDate.getMonth()+"-"+currentDate.getDate();
+    //let data = moment().format('YYYYMMDD');
+    this.myDate = moment().format('YYYY-MM-DD');//currentDate.getFullYear()+"-"+currentDate.getMonth()+"-"+currentDate.getDate();
    // this.myDate
    
     this.authService.checkSession().then((result) => {

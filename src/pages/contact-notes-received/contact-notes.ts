@@ -100,7 +100,7 @@ export class ContactNotesPage {
         // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
        
       } else {
-
+        
         this.authService.dismissLoading();
         if (dataoverall.message == "Unrecognized Session.") {
           this.authService.removeSession();
@@ -108,6 +108,9 @@ export class ContactNotesPage {
           this.navCtrl.setRoot(HomePage);
           
 
+        } else if (dataoverall.message == "No recieved contact message found.")
+        {
+          this.authService.presentToast("No data found");
         }else{
         //this.authService.dismissLoading();
         this.navCtrl.setRoot(DashboardPage);
@@ -156,6 +159,7 @@ export class ContactNotesPage {
 
             this.ContactBook = dataoverall.responseData[0].ContactBook;
             this.DailyNews = dataoverall.responseData[0].DailyNews;
+            this.Messages = dataoverall.responseData[0].Messages;
 
             for (let i = 0; i < dataoverall.responseData.length; i++) {
               this.overallresponseData.push(dataoverall.responseData[i]);
@@ -164,11 +168,14 @@ export class ContactNotesPage {
 
             this.authService.dismissLoading();
           } else {
+            this.authService.dismissLoading();
             if (dataoverall.message == 'No data found.') {
 
               this.authService.presentToast("No data found.");
-            } else {
-              this.authService.dismissLoading();
+            } else if (dataoverall.message == "No recieved contact message found.") {
+              this.authService.presentToast("No data found");
+            }else {
+            
               this.navCtrl.setRoot(DashboardPage);
               this.authService.presentToast("Something went wrong");
             }

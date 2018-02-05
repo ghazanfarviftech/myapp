@@ -24,8 +24,9 @@ export class WriteContactPage {
   DailyNews: any;
   CompanyID: any;
   CompanyName: any;
-  Department: Array<Object>;
-  Employees: Array<Object>;
+  Department: Array<any>;
+  Employees: Array<any>;
+  DepartmentStores: Array<any>;
   Logos: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: RevoService) {
 
@@ -59,7 +60,7 @@ export class WriteContactPage {
     });
 
   }
-
+ 
   ionViewWillEnter() {
     this.authService.showLoader("Loading ...");
     this.authService.coinsendsearch().then((result) => {
@@ -74,7 +75,18 @@ export class WriteContactPage {
         this.CompanyID = this.overallData.CompanyID;
         this.CompanyName = this.overallData.CompanyName;
 
+
+        /*
+        this.ContactBook = this.overallData.ContactBook;
+        this.DailyNews = this.overallData.DailyNews;
+        this.Messages = this.overallData.Messages;*/
+
         this.Department = this.overallData.Department;
+        this.DepartmentStores = [];
+        for (let i = 0; i < this.Department.length; i++) {
+          //.DepartmentStore
+          this.DepartmentStores.push(this.Department[i].DepartmentStore);
+        }
         this.Employees = this.overallData.Employees;
 
         this.authService.dismissLoading();

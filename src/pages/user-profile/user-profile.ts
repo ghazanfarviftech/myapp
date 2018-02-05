@@ -29,6 +29,7 @@ export class UserProfilePage {
   StoreName: string;
   ContactBook: string;
   DailyNews: string;
+  Messages: string;
   Igot: string;
   Rigot: string;
   Isent: string;
@@ -89,6 +90,7 @@ export class UserProfilePage {
         this.StoreName = dataoverall.responseData[0].StoreName;
         this.ContactBook = dataoverall.responseData[0].ContactBook;
         this.DailyNews = dataoverall.responseData[0].DailyNews;
+        this.Messages = dataoverall.responseData[0].Messages;
         this.Igot = dataoverall.responseData[0].Igot;
         this.Rigot = dataoverall.responseData[0].Rigot;
         this.Isent = dataoverall.responseData[0].Isent;

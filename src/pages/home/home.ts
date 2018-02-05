@@ -13,7 +13,7 @@ export class HomePage {
 
   data: any;
   mydata: any;
-  loginData = { EmailAddress:'ryouellc@tuttocitta.it', Password:'rose123' };
+  loginData = { EmailAddress: 'revo@gmail.com', Password:'revo' };
   response : any;
   sessionData: any;
   constructor(public navCtrl: NavController,public menuCtrl:MenuController,

@@ -9,32 +9,22 @@
 <ion-content >
 	<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 		<ion-item>
-				<ion-label>Select Company</ion-label>
-			  <ion-select [(ngModel)]="toppings" >
-			    <ion-option>Bacon</ion-option>
-			    <ion-option>Black Olives</ion-option>
-			    <ion-option>Extra Cheese</ion-option>
-			    <ion-option>Mushrooms</ion-option>
-			    <ion-option>Pepperoni</ion-option>
-			    <ion-option>Sausage</ion-option>
-			  </ion-select>
-		</ion-item>
-		<ion-item>
-			<ion-label>Select Department</ion-label>
-				<ion-select [(ngModel)]="toppings">
-					<ion-option *ngFor="let depart of Department" [value]="depart">{{depart.DepartmentName}}</ion-option>
+				<ion-label>Select a group</ion-label>
+				<ion-select [(ngModel)]="company">
+					<ion-option [value]="CompanyName">{{CompanyName}}</ion-option>
 				</ion-select>
 		</ion-item>
 		<ion-item>
-				<ion-label>Select Store</ion-label>
-			  <ion-select [(ngModel)]="toppings" >
-			    <ion-option>Bacon</ion-option>
-			    <ion-option>Black Olives</ion-option>
-			    <ion-option>Extra Cheese</ion-option>
-			    <ion-option>Mushrooms</ion-option>
-			    <ion-option>Pepperoni</ion-option>
-			    <ion-option>Sausage</ion-option>
-			  </ion-select>
+			<ion-label>Select a medium size group</ion-label>
+			<ion-select [(ngModel)]="depart">
+				<ion-option *ngFor="let depart of Department" [value]="depart">{{depart.DepartmentName}}</ion-option>
+			</ion-select>
+		</ion-item>
+		<ion-item>
+				<ion-label>Select a small size group</ion-label>
+				<ion-select [(ngModel)]="store">
+					<ion-option *ngFor="let departstore of DepartmentStores " [value]="departstore">{{departstore.StoreName}}</ion-option>
+				</ion-select>
 		</ion-item>
 		<ion-list>
 

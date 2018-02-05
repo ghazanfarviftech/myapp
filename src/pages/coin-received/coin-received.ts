@@ -78,7 +78,7 @@ export class CoinReceivedPage {
       var dataoverall = JSON.parse(my);
       if (dataoverall.success) {
         this.overallresponseData = dataoverall.responseData;
-      
+       
         this.ContactBook = dataoverall.responseData[0].ContactBook;
         this.DailyNews = dataoverall.responseData[0].DailyNews;
         this.Messages = dataoverall.responseData[0].Messages;

@@ -33,6 +33,7 @@ export class CoinsintroductionPage {
   CoinofMonthDescription: string;
   ContactBook: any;
   DailyNews: any;
+  Messages: any;
   coins: Array<Object>;
   SpecialCoins: Array<Object>;
   CoinDetailName : string;
@@ -144,15 +145,24 @@ export class CoinsintroductionPage {
         this.CoinofMonthDescription = dataoverall.responseData.defualt.CoinofMonth.Description;
         this.ContactBook = dataoverall.responseData.defualt.ContactBook;
         this.DailyNews = dataoverall.responseData.defualt.DailyNews;
+        this.Messages = dataoverall.responseData.defualt.Messages;
         //this.EmployeeNames = dataoverall.responseData[0].EmployeeName;
         // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
         // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
         // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
         this.authService.dismissLoading();
       } else {
+
         this.authService.dismissLoading();
+        
+        if (dataoverall.message == 'No data found.') {
+
+          this.authService.presentToast("No data found.");
+        }else{
+        
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
+        }
       }
      
     }, (err) => {

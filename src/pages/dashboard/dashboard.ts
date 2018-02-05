@@ -8,6 +8,7 @@ import { DailyNewsReceptBoxPage } from "../daily-news-recept-box/daily-news-rece
 import { ContactNotesPage } from "../contact-notes-received/contact-notes";
 import { RevoService } from "../../providers/revoservices";
 import { HomePage } from "../home/home";
+import { MsgWritePage } from "../msg-write/msg-write";
 
 @Component({
   selector: 'page-dashboard',
@@ -23,6 +24,9 @@ export class DashboardPage {
   CompanySlider2: any;
   CompanySlider3: any;
   Logo: any;
+  Messages: any;
+  ContactBook: any;
+  DailyNews: any;
  
   constructor(public navCtrl: NavController, public params: NavParams, public menuCtrl: MenuController,
     public authService: RevoService) {
@@ -52,17 +56,28 @@ export class DashboardPage {
           this.authService.setSlide2(this.CompanySlider2);
           this.authService.setSlide3(this.CompanySlider3);
 
+          this.Messages = this.overallData.Messages;
+          this.DailyNews = this.overallData.DailyNews;
+          this.ContactBook = this.overallData.ContactBook;
+
         }else{
           this.authService.getlogo();
           this.authService.getSlide1();
           this.authService.getSlide2();
           this.authService.getSlide3();
+          this.authService.getDailyNews();
+          this.authService.getContactBook();
+          this.authService.getMessages();
           setTimeout(() => {
             this.CompanySlider1 = this.authService.Slide1;
             this.CompanySlider2 = this.authService.Slide2;
             this.CompanySlider3 = this.authService.Slide3;
             this.Logo = this.authService.Logo;
 
+            this.Messages = this.authService.Messages;
+            this.DailyNews = this.authService.DailyNews;
+            this.ContactBook = this.authService.ContactBook;
+            
           }, 1000);
          
         }
@@ -88,7 +103,7 @@ export class DashboardPage {
     }
     */
   }
-
+ 
   ionViewWillEnter() {
 
 
@@ -195,5 +210,8 @@ export class DashboardPage {
   }
   dashboard(){
      this.navCtrl.push(DashboardPage);
+  }
+  editMsg() {
+    this.navCtrl.push(MsgWritePage);
   }
 }

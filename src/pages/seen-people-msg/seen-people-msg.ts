@@ -17,7 +17,7 @@ import { DashboardPage } from "../dashboard/dashboard";
   templateUrl: 'seen-people-msg.html',
 })
 export class SeenPeopleMsgPage {
-
+ 
   alldata: any;
   response: any;
   total_rows: any;

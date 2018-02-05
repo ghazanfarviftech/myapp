@@ -35,6 +35,7 @@ export class DailyNewsSentBoxPage {
   overallresponseData: Array<Object>;
   ContactBook: any;
   DailyNews: any;
+  Messages: any;
   total_rows: any;
   Cuurentpage = 1;
   TotalNumber: any;
@@ -90,8 +91,9 @@ export class DailyNewsSentBoxPage {
         this.PerPage = this.total_rows.PerPage;
         this.MaxPage = this.total_rows.MaxPage;
 
-        this.ContactBook = dataoverall.responseData[0].ContactBook;
-        this.DailyNews = dataoverall.responseData[0].DailyNews;
+          this.ContactBook = dataoverall.responseData[0].ContactBook;
+          this.DailyNews = dataoverall.responseData[0].DailyNews;
+          this.Messages = dataoverall.responseData[0].Messages;
         }else{
           this.authService.presentToast("No Data Found");
         }
@@ -101,9 +103,18 @@ export class DailyNewsSentBoxPage {
         // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
         this.authService.dismissLoading();
       } else {
+      
+
+        if (dataoverall.message == 'No sent news message found.') {
+
+          this.authService.presentToast("No data found.");
+        } else {
+
+          this.navCtrl.setRoot(DashboardPage);
+          this.authService.presentToast("Something went wrong");
+        }
         this.authService.dismissLoading();
-        this.navCtrl.setRoot(DashboardPage);
-        this.authService.presentToast("Something went wrong");
+        
       }
 
     }, (err) => {
@@ -147,6 +158,7 @@ export class DailyNewsSentBoxPage {
 
             this.ContactBook = dataoverall.responseData[0].ContactBook;
             this.DailyNews = dataoverall.responseData[0].DailyNews;
+            this.Messages = dataoverall.responseData[0].Messages;
 
             for (let i = 0; i < dataoverall.responseData.length; i++) {
               this.overallresponseData.push(dataoverall.responseData[i]);
@@ -155,11 +167,15 @@ export class DailyNewsSentBoxPage {
 
             this.authService.dismissLoading();
           } else {
+            this.authService.dismissLoading();
             if (dataoverall.message == 'No data found.') {
 
               this.authService.presentToast("No data found.");
-            } else {
-              this.authService.dismissLoading();
+            } else if (dataoverall.message == 'No sent news message found.') {
+
+              this.authService.presentToast("No data found.");
+            }else {
+             
               this.navCtrl.setRoot(DashboardPage);
               this.authService.presentToast("Something went wrong");
             }

@@ -31,6 +31,7 @@ export class ContactNotesSentPage {
   overallresponseData: Array<Object>;
   ContactBook: any;
   DailyNews: any;
+  Messages: any;
   total_rows: any;
   Cuurentpage = 1;
   TotalNumber: any;
@@ -85,6 +86,7 @@ export class ContactNotesSentPage {
 
         this.ContactBook = dataoverall.responseData[0].ContactBook;
         this.DailyNews = dataoverall.responseData[0].DailyNews;
+        this.Messages = dataoverall.responseData[0].Messages;
         //this.EmployeeNames = dataoverall.responseData[0].EmployeeName;
         // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
         // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
@@ -92,8 +94,19 @@ export class ContactNotesSentPage {
         this.authService.dismissLoading();
       } else {
         this.authService.dismissLoading();
-        this.navCtrl.setRoot(DashboardPage);
-        this.authService.presentToast("Something went wrong");
+        if (dataoverall.message == "Unrecognized Session.") {
+          this.authService.removeSession();
+          this.authService.presentToast("Please Login Again");
+          this.navCtrl.setRoot(HomePage);
+
+
+        } else if (dataoverall.message == "No sent contact message found.") {
+          this.authService.presentToast("No data found");
+        } else {
+          //this.authService.dismissLoading();
+          this.navCtrl.setRoot(DashboardPage);
+          this.authService.presentToast("Something went wrong");
+        }
       }
 
     }, (err) => {
@@ -137,7 +150,7 @@ export class ContactNotesSentPage {
 
             this.ContactBook = dataoverall.responseData[0].ContactBook;
             this.DailyNews = dataoverall.responseData[0].DailyNews;
-
+            this.Messages = dataoverall.responseData[0].Messages;
             for (let i = 0; i < dataoverall.responseData.length; i++) {
               this.overallresponseData.push(dataoverall.responseData[i]);
             }
@@ -145,11 +158,16 @@ export class ContactNotesSentPage {
 
             this.authService.dismissLoading();
           } else {
+
+            this.authService.dismissLoading();
+
             if (dataoverall.message == 'No data found.') {
 
               this.authService.presentToast("No data found.");
-            } else {
-              this.authService.dismissLoading();
+            } else if (dataoverall.message == "No sent contact message found.") {
+              this.authService.presentToast("No data found");
+            }  else {
+             
               this.navCtrl.setRoot(DashboardPage);
               this.authService.presentToast("Something went wrong");
             }

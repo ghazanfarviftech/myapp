@@ -24,7 +24,7 @@ export class MsgWritePage {
   myDate: any;
   alldata: any;
   response: any;
-  comment: any;
+  comment: any = '';
   fileData:any;
   currentBlob:any;
   profileImage:any;

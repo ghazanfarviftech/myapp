@@ -147,4 +147,8 @@ export class ProfileSettingsPage {
     dashboard(){
      this.navCtrl.push(DashboardPage);
   }
+
+  close() {
+    this.navCtrl.pop();
+  }
 }

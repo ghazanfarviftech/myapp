@@ -36,7 +36,7 @@
 <ion-footer>
   <ion-row class="toolbar-background-md">
       <ion-col col-6 >
-        <button ion-button round class="btn-app" >Cancel</button>
+        <button ion-button round class="btn-app" (click) ="close()" >Cancel</button>
       </ion-col>
       <ion-col col-6 >
         <button ion-button round class="btn-app" (click) = "sendCoin(coin,comment)">Send</button>

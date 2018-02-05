@@ -86,7 +86,7 @@
   <ion-row class="toolbar-background-md">
 
       <ion-col col-6 >
-        <button ion-button round class="btn-app" >{{ 'Cancel' | translate }}</button>
+        <button ion-button round class="btn-app" (click)="close()">{{ 'Cancel' | translate }}</button>
       </ion-col>
       <ion-col col-6 >
         <button ion-button round class="btn-app" (click)="update()" >{{ 'Apply' | translate }}</button>

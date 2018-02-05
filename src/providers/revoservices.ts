@@ -38,7 +38,9 @@ export class RevoService {
   Slide1: any = null;
   Slide2: any = null;
   Slide3: any = null;
-  
+  ContactBook: any =null;
+  Messages: any = null;
+  DailyNews: any = null;
   constructor(public http: HttpClient, public appPreferences: AppPreferences, public loadingCtrl: LoadingController,
     private toastCtrl: ToastController,public storage: Storage) {}
 
@@ -591,6 +593,29 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
     });
   }
 
+  public dailyNewskMessageSeenList(commentData, Cuurentpage, PerPage) {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : ");
+      this.http.post("http://chainayena.net/revo/api/revo-news-message-seen?PageID=" + Cuurentpage + "&PageSize=" + PerPage, commentData,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
   public employeeCoinSend(commentData) {
 
     return new Promise((resolve, reject) => {
@@ -769,6 +794,9 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
     this.storage.set('StoreID', session.StoreID.toString());
     this.storage.set('SessionID', session.SessionID.toString());
     this.storage.set('Role', session.Role.toString());
+    this.storage.set('Messages', session.Messages.toString());
+    this.storage.set('ContactBook', session.ContactBook.toString());
+    this.storage.set('DailyNews', session.DailyNews.toString());
     this.session = session;
     console.log("session set");
   }
@@ -892,6 +920,63 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
 
     }), (err) => {
       this.Slide3 = null;
+      // reject(err);
+      // this.sessionData = nullreject(err);
+    }
+    // return this.storage.get("SessionID");
+    //return this.session;
+
+
+    /* let mylogo = this.storage.get('Logo');
+    return mylogo; */
+  }
+
+  getMessages() {
+    this.storage.get('Messages').then((val) => {
+      console.log('Your Logo is', val);
+      this.Messages = val;
+      // resolve(val);
+
+    }), (err) => {
+      this.Messages = null;
+      // reject(err);
+      // this.sessionData = nullreject(err);
+    }
+    // return this.storage.get("SessionID");
+    //return this.session;
+
+
+    /* let mylogo = this.storage.get('Logo');
+    return mylogo; */
+  }
+
+  getContactBook() {
+    this.storage.get('ContactBook').then((val) => {
+      console.log('Your Logo is', val);
+      this.ContactBook = val;
+      // resolve(val);
+
+    }), (err) => {
+      this.ContactBook = null;
+      // reject(err);
+      // this.sessionData = nullreject(err);
+    }
+    // return this.storage.get("SessionID");
+    //return this.session;
+
+
+    /* let mylogo = this.storage.get('Logo');
+    return mylogo; */
+  }
+
+  getDailyNews() {
+    this.storage.get('DailyNews').then((val) => {
+      console.log('Your Logo is', val);
+      this.DailyNews = val;
+      // resolve(val);
+
+    }), (err) => {
+      this.DailyNews = null;
       // reject(err);
       // this.sessionData = nullreject(err);
     }

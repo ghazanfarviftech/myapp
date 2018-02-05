@@ -126,6 +126,10 @@ export class CoinSelectPage {
 
   sendCoin(coin, comment)
   {
+
+    if (comment.trim().length == 0 || comment.trim() == '') {
+      this.authService.presentToast("Fill the comment or Text Limit Reached");
+    }else{
     coin =  this.slides.getActiveIndex();
     let MainCoin: any;
     for (let i = 0; i < this.Coins.length;i++)
@@ -174,5 +178,10 @@ export class CoinSelectPage {
       //this.response = err;
 
     });
+  }
+}
+  close()
+  {
+    this.navCtrl.pop();
   }
 }
