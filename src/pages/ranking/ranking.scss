@@ -24,6 +24,9 @@ page-ranking {
 	height: 15%;
     padding: 10px 40px 10px 40px;
 }
+.rank-img{
+  width:85%;
+}
 .maincontentbg{
 	background-color: #f0f0f0;
 
@@ -32,7 +35,9 @@ page-ranking {
 	background-color: #ffffff;
 
 }
-
+.profile{
+  max-width:85%;
+}
 ion-list {
 width: 100%;
     ion-item {

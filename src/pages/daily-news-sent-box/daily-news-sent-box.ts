@@ -120,13 +120,19 @@ export class DailyNewsSentBoxPage {
     }, (err) => {
       this.authService.dismissLoading();
       var my = JSON.stringify(err);
-      if (err.error.message == "Unrecognized Session.") {
+      if (err.message == "Unrecognized Session.") {
         this.authService.removeSession();
         this.authService.presentToast("Please Login Again");
         this.navCtrl.setRoot(HomePage);
         console.log("errrorr " + err.status);
 
-      } else {
+      } else if (err.statusText == "Unauthorized") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+
+      }else {
 
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
@@ -184,11 +190,17 @@ export class DailyNewsSentBoxPage {
         (err) => {
           this.authService.dismissLoading();
           var my = JSON.stringify(err);
-          if (err.error.message == "Unrecognized Session.") {
+          if (err.message == "Unrecognized Session.") {
             this.authService.removeSession();
             this.authService.presentToast("Please Login Again");
             this.navCtrl.setRoot(HomePage);
             console.log("errrorr " + err.status);
+          } else if (err.statusText == "Unauthorized") {
+            this.authService.removeSession();
+            this.authService.presentToast("Please Login Again");
+            this.navCtrl.setRoot(HomePage);
+            console.log("errrorr " + err.status);
+
           } else {
             this.authService.dismissLoading();
             this.navCtrl.setRoot(DashboardPage);
@@ -204,8 +216,11 @@ export class DailyNewsSentBoxPage {
     dashboard(){
      this.navCtrl.push(DashboardPage);
   }
-  detailed(){
+  /* detailed(){
   	 this.navCtrl.push(DailyNewsMsgDetailsPage);
+  } */
+  detailed(messageId) {
+    this.navCtrl.push(DailyNewsMsgDetailsPage, { "MessageID": messageId });
   }
   write(){
    

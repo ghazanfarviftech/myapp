@@ -4,6 +4,7 @@ import { DashboardPage } from "../dashboard/dashboard";
 import { RevoService } from "../../providers/revoservices";
 import { HomePage } from '../home/home';
 import { Slides } from 'ionic-angular';
+import { CoinTimelinePage } from "../coin-timeline/coin-timeline";
 /**
  * Generated class for the CoinSelectPage page.
  *
@@ -43,6 +44,7 @@ export class CoinSelectPage {
 
   EmpImage: any;
   EmpName: any;
+  EmpId: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: RevoService) {
     this.authService.checkSession().then((result) => {
       if (result == null) {
@@ -54,6 +56,7 @@ export class CoinSelectPage {
         this.alldata = navParams.get('EmployeeData');
         this.EmpName = this.alldata.EmployeeName;
         this.EmpImage = this.alldata.EmployeeImage;
+        this.EmpId = this.alldata.EmployeeID;
         // this.navCtrl.setRoot(DashboardPage);
       }
     }, (err) => {
@@ -103,12 +106,18 @@ export class CoinSelectPage {
       this.authService.dismissLoading();
 
       var my = JSON.stringify(err);
-      if (err.error.message == "Unrecognized Session.") {
+      if (err.message == "Unrecognized Session.") {
         this.authService.removeSession();
         this.authService.presentToast("Please Login Again");
         this.navCtrl.setRoot(HomePage);
         console.log("errrorr " + err.status);
-      } else {
+      } else if (err.statusText == "Unauthorized") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+
+      }else {
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
         console.log("errrorr " + err.status);
@@ -141,7 +150,7 @@ export class CoinSelectPage {
 
     }
    /*  let MainCoin = this.Coins.indexOf(coin); */
-    let coinSendData = { "EmployeeID": this.alldata.EmployeeID, "CoinID": MainCoin.CoinID,"Comment":comment};
+      let coinSendData = { "EmployeeID": this.EmpId, "CoinID": MainCoin.CoinID,"Comments":comment};
     this.authService.showLoader("Sending Coin");
     this.authService.employeeCoinSend(coinSendData).then((result) => {
       this.response = result;
@@ -152,8 +161,10 @@ export class CoinSelectPage {
       if (dataoverall.success) {
        
         this.authService.dismissLoading();
-        this.authService.presentToast("coin send successfull");
-        this.navCtrl.pop();
+        this.authService.presentToast("coin send successfully");
+        
+        this.navCtrl.setRoot(CoinTimelinePage);
+        //this.navCtrl.pop();
       } else {
         this.authService.dismissLoading();
         // this.navCtrl.setRoot(DashboardPage);
@@ -164,14 +175,21 @@ export class CoinSelectPage {
       this.authService.dismissLoading();
 
       var my = JSON.stringify(err);
-      if (err.error.message == "Unrecognized Session.") {
+      if (err.message == "Unrecognized Session.") {
         this.authService.removeSession();
         this.authService.presentToast("Please Login Again");
         this.navCtrl.setRoot(HomePage);
         console.log("errrorr " + err.status);
-      } else {
-        this.navCtrl.setRoot(DashboardPage);
+      } else if (err.statusText == "Unauthorized") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+
+      }else {
+        
         this.authService.presentToast("Something went wrong");
+        this.navCtrl.setRoot(DashboardPage);
         console.log("errrorr " + err.status);
       }
       // this.presentToast(err);

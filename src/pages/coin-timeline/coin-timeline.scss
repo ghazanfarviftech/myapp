@@ -22,10 +22,12 @@ page-coin-timeline {
 
 	.arrow{
 		width: 15px;
-		height:40px;
+		height:100%;
 	}
+
 	.displaystyle{
 	display:flex;
+	padding:0px
 	}
 	img{
 		max-width:initial;
@@ -80,4 +82,14 @@ page-coin-timeline {
 	color:#666666;
 	}
 
+
+
+
+
+
+
+
+
+
+	
 }

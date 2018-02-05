@@ -193,6 +193,26 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
         });
     });
   }
+
+
+   public forgetPassword(email) {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : " + email);
+      console.log(email);
+      this.http.post("http://beta.aniparti/revo-forget-password", email,
+        { headers: new HttpHeaders().set('Content-Type', 'application/json')
+        .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13') })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
   
   public setProfile(profile) {
 
@@ -546,6 +566,29 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
     });
   }
 
+  public dailyNewsCommentSend(commentData) {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : ");
+      this.http.post("http://chainayena.net/revo/api/revo-news-message-comment", commentData,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
   public contactBookMessageSeenList(commentData,Cuurentpage, PerPage) {
 
     return new Promise((resolve, reject) => {
@@ -593,7 +636,53 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
     });
   }
 
-  public dailyNewskMessageSeenList(commentData, Cuurentpage, PerPage) {
+  public dailyNewsCommentUpdate(commentData) {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : ");
+      this.http.post("http://chainayena.net/revo/api/revo-news-message-edit-comment", commentData,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
+  public dailyNewsMessage(messageId) {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : ");
+      this.http.post("http://chainayena.net/revo/api/revo-news-message", messageId,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
+  public dailyNewsMessageSeenList(commentData, Cuurentpage, PerPage) {
 
     return new Promise((resolve, reject) => {
 
@@ -732,12 +821,58 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
     });
   }
 
+  public dailyNewsMessageSaved(messageId) {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : ");
+      this.http.post("http://chainayena.net/revo/api/revo-news-message-saved", messageId,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
   public contactBookMessageDelete(messageId) {
 
     return new Promise((resolve, reject) => {
 
       console.log("data to be send to service : ");
       this.http.post("http://chainayena.net/revo/api/revo-contact-book-message-delete", messageId,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
+  public newDailyMessageDelete(messageId) {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : ");
+      this.http.post("http://chainayena.net/revo/api/revo-news-message-delete", messageId,
         {
           headers: new HttpHeaders().set('Content-Type', 'application/json')
             .set('sessionid', this.SesssionID.toString())
@@ -777,6 +912,54 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
         });
     });
   }
+
+
+  public contactBookMessageSendSelected(messageId) {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : ");
+      this.http.post("http://chainayena.net/revo/api/revo-contact-book-send-message", messageId,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
+  public dailyNewsMessageSendSelected(messageId) {
+
+    return new Promise((resolve, reject) => {
+
+      console.log("data to be send to service : ");
+      this.http.post("http://chainayena.net/revo/api/revo-news-send-message", messageId,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+            .set('sessionid', this.SesssionID.toString())
+            .set('employeeid', this.EmployeeID.toString())
+            .set('companyid', this.CompanyID.toString())
+            .set('token', 'e662c46b5bef24a96c3128e25f43beaa05e3bd13')
+        })
+        .subscribe(res => {
+          console.log("data : " + res);
+          resolve(res);
+        }, (err) => {
+          console.log("error " + err);
+          reject(err);
+        });
+    });
+  }
+
 
 
   setSession(session)
@@ -1050,7 +1233,7 @@ this.http.get("http://chainayena.net/revo/api/revo-emp-mypage-profile",
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
-      duration: 3000,
+      duration: 1000,
       position: 'bottom',
       dismissOnPageChange: true
     });

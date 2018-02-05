@@ -27,7 +27,12 @@ export class WriteContactPage {
   Department: Array<any>;
   Employees: Array<any>;
   DepartmentStores: Array<any>;
+   SelectedEmployee: Array<any> = [];
   Logos: any;
+  comment : any  = '';
+  selectedEmpArray : Array<any>;
+  filterEmployee: Array<any> = [];
+  SelectedStore: Array<any> = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: RevoService) {
 
     this.authService.checkSession().then((result) => {
@@ -43,6 +48,8 @@ export class WriteContactPage {
           this.Logos = this.authService.Logo;
 
         }, 1000);
+
+        this.selectedEmpArray = [];
        /*  if (this.authService.getlogo() != null) {
           this.Logos = this.authService.Logo;
           setTimeout(() => {
@@ -89,6 +96,11 @@ export class WriteContactPage {
         }
         this.Employees = this.overallData.Employees;
 
+        console.log("-------Stores----")
+        console.log(this.DepartmentStores)
+      //  this.Employees = this.overallData.Employees;
+        this.filterEmployee = this.Employees;
+
         this.authService.dismissLoading();
       } else {
         this.authService.dismissLoading();
@@ -99,12 +111,18 @@ export class WriteContactPage {
     }, (err) => {
       this.authService.dismissLoading();
       var my = JSON.stringify(err);
-      if (err.error.message == "Unrecognized Session.") {
+      if (err.message == "Unrecognized Session.") {
         this.authService.removeSession();
         this.authService.presentToast("Please Login Again");
         this.navCtrl.setRoot(HomePage);
         console.log("errrorr " + err.status);
-      } else {
+      } else if (err.statusText == "Unauthorized") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+
+      }else {
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
         console.log("errrorr " + err.status);
@@ -122,5 +140,150 @@ export class WriteContactPage {
     dashboard(){
      this.navCtrl.push(DashboardPage);
   }
+
+ 
+  sendContactMessageToSelected()
+  {
+    /*{
+"Title":"Meeting at 10",
+"Description":"Meeting to understand jeera software",
+"EmployeeID":[13,15,16]
+}
+ */
+    if (this.comment.trim().length == 0 || this.comment.trim() == '') {
+
+      this.authService.presentToast("Fill the comment or Text Limit Reached");
+    }else{
+
+    
+    let MessageData = {
+      "Title":"Meeting at 10", 
+      "Description": this.comment,
+      "EmployeeID": this.SelectedEmployee,
+      "AttachFile":[] };
+    this.authService.showLoader("Loading ...");
+    this.authService.contactBookMessageSendSelected(MessageData).then((result) => {
+      this.response = result;
+
+      var my = JSON.stringify(this.response);
+      console.log("response :" + my);
+      var dataoverall = JSON.parse(my);
+      if (dataoverall.success) {
+
+        this.authService.presentToast("Message Send Successfully");
+      /*   this.overallresponseData = dataoverall.responseData;
+        this.overallData = this.overallresponseData[0];
+        this.CompanyID = this.overallData.CompanyID;
+        this.CompanyName = this.overallData.CompanyName; */
+
+
+        /*
+        this.ContactBook = this.overallData.ContactBook;
+        this.DailyNews = this.overallData.DailyNews;
+        this.Messages = this.overallData.Messages;
+           this.Department = this.overallData.Department;
+        this.DepartmentStores = [];
+        for (let i = 0; i < this.Department.length; i++) {
+          //.DepartmentStore
+          this.DepartmentStores.push(this.Department[i].DepartmentStore);
+        }
+        */
+
+     
+       // this.Employees = this.overallData.Employees;
+
+       
+
+        this.authService.dismissLoading();
+      } else {
+        this.authService.dismissLoading();
+        //this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast(dataoverall.message);
+      }
+
+    }, (err) => {
+      this.authService.dismissLoading();
+      var my = JSON.stringify(err);
+      if (err.message == "Unrecognized Session.") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+      } else if (err.statusText == "Unauthorized")
+      {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+
+      }else {
+        this.navCtrl.setRoot(DashboardPage);
+        this.authService.presentToast("Something went wrong");
+        console.log("errrorr " + err.status);
+      }
+
+    });
+  }
+  }
+  back()
+  {
+    this.navCtrl.pop();
+  }
+
+  getItems(ev: any) {
+
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+
+
+      this.filterEmployee = this.Employees.filter(employee => employee.EmployeeName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+
+
+    }
+  }
+
+
+  /* selectEmployee(selectedEmp) {
+    let imgEl: HTMLElement = document.getElementById('icon-image-' + selectedEmp);
+    if (this.SelectedEmployee.some(x => x === selectedEmp)) {
+      this.SelectedEmployee.splice(this.SelectedEmployee.indexOf(selectedEmp), 1);
+      (<HTMLImageElement>document.getElementById("icon-image-" + selectedEmp)).src = "assets/check.png";
+    } else {
+      this.SelectedEmployee.push(selectedEmp);
+      (<HTMLImageElement>document.getElementById("icon-image-" + selectedEmp)).src = "assets/checkGreen.png";
+    }
+  } */
+
+  selectEmployee(selectedEmp) {
+    let imgEl: HTMLElement = document.getElementById('icon-image-' + selectedEmp);
+    if (this.SelectedEmployee.some(x => x === selectedEmp)) {
+      this.SelectedEmployee.splice(this.SelectedEmployee.indexOf(selectedEmp), 1);
+      (<HTMLImageElement>document.getElementById("icon-image-" + selectedEmp)).src = "assets/check.png";
+    } else {
+      this.SelectedEmployee.push(selectedEmp);
+      (<HTMLImageElement>document.getElementById("icon-image-" + selectedEmp)).src = "assets/checkGreen.png";
+    }
+
+
+    console.log(this.SelectedEmployee)
+
+
+
+  }
+  setStoreValues(dept) {
+    this.SelectedStore = this.DepartmentStores.filter(store => store.DepartmentID == dept.DepartmentID);
+    console.log("------filter store", this.DepartmentStores);
+  }
+  filterEmployees(sStore) {
+    this.filterEmployee = this.Employees.filter(employee => employee.StoreID == sStore.StoreID);
+
+    console.log("------filter store", this.Employees);
+  }
+
+  
 }
  

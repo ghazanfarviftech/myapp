@@ -5,9 +5,9 @@
       <ion-badge class="notification" style="left:27%">{{Messages}}</ion-badge>
       
     </ion-col>
-    <ion-col col-6><img class="logo" (click)="dashboard()" src="{{Logos}}" /></ion-col>
-    <ion-col col-2>
-      <img item-right src="assets/dashboard/Pic (4).png" menuToggle="right"  style="height: 30px; width:30px">
+    <ion-col col-4><img class="logo" (click)="dashboard()" src="{{Logos}}" /></ion-col>
+    <ion-col col-4>
+      <img item-right src="assets/dashboard/Pic (4).png" menuToggle="right"  style="height: 30px; width:30px; position: absolute; right: 10px">
     </ion-col>
   </ion-row>
   <ion-row style="  background: white;  ">
@@ -59,20 +59,21 @@
   	
   	</ion-row>
   	<ion-row>
-  		<ion-col col-12 style="border: 1px solid #cccccc;display: flex; ">
-  			<p col-10>{{item.Comments}}</p>
-  			
-  	
-  		
-  		</ion-col>
+  		     <ion-col col-12 class="bubble bubble-top">
+          <i class="arrow-before"></i>
+          <i class="arrow-after"></i>
+          <div class="bubble-main">
+            <p col-10>{{item.Comments}}</p>
+          </div>
+      </ion-col>
   		
   	
   	</ion-row>
 
     <ion-row>
     	<ion-col col-6 style="display: flex;">
-    <img src="assets/coins/Pic (2).png"  style="width: 20px;height: 20px;" />
-    <span class="seen">{{ 'seen'  | translate }}</span>
+    <img src="assets/coins/like.png"  style="width: 20px;height: 20px;" />
+    <span class="seen" [style.color]="item.likes ? '#25b6b5' : '#666666'">{{ 'Seen' | translate }} {{item.likes}}</span>
   </ion-col>
 
   <ion-col col-6 class="datetime">

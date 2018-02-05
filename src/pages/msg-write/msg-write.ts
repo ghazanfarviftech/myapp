@@ -27,7 +27,7 @@ export class MsgWritePage {
   comment: any = '';
   fileData:any;
   currentBlob:any;
-  profileImage:any;
+  profileImage:any = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: RevoService, public camera: Camera) {
    
     this.authService.getlogo();
@@ -57,7 +57,7 @@ export class MsgWritePage {
         "Reply": this.comment,
         "Title":"HWat",
         "UpDay": this.myDate,
-        "AttachFile": [this.profileImage]
+        "AttachFile": this.profileImage
        };
 
       this.authService.showLoader("Loading Data");
@@ -69,7 +69,7 @@ export class MsgWritePage {
         var dataoverall = JSON.parse(my);
         if (dataoverall.success) {
 
-
+          this.authService.presentToast(dataoverall.message);
           //this.overallresponseData = dataoverall.responseData;
           // this.EmployeeNames = dataoverall.responseData[0].EmployeeName;
           // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
@@ -87,12 +87,18 @@ export class MsgWritePage {
         this.authService.dismissLoading();
 
         var my = JSON.stringify(err);
-        if (err.error.message == "Unrecognized Session.") {
+        if (err.message == "Unrecognized Session.") {
           this.authService.removeSession();
           this.authService.presentToast("Please Login Again");
           this.navCtrl.setRoot(HomePage);
           console.log("errrorr " + err.status);
-        } else {
+        } else if (err.statusText == "Unauthorized") {
+          this.authService.removeSession();
+          this.authService.presentToast("Please Login Again");
+          this.navCtrl.setRoot(HomePage);
+          console.log("errrorr " + err.status);
+
+        }else {
           this.navCtrl.setRoot(DashboardPage);
           this.authService.presentToast("Something went wrong");
           console.log("errrorr " + err.status);
@@ -174,5 +180,10 @@ export class MsgWritePage {
   {
     this.myDate = date;
 
+  }
+
+  messageMain()
+  {
+    this.navCtrl.setRoot(MessageMainPage);
   }
 }

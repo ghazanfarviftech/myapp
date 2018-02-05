@@ -38,6 +38,11 @@ export class CoinSendPage {
   Employees: Array<any>;
   DepartmentStores: Array<any>;
 Logos:any;
+  
+  filterEmployee: Array<any> = [];
+  SelectedStore: Array<any> = [];
+  SelectedEmployee: Array<any> = [];
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: RevoService) {
 
     this.authService.checkSession().then((result) => {
@@ -98,7 +103,10 @@ Logos:any;
           //.DepartmentStore
           this.DepartmentStores.push(this.Department[i].DepartmentStore);
       }
+        console.log("-------Stores----")
+        console.log(this.DepartmentStores)
         this.Employees = this.overallData.Employees;
+        this.filterEmployee = this.Employees;
         
         this.authService.dismissLoading();
       } else {
@@ -110,12 +118,18 @@ Logos:any;
     }, (err) => {
       this.authService.dismissLoading();
       var my = JSON.stringify(err);
-      if (err.error.message == "Unrecognized Session.") {
+      if (err.message == "Unrecognized Session.") {
         this.authService.removeSession();
         this.authService.presentToast("Please Login Again");
         this.navCtrl.setRoot(HomePage);
         console.log("errrorr " + err.status);
-      } else {
+      } else if (err.statusText == "Unauthorized") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+
+      }else {
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
         console.log("errrorr " + err.status);
@@ -169,21 +183,47 @@ message(){
     this.navCtrl.push(MessageMainPage);
   }
 
+  setStoreValues(dept) {
+    this.SelectedStore = this.DepartmentStores.filter(store => store.DepartmentID == dept.DepartmentID);
+    console.log("------filter store", this.DepartmentStores);
+  }
+  filterEmployees(sStore) {
+    this.filterEmployee = this.Employees.filter(employee => employee.StoreID == sStore.StoreID);
+
+    console.log("------filter store", this.Employees);
+  }
+
+  selectEmployee(selectedEmp) {
+    let imgEl: HTMLElement = document.getElementById('icon-image-' + selectedEmp);
+    if (this.SelectedEmployee.some(x => x === selectedEmp)) {
+      this.SelectedEmployee.splice(this.SelectedEmployee.indexOf(selectedEmp), 1);
+      // imgEl.src = "assets/check.png";
+    } else {
+      this.SelectedEmployee.push(selectedEmp);
+      // imgEl.src = "assets/checkPink.png";
+    }
+
+
+    console.log(this.SelectedEmployee)
+
+
+
+  }
+
+
   getItems(ev: any) {
-    // Reset items back to all of the items
-   // this.initializeItems();
+
 
     // set val to the value of the searchbar
     let val = ev.target.value;
 
     // if the value is an empty string don't filter the items
-    /*
     if (val && val.trim() != '') {
-      this.items = this.items.filter((item) => {
-        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
+
+
+      this.filterEmployee = this.Employees.filter(employee => employee.EmployeeName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+
     }
-    */
   }
  dashboard(){
      this.navCtrl.push(DashboardPage);

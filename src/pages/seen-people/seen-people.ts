@@ -42,13 +42,13 @@ export class SeenPeoplePage {
       this.navCtrl.setRoot(HomePage);
     });
   }
-
+ 
   ionViewWillEnter() {
 
     let MessageID = { MessageID: this.alldata };
 
     this.authService.showLoader("Loading ...");
-    this.authService.contactBookMessageSeenList(MessageID, this.Cuurentpage, this.PerPage).then((result) => {
+    this.authService.dailyNewsMessageSeenList(MessageID, this.Cuurentpage, this.PerPage).then((result) => {
       this.response = result;
 
       var my = JSON.stringify(this.response);
@@ -81,19 +81,30 @@ export class SeenPeoplePage {
         this.authService.dismissLoading();
       } else {
         this.authService.dismissLoading();
+        if (dataoverall.message == 'provide message')
+        {
+          this.authService.presentToast("No data found");
+        }else{
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
+      }
       }
 
     }, (err) => {
       this.authService.dismissLoading();
       var my = JSON.stringify(err);
-      if (err.error.message == "Unrecognized Session.") {
+      if (err.message == "Unrecognized Session.") {
         this.authService.removeSession();
         this.authService.presentToast("Please Login Again");
         this.navCtrl.setRoot(HomePage);
         console.log("errrorr " + err.status);
-      } else {
+      } else if (err.statusText == "Unauthorized") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+
+      }else {
 
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
@@ -107,7 +118,7 @@ export class SeenPeoplePage {
     this.Cuurentpage = this.Cuurentpage + 1;
     let MessageID = { MessageID: this.alldata };
     setTimeout(() => {
-      this.authService.dailyNewskMessageSeenList(MessageID, this.Cuurentpage, this.PerPage)
+      this.authService.dailyNewsMessageSeenList(MessageID, this.Cuurentpage, this.PerPage)
         .then((result) => {
           this.response = result;
 
@@ -148,11 +159,17 @@ export class SeenPeoplePage {
         (err) => {
           this.authService.dismissLoading();
           var my = JSON.stringify(err);
-          if (err.error.message == "Unrecognized Session.") {
+          if (err.message == "Unrecognized Session.") {
             this.authService.removeSession();
             this.authService.presentToast("Please Login Again");
             this.navCtrl.setRoot(HomePage);
             console.log("errrorr " + err.status);
+          } else if (err.statusText == "Unauthorized") {
+            this.authService.removeSession();
+            this.authService.presentToast("Please Login Again");
+            this.navCtrl.setRoot(HomePage);
+            console.log("errrorr " + err.status);
+
           } else {
 
             this.navCtrl.setRoot(DashboardPage);

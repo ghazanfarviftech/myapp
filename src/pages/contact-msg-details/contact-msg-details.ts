@@ -4,7 +4,8 @@ import { SeenPeopleMsgPage } from "../seen-people-msg/seen-people-msg";
 import { DashboardPage } from "../dashboard/dashboard";
 import { RevoService } from "../../providers/revoservices";
 import { HomePage } from '../home/home';
-
+import { CoinSelectPage } from "../coin-select/coin-select";
+import { ContactNotesPage } from "../contact-notes-received/contact-notes";
 /**
  * Generated class for the DailyNewsMsgDetailsPage page.
  *
@@ -127,12 +128,18 @@ export class ContactMsgDetailsPage {
     }, (err) => {
       this.authService.dismissLoading();
       var my = JSON.stringify(err);
-      if (err.error.message == "Unrecognized Session.") {
+      if (err.message == "Unrecognized Session.") {
         this.authService.removeSession();
         this.authService.presentToast("Please Login Again");
         this.navCtrl.setRoot(HomePage);
         console.log("errrorr " + err.status);
-      } else {
+      } else if (err.statusText == "Unauthorized") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+
+      }else {
 
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
@@ -144,6 +151,10 @@ export class ContactMsgDetailsPage {
 
   sendComment(CommentMessage)
   {
+
+    if (this.CommentMessage.trim().length == 0 || this.CommentMessage.trim() == '') {
+      this.authService.presentToast("Fill the comment or Text Limit Reached");
+    } else {
     let CommentData = { "MessageID": this.MessageID, "Comment": CommentMessage };
     this.authService.showLoader("Send Comment ...");
     this.authService.contactBookCommentSend(CommentData).then((result) => {
@@ -154,8 +165,9 @@ export class ContactMsgDetailsPage {
       var dataoverall = JSON.parse(my);
       if (dataoverall.success) {
         //this.overallresponseData = dataoverall.message;
-
+        this.authService.dismissLoading();
         this.authService.presentToast("Comment Send Successfully");
+        this.loadingData();
      /*    this.MessageID = this.overallresponseData.MessageID;
         this.MessageTitle = this.overallresponseData.MessageTitle;
         this.MessageDescription = this.overallresponseData.MessageDescription;
@@ -176,7 +188,7 @@ export class ContactMsgDetailsPage {
         // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
         // this.DepartmentName = dataoverall.responseData[0].DepartmentName;
         // this.Catchpharase = dataoverall.responseData[0].Catchpharase;
-        this.authService.dismissLoading();
+        
       } else {
         this.authService.dismissLoading();
         if (dataoverall.message == 'provide message ')
@@ -195,22 +207,33 @@ export class ContactMsgDetailsPage {
     }, (err) => {
       this.authService.dismissLoading();
       var my = JSON.stringify(err);
-      if (err.error.message == "Unrecognized Session.") {
+      if (err.message == "Unrecognized Session.") {
         this.authService.removeSession();
         this.authService.presentToast("Please Login Again");
         this.navCtrl.setRoot(HomePage);
         console.log("errrorr " + err.status);
-      } else {
+      } else if (err.statusText == "Unauthorized") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+
+      }else {
 
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
       }
     });
   }
+  }
 
   updateComment(CommentUpdateMessage)
   {
 
+    if (this.CommentUpdateText.trim().length == 0 || this.CommentUpdateText.trim() == '')
+    {
+      this.authService.presentToast("Fill the comment or Text Limit Reached");
+    }else{
     let CommentData = { "MessageID": this.MessageID, "CommentID": CommentUpdateMessage.CommentID,"Comment" :this.CommentUpdateText};
     this.authService.showLoader("Send Comment ...");
     this.authService.contactBookCommentUpdate(CommentData).then((result) => {
@@ -262,17 +285,24 @@ export class ContactMsgDetailsPage {
     }, (err) => {
       this.authService.dismissLoading();
       var my = JSON.stringify(err);
-      if (err.error.message == "Unrecognized Session.") {
+      if (err.message == "Unrecognized Session.") {
         this.authService.removeSession();
         this.authService.presentToast("Please Login Again");
         this.navCtrl.setRoot(HomePage);
         console.log("errrorr " + err.status);
-      } else {
+      } else if (err.statusText == "Unauthorized") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+
+      }else {
 
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
       }
     });
+  }
   }
 
   messageSave()
@@ -286,9 +316,13 @@ export class ContactMsgDetailsPage {
       console.log("response :" + my);
       var dataoverall = JSON.parse(my);
       if (dataoverall.success) {
-       
+       //"{"success":true,"responseData":[],"message":"message is remove from saved messages"}"
+        if (dataoverall.message == "message is remove from saved messages")
+        {
+          this.authService.presentToast("Message Removed From Saved List Successfully");
+        }else{
         this.authService.presentToast("Message Saved Successfully");
-       
+        }
         this.authService.dismissLoading();
       } else {
         this.authService.dismissLoading();
@@ -302,11 +336,17 @@ export class ContactMsgDetailsPage {
     }, (err) => {
       this.authService.dismissLoading();
       var my = JSON.stringify(err);
-      if (err.error.message == "Unrecognized Session.") {
+      if (err.message == "Unrecognized Session.") {
         this.authService.removeSession();
         this.authService.presentToast("Please Login Again");
         this.navCtrl.setRoot(HomePage);
         console.log("errrorr " + err.status);
+      } else if (err.statusText == "Unauthorized") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+
       } else {
 
         this.navCtrl.setRoot(DashboardPage);
@@ -341,12 +381,18 @@ export class ContactMsgDetailsPage {
     }, (err) => {
       this.authService.dismissLoading();
       var my = JSON.stringify(err);
-      if (err.error.message == "Unrecognized Session.") {
+      if (err.message == "Unrecognized Session.") {
         this.authService.removeSession();
         this.authService.presentToast("Please Login Again");
         this.navCtrl.setRoot(HomePage);
         console.log("errrorr " + err.status);
-      } else {
+      } else if (err.statusText == "Unauthorized") {
+        this.authService.removeSession();
+        this.authService.presentToast("Please Login Again");
+        this.navCtrl.setRoot(HomePage);
+        console.log("errrorr " + err.status);
+
+      }else {
 
         this.navCtrl.setRoot(DashboardPage);
         this.authService.presentToast("Something went wrong");
@@ -357,6 +403,20 @@ export class ContactMsgDetailsPage {
   seenPeople(){
   	 this.navCtrl.push(SeenPeopleMsgPage,{"MessageID":this.MessageID});
   
+  }
+
+  coinSelect() {
+
+    //this.SenderID = this.overallresponseData.SenderID;
+    // this.SenderName = this.overallresponseData.SenderName;
+    // this.SenderImage = this.overallresponseData.SenderImage;
+    let employeeData = {
+      "EmployeeID": this.SenderID,
+      "EmployeeName": this.SenderName,
+      "EmployeeImage": this.SenderImage
+    }
+    this.navCtrl.push(CoinSelectPage, { EmployeeData: employeeData });
+
   }
 
   toggleDetails(data) {
@@ -376,5 +436,10 @@ export class ContactMsgDetailsPage {
   noclick()
   {
 
+  }
+
+  messageBackToReceived()
+  {
+    this.navCtrl.setRoot(ContactNotesPage);
   }
 }

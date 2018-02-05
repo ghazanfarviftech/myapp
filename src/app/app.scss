@@ -64,10 +64,11 @@ ion-header{
 }
     .logo{
         padding: 0px;
-        display: inline-block;
+        display: block;
         color: #cccccc;
         width: 75px;
         height: 30px;
+        margin:auto;
     }
 
  .toolbar-title{
@@ -130,6 +131,50 @@ ion-header{
       left: 0;
       z-index: 999;
     }
+    .bubble{
+
+  border:1px solid #C4C4C4;
+ 
+    color:#333;
+    margin-top:5px;
+    text-align:center;  
+}
+.bubble-main{
+    display:inline-blockd;
+
+    font-size:12px;
+}
+.bubble-main p{
+    line-height:1.7;
+}
+.arrow-before, 
+.arrow-after{
+    position: absolute;
+    width:0;
+    height:0;
+    border:15px dashed transparent;
+    font-size:0;
+}
+.arrow-after {
+    border: 14px dashed transparent;
+}
+/*向上*/
+.bubble-top .arrow-before, 
+.bubble-top .arrow-after{
+    bottom:100%;
+    left:15%;
+}
+.bubble-top .arrow-before{
+    border-bottom-style:solid;
+    border-bottom-color:#C4C4C4;
+    margin-left:-15px;
+}
+.bubble-top .arrow-after{
+    border-bottom-style:solid;
+    border-bottom-color:white;
+    margin-left:-14px;
+}
+
 .ios{
     .footercopyright{
         margin-top: 58px;

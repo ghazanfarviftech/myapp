@@ -16,25 +16,25 @@
 		</ion-item>
 		<ion-item>
 			<ion-label>Select a medium size group</ion-label>
-			<ion-select [(ngModel)]="depart">
+			<ion-select [(ngModel)]="depart" (ionChange)="setStoreValues(depart)">
 				<ion-option *ngFor="let depart of Department" [value]="depart">{{depart.DepartmentName}}</ion-option>
 			</ion-select>
 		</ion-item>
 		<ion-item>
 				<ion-label>Select a small size group</ion-label>
-				<ion-select [(ngModel)]="store">
-					<ion-option *ngFor="let departstore of DepartmentStores " [value]="departstore">{{departstore.StoreName}}</ion-option>
-				</ion-select>
+			<ion-select [(ngModel)]="store" (ionChange)="filterEmployees(store)">
+				<ion-option *ngFor="let departstore of SelectedStore " [value]="departstore">{{departstore.StoreName}}</ion-option>
+			</ion-select>
 		</ion-item>
 		<ion-list>
 
-			<ion-item *ngFor="let employes of Employees">
+			<ion-item *ngFor="let employes of filterEmployee">
 				<ion-avatar item-start>
-					<img src="{{employes.EmployeeImage}}" (click)="userProfile(employes.EmployeeID)">
+					<img src="{{employes.EmployeeImage}}" >
 				</ion-avatar>
 				<h3>{{employes.EmployeeName}}</h3>
 			
-				<img src="assets/check.png" item-end class="tabIcon" />
+				<img src="assets/check.png" id="icon-image-{{employes.EmployeeID}}" item-end class="tabIcon" (click)="selectEmployee(employes.EmployeeID)" />
 			</ion-item>
 			
 		</ion-list>
@@ -47,16 +47,16 @@
 		<p class="lbl-gray" style="padding-left:10px">{{ 'Contents:(less than 1000 character)' | translate }}</p> 
 		 <ion-item>
           10
-           <ion-textarea  id="myInput" rows="10" maxLength="500"  [(ngModel)]="model"></ion-textarea>
+           <ion-textarea  id="myInput" rows="10" maxLength="500"  [(ngModel)]="comment"></ion-textarea>
         </ion-item>
 </ion-content>
 <ion-footer>
   <ion-row class="toolbar-background-md">
       <ion-col col-6 >
-        <button ion-button round class="btn-app" >{{ 'Cancel' | translate }}</button>
+        <button ion-button round class="btn-app" (click)= "back()" >{{ 'Cancel' | translate }}</button>
       </ion-col>
       <ion-col col-6 >
-        <button ion-button round class="btn-app" >{{ 'Send' | translate }}</button>
+        <button ion-button round class="btn-app" (click)= "sendDailyNewsToSelected()" >{{ 'Send' | translate }}</button>
       </ion-col>
   </ion-row>  
  </ion-footer>

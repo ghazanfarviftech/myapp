@@ -5,9 +5,9 @@
       <ion-badge class="notification" style="left:27%">{{Messages}}</ion-badge>
      
     </ion-col>
-    <ion-col col-6><img class="logo" (click)="dashboard()" src="{{Logos}}" /></ion-col>
-    <ion-col col-2>
-      <img item-right src="assets/dashboard/Pic (4).png" menuToggle="right"  style="height: 30px; width:30px">
+    <ion-col col-4><img class="logo" (click)="dashboard()" src="{{Logos}}" /></ion-col>
+    <ion-col col-4>
+      <img item-right src="assets/dashboard/Pic (4).png" menuToggle="right"  style="height: 30px; width:30px; position: absolute; right: 10px">
     </ion-col>
   </ion-row>
   <ion-row>
@@ -26,7 +26,7 @@
     <img class="tabIcon" (click)="timeline()" src="assets/coin.png"/>
   </ion-col>
 </ion-row>
-  <ion-navbar >
+  <ion-navbar > 
       <ion-title>{{ 'Daily News Received Message Box' | translate }}</ion-title>
     </ion-navbar>
 </ion-header>
@@ -44,8 +44,8 @@
         <span item-end>
       <p>{{item.DateAdded}}</p>
    
-      <img src="assets/attach.png" width="30px" style="margin-top: 10px" />
-      <img src="assets/save.png" width="25px"  style="margin-top: 10px" />
+      <img src="assets/attach.png" *ngIf="item.HaveAttachment" width="30px" style="margin-top: 10px" />
+      <img [src]="item.IsSaved ? 'assets/saveActiveDaily.png' : 'assets/save.png'" width="25px" style="margin-top: 10px">
     </span>
   </ion-item>
   

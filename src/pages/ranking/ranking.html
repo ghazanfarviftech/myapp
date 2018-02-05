@@ -6,10 +6,10 @@
       <ion-badge class="notification" style="left:27%">26</ion-badge>
      
     </ion-col>
-    <ion-col col-6><img class="logo" (click)="dashboard()" src="{{Logos}}" />
+    <ion-col col-4><img class="logo" (click)="dashboard()" src="{{Logos}}" />
     </ion-col>
-    <ion-col col-2>
-      <img item-right src="assets/dashboard/Pic (4).png" menuToggle="right"  style="height: 30px; width:30px">
+    <ion-col col-4>
+      <img item-right src="assets/dashboard/Pic (4).png" menuToggle="right"  style="height: 30px; width:30px; position: absolute; right: 10px">
     </ion-col>
   </ion-row>
   <ion-row>
@@ -93,7 +93,7 @@
 	 <ion-list>
     <ion-item  *ngFor="let d of data" (click)="toggleDetails(d)">
     	<img src="assets/ranking/Pic (7).png" class="badge" />
-    	<img item-right [src]="d.icon"  *ngIf="!(d.showDetails)"/>
+    	<img item-right [src]="d.icon"  *ngIf="!(d.showDetails)" class="profile"/>
      <span class="badge-title"> {{d.title}}</span>
       <div *ngIf="d.showDetails">
         <ion-list>

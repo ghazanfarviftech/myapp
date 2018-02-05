@@ -5,10 +5,10 @@
       <ion-badge class="notification" style="left:27%">{{Messages}}</ion-badge>
      
     </ion-col>
-    <ion-col col-6><img class="logo" (click)="dashboard()" src="{{Logos}}" />
+    <ion-col col-4><img class="logo" (click)="dashboard()" src="{{Logos}}" />
     </ion-col>
-    <ion-col col-2>
-      <img item-right src="assets/dashboard/Pic (4).png" menuToggle="right"  style="height: 30px; width:30px">
+    <ion-col col-4>
+      <img item-right src="assets/dashboard/Pic (4).png" menuToggle="right"  style="height: 30px; width:30px; position: absolute; right: 10px">
     </ion-col>
   </ion-row>
   <ion-row>
@@ -42,19 +42,19 @@
 			  </ion-select>
 		</ion-item>
 		<ion-item>
-	  		<ion-label>Select a medium size group</ion-label>
-			  <ion-select [(ngModel)]="depart" >
-			    <ion-option *ngFor="let depart of Department" [value]="depart">{{depart.DepartmentName}}</ion-option>
-			  </ion-select>
+        <ion-label>Select a medium size group</ion-label>
+        <ion-select [(ngModel)]="depart" (ionChange)="setStoreValues(depart)">
+          <ion-option *ngFor="let depart of Department" [value]="depart">{{depart.DepartmentName}}</ion-option>
+        </ion-select>
 		</ion-item>
 		<ion-item>
-	  		<ion-label>Select a small size group</ion-label>
-			  <ion-select [(ngModel)]="store" >
-          <ion-option *ngFor="let departstore of DepartmentStores " [value]="departstore">{{departstore.StoreName}}</ion-option>
-			  </ion-select>
+        <ion-label>Select a small size group</ion-label>
+        <ion-select [(ngModel)]="store" (ionChange)="filterEmployees(store)">
+          <ion-option *ngFor="let departstore of SelectedStore " [value]="departstore">{{departstore.StoreName}}</ion-option>
+        </ion-select>
 		</ion-item>
 		<ion-list>
-			<ion-item *ngFor="let employes of Employees">
+			<ion-item *ngFor="let employes of filterEmployee">
 				<ion-avatar item-start>
 		        	<img src="{{employes.EmployeeImage}}" (click)="userProfile(employes.EmployeeID)">
 			      </ion-avatar>
@@ -63,7 +63,8 @@
 			      <span item-end class="badge-title" (click)="coinSelect(employes)"> <img src="assets/coinImg.png" class="tabIcon" />Send</span>
 			</ion-item>
 			
-		</ion-list>
+    </ion-list>
+    
 
 </ion-content>
 <ion-footer>

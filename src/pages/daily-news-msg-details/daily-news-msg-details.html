@@ -5,13 +5,13 @@
       <ion-badge class="notification" style="left:27%">26</ion-badge>
      
     </ion-col>
-    <ion-col col-6><img class="logo" (click)="dashboard()" src="{{Logos}}" />
+    <ion-col col-4><img class="logo" (click)="dashboard()" src="{{Logos}}" />
 		</ion-col>
-    <ion-col col-2>
-      <img item-right src="assets/dashboard/Pic (4).png" menuToggle="right"  style="height: 30px; width:30px">
+    <ion-col col-4>
+      <img item-right src="assets/dashboard/Pic (4).png" menuToggle="right"  style="height: 30px; width:30px; position: absolute; right: 10px">
     </ion-col>
   </ion-row>
-
+  
   <ion-navbar >
       <ion-title>Daily News Msg Details</ion-title>
     </ion-navbar>
@@ -38,61 +38,61 @@
 				</ion-item>
 		</ion-card-content>
 	<ion-row style="text-align: center;">
-		<ion-col col-4 offset-2>
+		<ion-col col-4 offset-2 (click)="coinSelect()">
 			<ion-thumbnail item-start>
 		      <img src="assets/coin.png" class="icon">
 		    </ion-thumbnail>
 		    <span class="lbl-gray">Send Coin Now</span>
 
 		</ion-col>
-		<ion-col col-4 (click)="seenPeople()">
+		<ion-col col-4 (click)="IsSeen ? seenPeople() : noclick()">
 			<ion-thumbnail item-start>
 		      <img src="assets/eye.png" class="icon">
 		    </ion-thumbnail>
-		    <span class="lbl-gray">Seen</span>
+		    <span class="lbl-gray">Seen  {{TotalSeen}}</span>
 		</ion-col>
 	</ion-row>
 </ion-card>
 
 
 	
-		<p class="lbl-gray" style="padding-left: 5px">3 Comments</p>
+		<p class="lbl-gray" style="padding-left: 5px">{{TotalComment}} Comments</p>
 
 	<ion-row>
 
 		<ion-col col-9>
-			<ion-input  type="text" placeholder="Write comment(less than 100 characters)" ></ion-input>
+			<ion-input  type="text" placeholder="Write comment(less than 100 characters)" rows="10" maxLength="100" [(ngModel)]="CommentMessage"></ion-input>
 		</ion-col>
 		<ion-col col-3>
-			 <button ion-button round class="btn-app" >Send</button>
+			 <button ion-button round class="btn-app" (click)="sendComment(CommentMessage)" >Send</button>
 		</ion-col>
 	</ion-row>
 
 
 <ion-list class="comment"  >
-	<div *ngFor="let d of data">
-    <ion-item >
-      <ion-avatar item-start>
-        <img [src]="d.img">
-      </ion-avatar>
-      <h2>{{d.name}}</h2>
-      <p>{{d.msg}}</p>
-      <img (click)="toggleDetails(d)" item-right src="assets/edit.png" width="30px" height="35px"  />
-
-
-
-    </ion-item>
-
-	      	<ion-row style="background: white" *ngIf="d.showDetails">
-				<ion-col col-9>
-					<ion-input  type="text" placeholder="Write comment(less than 100 characters)" ></ion-input>
-				</ion-col>
-				<ion-col col-3>
-					 <button ion-button round class="btn-app" >Send</button>
-				</ion-col>
-			</ion-row>
-
-</div>
+	<div *ngFor="let d of Comments">
+		<ion-item>
+			<ion-avatar item-start>
+				<img [src]="d.EmployeeImage">
+			</ion-avatar>
+			<h2>{{d.EmployeeName}}</h2>
+			<p>{{d.Comment}}</p>
+			<img (click)="toggleDetails(d)" item-right src="assets/edit.png" width="30px" height="35px" />
+	
+	
+	
+		</ion-item>
+	
+		<ion-row style="background: white" *ngIf="d.showDetails">
+			<ion-col col-9>
+				<ion-input type="text" placeholder="Write comment(less than 100 characters)" rows="10" maxLength="100" [(ngModel)]="CommentUpdateText"></ion-input>
+			</ion-col>
+			<ion-col col-3>
+				<button ion-button round class="btn-app" (click)="updateComment(d)">Send</button>
+			</ion-col>
+		</ion-row>
+	
+	</div>
 
 	</ion-list>
 
@@ -100,14 +100,14 @@
 <ion-footer>
   <ion-row class="toolbar-background-md">
     <ion-col col-4 >
-        <button ion-button round class="btn-app" >
+        <button ion-button round class="btn-app" (click)="messageDelete()" >
         Delete </button>
       </ion-col>
       <ion-col col-4 >
-        <button ion-button round class="btn-app" >Save</button>
+        <button ion-button round class="btn-app" (click)="messageSave()" >Save</button>
       </ion-col>
       <ion-col col-4 >
-        <button ion-button round class="btn-app" >Reply</button>
+        <button ion-button round class="btn-app" (click)="messageBackToReceived()">Received</button>
       </ion-col>
   </ion-row>  
  </ion-footer>
