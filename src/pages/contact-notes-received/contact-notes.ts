@@ -212,7 +212,7 @@ export class ContactNotesPage {
       infiniteScroll.complete();
     }, 2000);
   }
-
+ 
     dashboard(){
      this.navCtrl.push(DashboardPage);
   }

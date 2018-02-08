@@ -4,8 +4,11 @@ import { MessageMainPage } from "../message-main/message-main";
 import { DashboardPage } from "../dashboard/dashboard";
 import { RevoService } from '../../providers/revoservices';
 import { HomePage } from '../home/home';
-
+import { FileChooser } from '@ionic-native/file-chooser';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Base64 } from '@ionic-native/base64';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+
 /**
  * Generated class for the MsgWritePage page.
  *
@@ -28,7 +31,10 @@ export class MsgWritePage {
   fileData:any;
   currentBlob:any;
   profileImage:any = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: RevoService, public camera: Camera) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+     public authService: RevoService, public camera: Camera, public fileChooser: FileChooser,
+    private transfer: FileTransfer,
+    public base64: Base64) {
    
     this.authService.getlogo();
     setTimeout(() => {
@@ -59,7 +65,7 @@ export class MsgWritePage {
         "UpDay": this.myDate,
         "AttachFile": this.profileImage
        };
-
+      console.log("data to send :" + date.toString());
       this.authService.showLoader("Loading Data");
       this.authService.messageReply(date).then((result) => {
         this.response = result;
@@ -118,11 +124,96 @@ export class MsgWritePage {
      this.navCtrl.push(DashboardPage);
   }	
 
+  fd :any;
   fileUpload(event) {
-    let fileList: FileList = event.target.files;
+
+    this.fileChooser.open()
+      .then(uri => 
+        {
+          console.log(uri)
+        this.base64.encodeFile(uri).then((base64File: string) => {
+          console.log(base64File);
+          this.profileImage.push(base64File);//base64File.substring(base64File.indexOf(";"),0); //.replace("data:image/*;charset=utf-8;base64","data:application/pdf;base64")
+          console.log("pdf "+this.profileImage);
+          
+        }, (err) => {
+          console.log(err);
+        });
+        })
+      .catch(e => 
+        {
+          console.log(e)
+        
+        });
+
+  /*   let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       let file: File = fileList[0];
       
+      this.fd = new FormData();
+
+
+      let options: FileUploadOptions = {
+        fileKey: 'file',
+        fileName: 'name.pdf'
+    
+  };
+
+      const fileTransfer: FileTransferObject = this.transfer.create();
+      fileTransfer.upload(file.webkitRelativePath, 'http://beta.aniparti.com/files/', options)
+        .then((data) => {
+          // success
+          console.log('Sucess');
+        }, (err) => {
+          // error
+          console.log('Error');
+        }) */
+      // JUST APPEND EVERY OTHER DATA THAT YOU WANT IT TO COME WITH THE
+      //CHOOSEN FILE, LIKE NAME,PH NO ETC
+  /*     "Reply": "hello",
+        "Title": "HWat is is ",
+          "UpDay": "2018-02-12",
+            "AttachFile": ["data:application/xlsx;base64,<--base64 string-->", "data:image/jpeg;base64,<--base64 string-->"] */
+
+
+      /* this.fd.append("Reply", "hello");
+      this.fd.append("Title", "HWat is is ");
+      this.fd.append("UpDay", "2018-02-07");
+      this.fd.append("AttachFile", [file]);
+
+
+      //BELOW IS THE CODE FOR SENDING THAT FILE TO YOUR CUSTOM SERVER
+      var xhr = new XMLHttpRequest();
+
+      //self.progressDialog.presentLoading();
+      xhr.open('POST', 'http://chainayena.net/revo/api/revo-message-reply', true);
+
+
+      xhr.onload = function () {
+
+
+        if (xhr.status == 200) {
+          //self.progressDialog.dismissLoading();
+
+          var resp = JSON.parse(xhr.response);
+          console.log('Server got: ', resp);
+          console.log('Server got: ', resp.message);
+
+          if (resp.success == 1) {
+            console.log("THIS IS SUCCESS")
+          }
+          else {
+
+           // self.showalert.presentAlert("Error", resp.message)
+           // self.progressDialog.dismissLoading();
+            return
+          }
+
+        };
+      }
+
+
+      xhr.send(this.fd); */
       /* this.base64.encodeFile(file).then((base64File: string) => {
         console.log(base64File);
       }, (err) => {
@@ -145,7 +236,7 @@ export class MsgWritePage {
         data => console.log('success'),
         error => console.log(error)
         ) */
-    }
+    //}
   }
 
   private openGallery(): void {

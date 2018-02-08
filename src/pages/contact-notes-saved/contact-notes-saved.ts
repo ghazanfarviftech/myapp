@@ -5,7 +5,7 @@ import { WriteDailyNewsPage } from "../write-daily-news/write-daily-news";
 import { DashboardPage } from "../dashboard/dashboard";
 import { ContactNotesPage } from "../contact-notes-received/contact-notes";
 import { ContactNotesSentPage } from "../contact-notes-sent/contact-notes-sent";
-
+import { ContactMsgDetailsPage } from "../contact-msg-details/contact-msg-details";
 import { DailyNewsReceptBoxPage } from "../daily-news-recept-box/daily-news-recept-box";
 import { CoinTimelinePage } from "../coin-timeline/coin-timeline";
 import { ProfilePage } from "../mypageprofile/profile";
@@ -203,8 +203,8 @@ export class ContactNotesSavedPage {
     dashboard(){
      this.navCtrl.push(DashboardPage);
   }
-  detailed(){
-  	 this.navCtrl.push(DailyNewsMsgDetailsPage);
+  detailed(messageId) {
+    this.navCtrl.push(ContactMsgDetailsPage, { "MessageID": messageId });
   }
   write(){
    

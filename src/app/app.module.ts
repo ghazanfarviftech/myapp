@@ -48,6 +48,9 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera';
 import { Base64 } from '@ionic-native/base64';
 
+import { FileChooser } from '@ionic-native/file-chooser';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -147,6 +150,10 @@ export function createTranslateLoader(http: HttpClient) {
     Camera,
     AppPreferences,
     Base64,
+    FileChooser,
+    FileTransfer,
+    FileTransferObject,
+    File,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

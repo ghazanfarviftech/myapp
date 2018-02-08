@@ -34,7 +34,7 @@
 <ion-content class="gray-content" >
 
 <ion-list>
-  <ion-item (click)="detailed()" *ngFor="let item of overallresponseData">
+  <ion-item (click)="detailed(item.MessageID)" *ngFor="let item of overallresponseData">
     <ion-thumbnail item-start>
     <img src="{{item.SenderImage}}">
     </ion-thumbnail>
