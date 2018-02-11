@@ -33,7 +33,7 @@
         </ion-item>
          <ion-item>
        
-        <input type="file" (change)="fileUpload($event)" id="file-input" style="opacity: 0" #fileInp>
+        <input type="file"  id="file-input" (change)="fileUpload($event)" ng-model='myfile' style="opacity: 0" #fileInp >
         <img src="assets/attach.png" width="30px" height="30px" > <label>{{ 'Select File' | translate }}</label>
        
     </ion-item>
@@ -41,6 +41,10 @@
      <ion-item>
           10
            <ion-textarea  id="myInput" rows="10" maxLength="500"  [(ngModel)]="comment"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+        {{myFile}}
         </ion-item>
     </ion-list>
 </ion-content>

@@ -21,6 +21,9 @@
     <preference name="SplashScreenDelay" value="1000" />
     <preference name="loadUrlTimeoutValue" value="70000" />
     <platform name="android">
+        <allow-intent href="content:*" />
+        <allow-intent href="file:*" />
+        <preference name="AndroidPersistentFileLocation" value="Compatibility" />
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
@@ -88,6 +91,8 @@
     <allow-navigation href="http://192.168.10.5:8100" />
     <plugin name="com-badrit-base64" spec="^0.2.0" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
-    <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <engine name="android" spec="~6.3.0" />
+    <plugin name="cordova-plugin-ftp" spec="^1.1.0" />
+    <plugin name="cordova-plugin-file" spec="^6.0.1" />
+    <plugin name="cordova-plugin-filepath" spec="^1.2.0" />
 </widget>

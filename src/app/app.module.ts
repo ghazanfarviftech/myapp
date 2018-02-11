@@ -51,6 +51,27 @@ import { Base64 } from '@ionic-native/base64';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
+
+import { FTP } from '@ionic-native/ftp';
+
+import { ChartModule } from 'angular2-highcharts';
+
+// Import angular2-fusioncharts
+/* import { FusionChartsModule } from 'angular2-fusioncharts'; */
+
+/* import { ChartModule } from 'angular2-highcharts'; */
+
+/* import { base64 } from 'angular-base64-upload'; */
+
+
+// Import FusionCharts library
+/* import * as FusionCharts from 'fusioncharts'; */
+// Load FusionCharts Charts module
+/* import Charts from "fusioncharts/fusioncharts.charts"; */
+// Load themes
+/* import themes from "fusioncharts/themes/fusioncharts.theme.fint"; */
+
+declare var require: any;
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -94,10 +115,11 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
+    ChartModule.forRoot(require('highcharts'), require('../../node_modules/highcharts/highcharts-more.js')
+      , require('highcharts/modules/exporting.js')),
     TranslateModule.forChild(),
     BrowserModule,
     HttpClientModule,
-    ChartsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -149,11 +171,12 @@ export function createTranslateLoader(http: HttpClient) {
     RevoService,
     Camera,
     AppPreferences,
-    Base64,
     FileChooser,
     FileTransfer,
     FileTransferObject,
     File,
+    Base64,
+    FTP,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

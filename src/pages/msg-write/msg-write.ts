@@ -7,7 +7,10 @@ import { HomePage } from '../home/home';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Base64 } from '@ionic-native/base64';
+/* import { base64 } from 'angular-base64-upload'; */
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { FTP } from '@ionic-native/ftp';
+import { File } from '@ionic-native/file';
 
 /**
  * Generated class for the MsgWritePage page.
@@ -31,10 +34,11 @@ export class MsgWritePage {
   fileData:any;
   currentBlob:any;
   profileImage:any = [];
+  myFile :any;
+  Fileess :any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
      public authService: RevoService, public camera: Camera, public fileChooser: FileChooser,
-    private transfer: FileTransfer,
-    public base64: Base64) {
+    private transfer: FileTransfer, public base64: Base64, private fTP: FTP, public file: File) {
    
     this.authService.getlogo();
     setTimeout(() => {
@@ -58,14 +62,19 @@ export class MsgWritePage {
   	register(){
 
       
-
+      
+     // console.log("ym flelelee "+this.myFile);
+      //this.profileImage.push(this.myFile);
       let date = { 
         "Reply": this.comment,
-        "Title":"HWat",
+        "Title":"pdf-sample.pdf",
         "UpDay": this.myDate,
-        "AttachFile": this.profileImage
+        "AttachFile": [this.profileImage]
        };
-      console.log("data to send :" + date.toString());
+      console.log("data to send Reply :" + date.Reply);
+      console.log("data to send Title :" + date.Title);
+      console.log("data to send UpDay :" + date.UpDay);
+      console.log("data to send AttachFile :" + date.AttachFile);
       this.authService.showLoader("Loading Data");
       this.authService.messageReply(date).then((result) => {
         this.response = result;
@@ -127,24 +136,67 @@ export class MsgWritePage {
   fd :any;
   fileUpload(event) {
 
+
     this.fileChooser.open()
-      .then(uri => 
-        {
-          console.log(uri)
-        this.base64.encodeFile(uri).then((base64File: string) => {
-          console.log(base64File);
-          this.profileImage.push(base64File);//base64File.substring(base64File.indexOf(";"),0); //.replace("data:image/*;charset=utf-8;base64","data:application/pdf;base64")
-          console.log("pdf "+this.profileImage);
-          
-        }, (err) => {
-          console.log(err);
-        });
-        })
-      .catch(e => 
-        {
-          console.log(e)
-        
-        });
+      .then(uri => {
+        (<any>window).FilePath.resolveLocalFilesystemUrl(uri)
+          .then(entry => {
+            alert(JSON.stringify(entry));
+            let path = entry.nativeURL.substring(0, entry.nativeURL.lastIndexOf('/'));
+            alert(path);
+            alert(entry.name);
+            this.file.readAsBinaryString(path, entry.name)
+              .then(content => {
+                console.log(content);
+                alert(JSON.stringify(content));
+              })
+              .catch(err => {
+                console.log(err);
+                alert(JSON.stringify(err));
+              });
+          })
+
+      })
+      .catch(e => console.log(e));
+
+    
+    /* let fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      this.Fileess   = fileList[0];
+
+
+      this.file.resolveLocalFilesystemUrl(this.Fileess)
+        .then(entry => {
+
+          console.log(JSON.stringify(entry));
+          //alert(JSON.stringify(entry));
+          let path = entry.nativeURL.substring(0, entry.nativeURL.lastIndexOf('/'));
+          //alert(path);
+          //alert(entry.name);
+          console.log(path);
+          console.log(entry.name);
+          this.file.readAsBinaryString(path, entry.name)
+            .then(content => {
+              console.log(content);
+            //  alert(JSON.stringify(content));
+            })
+            .catch(err => {
+              console.log(err);
+            //  alert(JSON.stringify(err));
+            });
+        }) */
+
+    /*   this.file.readAsDataURL(this.Fileess, 'pdf.pdf').then((base64File: string) => {
+
+        console.log("file created " + base64File)
+
+        this.profileImage.push(base64File);
+
+      }).catch(e => {
+        console.log("error in reading file " + e)
+
+      }); */
+   // }
 
   /*   let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
@@ -277,4 +329,29 @@ export class MsgWritePage {
   {
     this.navCtrl.setRoot(MessageMainPage);
   }
+
+ /*  openFile(): void {
+    this.fileChooser.open()
+      .then(uri => {
+        this.file.resolveLocalFilesystemUrl(uri)
+          .then(entry => {
+            alert(JSON.stringify(entry));
+            let path = entry.nativeURL.substring(0, entry.nativeURL.lastIndexOf('/'));
+            alert(path);
+            alert(entry.name);
+            this.file.readAsDataURL(path, entry.name)
+              .then(content => {
+                console.log(content);
+                alert(JSON.stringify(content));
+              })
+              .catch(err => {
+                console.log(err);
+                alert(JSON.stringify(err));
+              });
+          })
+
+      })
+      .catch(e => console.log(e));
+  } */
+
 }

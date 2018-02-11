@@ -67,13 +67,27 @@
 </ion-row>
 <ion-row style="border-top: 1px solid #CCC; border-bottom: 1px solid #ccc">
   <ion-col col-12>
-    <ion-col col-12>
+    <!-- <ion-col col-12>
       <img src="assets/Pic.png" />
-    </ion-col>
-   <!--  <div style="display: block">
-      <canvas baseChart [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType" (chartHover)="chartHovered($event)"
-        (chartClick)="chartClicked($event)"></canvas>
-    </div> -->
+    </ion-col> -->
+    <div style="display: block">
+
+    <chart [options]="options" >
+    </chart>
+     <!--  <div #myChart></div> -->
+   <!--  <div id="container" style="min-width: 400px; max-width: 600px; height: 400px; margin: 0 auto"></div> -->
+<!-- <fusioncharts
+          width="600"
+          height="350"
+          type="radar"
+          dataFormat="JSON"
+          [dataSource]="dataSource">
+       
+      </fusioncharts> -->
+      <!-- <div id="chart-container">FusionCharts XT will load here!</div> -->
+      <!-- <canvas baseChart [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType" (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"></canvas> -->
+    </div>
   </ion-col>
 </ion-row>
 
