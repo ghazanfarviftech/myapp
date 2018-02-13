@@ -9,7 +9,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Base64 } from '@ionic-native/base64';
 /* import { base64 } from 'angular-base64-upload'; */
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
-import { FTP } from '@ionic-native/ftp';
+
 import { File } from '@ionic-native/file';
 
 /**
@@ -38,7 +38,7 @@ export class MsgWritePage {
   Fileess :any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
      public authService: RevoService, public camera: Camera, public fileChooser: FileChooser,
-    private transfer: FileTransfer, public base64: Base64, private fTP: FTP, public file: File) {
+    private transfer: FileTransfer, public base64: Base64, public file: File) {
    
     this.authService.getlogo();
     setTimeout(() => {
@@ -139,13 +139,53 @@ export class MsgWritePage {
 
     this.fileChooser.open()
       .then(uri => {
-        (<any>window).FilePath.resolveLocalFilesystemUrl(uri)
+        this.file.resolveLocalFilesystemUrl(uri)
           .then(entry => {
             alert(JSON.stringify(entry));
             let path = entry.nativeURL.substring(0, entry.nativeURL.lastIndexOf('/'));
             alert(path);
             alert(entry.name);
-            this.file.readAsBinaryString(path, entry.name)
+
+
+            const fileTransfer: FileTransferObject = this.transfer.create();
+
+
+            // regarding detailed description of this you cn just refere ionic 2 transfer plugin in official website
+            let options1: FileUploadOptions = {
+              fileKey: "file",
+              fileName: 'mypdf.pdf',
+              headers: {
+                "token": "e662c46b5bef24a96c3128e25f43beaa05e3bd13",
+                Connection: "close"
+              },
+              httpMethod: "POST",
+              chunkedMode: false,
+              mimeType: "multipart/form-data",
+              params: {
+                'Attachment': entry,
+                'AttachmentFor': '1'
+              }
+            }
+
+            var options = {
+              fileKey: "file",
+              fileName: "mypdf.pdf",
+              chunkedMode: false,
+              mimeType: "multipart/form-data",
+              params: { 'fileName': "mypdf.pdf" }
+            };
+
+
+            fileTransfer.upload(path + "/" + entry.name, 'https://half-size-resistor.000webhostapp.com/upload.php', options,true)
+              .then((data) => {
+                // success
+                alert("success" + JSON.stringify(data));
+              }, (err) => {
+                // error
+                alert("error" + JSON.stringify(err));
+              });
+
+           /*  this.file.readAsBinaryString(path, entry.name)
               .then(content => {
                 console.log(content);
                 alert(JSON.stringify(content));
@@ -153,7 +193,7 @@ export class MsgWritePage {
               .catch(err => {
                 console.log(err);
                 alert(JSON.stringify(err));
-              });
+              }); */
           })
 
       })

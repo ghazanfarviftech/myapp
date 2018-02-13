@@ -52,7 +52,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 
-import { FTP } from '@ionic-native/ftp';
+/* import { FTP } from '@ionic-native/ftp'; */
 
 import { ChartModule } from 'angular2-highcharts';
 
@@ -176,7 +176,6 @@ export function createTranslateLoader(http: HttpClient) {
     FileTransferObject,
     File,
     Base64,
-    FTP,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
