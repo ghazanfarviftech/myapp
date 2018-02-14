@@ -34,7 +34,7 @@
          <ion-item>
        
         <input type="file"  id="file-input" (change)="fileUpload($event)" ng-model='myfile' style="opacity: 0" #fileInp >
-        <img src="assets/attach.png" width="30px" height="30px" > <label>{{ 'Select File' | translate }}</label>
+        <img src="assets/attach.png" width="30px" height="30px" > <label ng-model='selectFile'>{{selectFile}}<!-- {{ 'Select File' | translate }} --></label>
        
     </ion-item>
     <p class="lbl-gray" style="padding-left:10px">{{ 'Contents:(less than 1000 character)' | translate }}</p> 

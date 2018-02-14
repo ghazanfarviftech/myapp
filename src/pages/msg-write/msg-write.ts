@@ -36,6 +36,11 @@ export class MsgWritePage {
   profileImage:any = [];
   myFile :any;
   Fileess :any;
+  fileTransferresponse : any;
+  selectFile: string = 'Select File';
+  fd :any;
+  path : any;
+  fileName : any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
      public authService: RevoService, public camera: Camera, public fileChooser: FileChooser,
     private transfer: FileTransfer, public base64: Base64, public file: File) {
@@ -62,67 +67,108 @@ export class MsgWritePage {
   	register(){
 
       
+
+      const fileTransfer: FileTransferObject = this.transfer.create();
+
+
+            // regarding detailed description of this you cn just refere ionic 2 transfer plugin in official website
+            let options1 = {
+              fileKey: "Attachment",
+              fileName: this.fileName.name,
+              headers: {
+                "token": "e662c46b5bef24a96c3128e25f43beaa05e3bd13",
+                Connection: "close"
+              },
+              httpMethod: "POST",
+              chunkedMode: false,
+              mimeType: "multipart/form-data",
+              params: {
+                'Attachment': this.fileName.name,
+                'AttachmentFor': '1'
+              }
+            }
       
+            
+            fileTransfer.upload(this.path + "/" + this.fileName.name, 'http://chainayena.net/revo/api/revo-file-upload', options1)
+              .then((data) => {
+
+                console.log("success " + JSON.stringify(data));
+
+               this.fileTransferresponse = data;
+                if(this.fileTransferresponse.message == 'file uploaded succesfully')
+                {
+
+                  
+                  console.log("fileTransferresponse " + JSON.stringify(this.fileTransferresponse));
+
+                  console.log("fileTransferresponse.responseData.FileName ", this.fileTransferresponse.responseData.FileName);
+                  this.profileImage = [];
+                  this.profileImage.push(this.fileTransferresponse.responseData.FileName);
+                  let date = { 
+                    "Reply": this.comment,
+                    "Title":"pdf-sample.pdf",
+                    "UpDay": this.myDate,
+                    "AttachFile": [this.profileImage]
+                   };
+                  console.log("data to send Reply :" + date.Reply);
+                  console.log("data to send Title :" + date.Title);
+                  console.log("data to send UpDay :" + date.UpDay);
+                  console.log("data to send AttachFile :" + date.AttachFile);
+                  this.authService.showLoader("Loading Data");
+                  this.authService.messageReply(date).then((result) => {
+                    this.response = result;
+            
+                    var my = JSON.stringify(this.response);
+                    console.log("response :" + my);
+                    var dataoverall = JSON.parse(my);
+                    if (dataoverall.success) {
+            
+                      this.authService.presentToast(dataoverall.message);
+                      this.authService.dismissLoading();
+            
+                    } else {
+                      this.authService.dismissLoading();
+                      this.authService.presentToast(dataoverall.message);
+                    }
+            
+                  }, (err) => {
+                    this.authService.dismissLoading();
+            
+                    var my = JSON.stringify(err);
+                    if (err.message == "Unrecognized Session.") {
+                      this.authService.removeSession();
+                      this.authService.presentToast("Please Login Again");
+                      this.navCtrl.setRoot(HomePage);
+                      console.log("errrorr " + err.status);
+                    } else if (err.statusText == "Unauthorized") {
+                      this.authService.removeSession();
+                      this.authService.presentToast("Please Login Again");
+                      this.navCtrl.setRoot(HomePage);
+                      console.log("errrorr " + err.status);
+            
+                    }else {
+                      this.navCtrl.setRoot(DashboardPage);
+                      this.authService.presentToast("Something went wrong");
+                      console.log("errrorr " + err.status);
+                    }
+                  });
+            
+                }else{
+                  console.log("error " + JSON.stringify(this.fileTransferresponse.messagecd ));
+                }
+                
+                
+                // success
+               // alert("success" + JSON.stringify(data));
+              }, (err) => {
+                // error
+                console.log("error " + JSON.stringify(err));
+               // alert("error" + JSON.stringify(err));
+              });
+
      // console.log("ym flelelee "+this.myFile);
       //this.profileImage.push(this.myFile);
-      let date = { 
-        "Reply": this.comment,
-        "Title":"pdf-sample.pdf",
-        "UpDay": this.myDate,
-        "AttachFile": [this.profileImage]
-       };
-      console.log("data to send Reply :" + date.Reply);
-      console.log("data to send Title :" + date.Title);
-      console.log("data to send UpDay :" + date.UpDay);
-      console.log("data to send AttachFile :" + date.AttachFile);
-      this.authService.showLoader("Loading Data");
-      this.authService.messageReply(date).then((result) => {
-        this.response = result;
-
-        var my = JSON.stringify(this.response);
-        console.log("response :" + my);
-        var dataoverall = JSON.parse(my);
-        if (dataoverall.success) {
-
-          this.authService.presentToast(dataoverall.message);
-          //this.overallresponseData = dataoverall.responseData;
-          // this.EmployeeNames = dataoverall.responseData[0].EmployeeName;
-          // this.ProfileImage = dataoverall.responseData[0].ProfilePicture;
-       
-
-          this.authService.dismissLoading();
-
-        } else {
-          this.authService.dismissLoading();
-          //this.navCtrl.setRoot(DashboardPage);
-          this.authService.presentToast(dataoverall.message);
-        }
-
-      }, (err) => {
-        this.authService.dismissLoading();
-
-        var my = JSON.stringify(err);
-        if (err.message == "Unrecognized Session.") {
-          this.authService.removeSession();
-          this.authService.presentToast("Please Login Again");
-          this.navCtrl.setRoot(HomePage);
-          console.log("errrorr " + err.status);
-        } else if (err.statusText == "Unauthorized") {
-          this.authService.removeSession();
-          this.authService.presentToast("Please Login Again");
-          this.navCtrl.setRoot(HomePage);
-          console.log("errrorr " + err.status);
-
-        }else {
-          this.navCtrl.setRoot(DashboardPage);
-          this.authService.presentToast("Something went wrong");
-          console.log("errrorr " + err.status);
-        }
-        // this.presentToast(err);
-        //this.response = err;
-
-      });
-
+      
      // this.navCtrl.push(MessageMainPage);
       
   	}	
@@ -133,7 +179,7 @@ export class MsgWritePage {
      this.navCtrl.push(DashboardPage);
   }	
 
-  fd :any;
+ 
   fileUpload(event) {
 
 
@@ -142,30 +188,13 @@ export class MsgWritePage {
         this.file.resolveLocalFilesystemUrl(uri)
           .then(entry => {
             alert(JSON.stringify(entry));
-            let path = entry.nativeURL.substring(0, entry.nativeURL.lastIndexOf('/'));
-            alert(path);
+            this.path = entry.nativeURL.substring(0, entry.nativeURL.lastIndexOf('/'));
+            alert(this.path);
             alert(entry.name);
-
-
-            const fileTransfer: FileTransferObject = this.transfer.create();
-
-
-            // regarding detailed description of this you cn just refere ionic 2 transfer plugin in official website
-            let options1: FileUploadOptions = {
-              fileKey: "file",
-              fileName: 'mypdf.pdf',
-              headers: {
-                "token": "e662c46b5bef24a96c3128e25f43beaa05e3bd13",
-                Connection: "close"
-              },
-              httpMethod: "POST",
-              chunkedMode: false,
-              mimeType: "multipart/form-data",
-              params: {
-                'Attachment': entry,
-                'AttachmentFor': '1'
-              }
-            }
+            this.fileName = entry.name;
+            
+            this.selectFile = entry.name;
+            
 
             var options = {
               fileKey: "file",
@@ -175,15 +204,15 @@ export class MsgWritePage {
               params: { 'fileName': "mypdf.pdf" }
             };
 
-
-            fileTransfer.upload(path + "/" + entry.name, 'https://half-size-resistor.000webhostapp.com/upload.php', options,true)
+/* 
+            fileTransfer.upload(this.path + "/" + entry.name, 'http://chainayena.net/revo/api/revo-file-upload', options1)
               .then((data) => {
                 // success
                 alert("success" + JSON.stringify(data));
               }, (err) => {
                 // error
                 alert("error" + JSON.stringify(err));
-              });
+              }); */
 
            /*  this.file.readAsBinaryString(path, entry.name)
               .then(content => {
