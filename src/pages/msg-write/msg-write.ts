@@ -33,31 +33,41 @@ export class MsgWritePage {
   comment: any = '';
   fileData:any;
   currentBlob:any;
-  profileImage:any = [];
+  profileImage:Array<any> = [];
   myFile :any;
   Fileess :any;
   fileTransferresponse : any;
   selectFile: string = 'Select File';
   fd :any;
   path : any;
-  fileName : any;
+  fileNames : any = null;
   constructor(public navCtrl: NavController, public navParams: NavParams,
      public authService: RevoService, public camera: Camera, public fileChooser: FileChooser,
     private transfer: FileTransfer, public base64: Base64, public file: File) {
    
-    this.authService.getlogo();
-    setTimeout(() => {
 
-      this.Logos = this.authService.Logo;
+      this.authService.checkSession().then((result) => {
+      if (result == null) {
+        this.authService.presentToast("Not Authorized Kindly Login");
+        this.navCtrl.setRoot(HomePage);
+      } else {
+        this.authService.checkCompanyId();
+        this.authService.checkEmployeeId();
+       
+        this.authService.getlogo();
+        setTimeout(() => {
 
-    }, 1000);
-    /* if (this.authService.getlogo() != null) {
-      setTimeout(() => {
+          this.Logos = this.authService.Logo;
 
-        this.Logos = this.authService.Logo;
+        }, 1000);
+      
+      }
+    }, (err) => {
+      this.authService.presentToast("Something went wrong");
+      this.navCtrl.setRoot(HomePage);
+    });
 
-      }, 1000);
-    } */
+  
   }
 
   ionViewDidLoad() {
@@ -65,16 +75,134 @@ export class MsgWritePage {
   }
 
   	register(){
+      //messages_attachments-lnwd8-1518969736.pdf
 
-      
+     /*  this.fileTransferresponse = 'messages_attachments-IIH3i-1518984106.pdf';
+      this.profileImage = [];
+      this.profileImage.push(this.fileTransferresponse);
+      let dataMsgReply = {
+        "Reply": this.comment,
+        "Title": this.fileTransferresponse,
+        "UpDay": this.myDate,
+        "AttachFile": this.profileImage
+      };
+      console.log("data to send Reply :" + dataMsgReply.Reply);
+      console.log("data to send Title :" + dataMsgReply.Title);
+      console.log("data to send UpDay :" + dataMsgReply.UpDay);
+      console.log("data to send AttachFile :" + dataMsgReply.AttachFile);
+      this.authService.showLoader("Loading Data");
+      this.authService.messageReply(dataMsgReply).then((result) => {
+        this.response = result;
+
+        var my = JSON.stringify(this.response);
+        console.log("response :" + my);
+        var dataoverall = JSON.parse(my);
+        if (dataoverall.success) {
+
+          this.authService.presentToast(dataoverall.message);
+          this.authService.dismissLoading();
+
+        } else {
+          this.authService.dismissLoading();
+          this.authService.presentToast(dataoverall.message);
+        }
+
+      }, (err) => {
+        this.authService.dismissLoading();
+
+        var my = JSON.stringify(err);
+        if (err.message == "Unrecognized Session.") {
+          this.authService.removeSession();
+          this.authService.presentToast("Please Login Again");
+          this.navCtrl.setRoot(HomePage);
+          console.log("errrorr " + err.status);
+        } else if (err.statusText == "Unauthorized") {
+          this.authService.removeSession();
+          this.authService.presentToast("Please Login Again");
+          this.navCtrl.setRoot(HomePage);
+          console.log("errrorr " + err.status);
+
+        } else {
+          this.navCtrl.setRoot(DashboardPage);
+          this.authService.presentToast("Something went wrong");
+          console.log("errrorr " + err.status);
+        }
+      }); */
 
       const fileTransfer: FileTransferObject = this.transfer.create();
 
 
+      /*file:///storage/emulated/0/Download
+mypdf.pdf */
             // regarding detailed description of this you cn just refere ionic 2 transfer plugin in official website
+            
+     // this.fileNames = 'mypdf.pdf';
+     // this.path = 'file:///storage/emulated/0/Download';
+      this.authService.showLoader("Sending Message ...");
+     if(this.fileNames == null)
+     {
+
+       this.profileImage = [];
+       //this.profileImage.push(fileNameToSend);
+
+       console.log("data to send arrayt :" + this.profileImage);
+
+       let dataMsgReply = {
+         "Reply": this.comment,
+         "Title": 'test',
+         "UpDay": this.myDate,
+         "AttachFile": this.profileImage
+       };
+       console.log("data to send Reply :" + dataMsgReply.Reply);
+       console.log("data to send Title :" + dataMsgReply.Title);
+       console.log("data to send UpDay :" + dataMsgReply.UpDay);
+       console.log("data to send AttachFile :" + dataMsgReply.AttachFile);
+       ///this.authService.showLoader("Loading Data");
+       this.authService.messageReply(dataMsgReply).then((result) => {
+         this.response = result;
+
+         var my = JSON.stringify(this.response);
+         console.log("response :" + my);
+         var dataoverall = JSON.parse(my);
+         if (dataoverall.success) {
+
+           this.authService.presentToast(dataoverall.message);
+           this.authService.dismissLoading();
+           this.navCtrl.setRoot(DashboardPage);
+         } else {
+           this.authService.dismissLoading();
+           this.authService.presentToast(dataoverall.message);
+         }
+
+       }, (err) => {
+         //this.authService.dismissLoading();
+         //var my = JSON.stringify(err);
+         //this.authService.presentToast(err.message);
+         var my = JSON.stringify(err);
+         if (err.message == "Unrecognized Session.") {
+           this.authService.removeSession();
+           this.authService.presentToast("Please Login Again");
+           this.navCtrl.setRoot(HomePage);
+           console.log("errrorr " + err.status);
+         } else if (err.statusText == "Unauthorized") {
+           this.authService.removeSession();
+           this.authService.presentToast("Please Login Again");
+           this.navCtrl.setRoot(HomePage);
+           console.log("errrorr " + err.status);
+
+         } else {
+           this.navCtrl.setRoot(DashboardPage);
+           this.authService.presentToast("Something went wrong");
+           console.log("errrorr " + err.status);
+         }
+       });
+
+     }else{
+
+       
             let options1 = {
               fileKey: "Attachment",
-              fileName: this.fileName.name,
+              fileName: this.fileNames,
               headers: {
                 "token": "e662c46b5bef24a96c3128e25f43beaa05e3bd13",
                 Connection: "close"
@@ -83,57 +211,70 @@ export class MsgWritePage {
               chunkedMode: false,
               mimeType: "multipart/form-data",
               params: {
-                'Attachment': this.fileName.name,
-                'AttachmentFor': '1'
+                'Attachment': this.fileNames,
+                'AttachmentFor': '6'
               }
             }
       
             
-            fileTransfer.upload(this.path + "/" + this.fileName.name, 'http://chainayena.net/revo/api/revo-file-upload', options1)
-              .then((data) => {
+            fileTransfer.upload(this.path + "/" + this.fileNames, 'http://chainayena.net/revo/api/revo-file-upload', options1)
+              .then((result) => {
 
-                console.log("success " + JSON.stringify(data));
 
-               this.fileTransferresponse = data;
-                if(this.fileTransferresponse.message == 'file uploaded succesfully')
+                this.response = result;
+
+                var my = JSON.stringify(this.response);
+                console.log("response :" + my);
+                var dataoverall = JSON.parse(my);
+                console.log("response data:" + dataoverall);
+
+                console.log("bytesSent" + dataoverall.bytesSent);
+                console.log("response" + dataoverall.response);
+                console.log("responseCode" + dataoverall.responseCode);
+                var dataresponse = JSON.parse(dataoverall.response);
+                if (dataresponse.success)
                 {
 
-                  
-                  console.log("fileTransferresponse " + JSON.stringify(this.fileTransferresponse));
 
-                  console.log("fileTransferresponse.responseData.FileName ", this.fileTransferresponse.responseData.FileName);
+                  let overallresponseData = dataresponse.responseData;
+                  console.log("data overall in success" + overallresponseData);
+                  var fileNameToSend = overallresponseData.FileName;
                   this.profileImage = [];
-                  this.profileImage.push(this.fileTransferresponse.responseData.FileName);
-                  let date = { 
+                  this.profileImage.push(fileNameToSend);
+
+                  console.log("data to send arrayt :" + this.profileImage);
+                  
+                  let dataMsgReply = {
                     "Reply": this.comment,
-                    "Title":"pdf-sample.pdf",
+                    "Title": overallresponseData.FileName,
                     "UpDay": this.myDate,
-                    "AttachFile": [this.profileImage]
-                   };
-                  console.log("data to send Reply :" + date.Reply);
-                  console.log("data to send Title :" + date.Title);
-                  console.log("data to send UpDay :" + date.UpDay);
-                  console.log("data to send AttachFile :" + date.AttachFile);
-                  this.authService.showLoader("Loading Data");
-                  this.authService.messageReply(date).then((result) => {
+                    "AttachFile": this.profileImage
+                  };
+                  console.log("data to send Reply :" + dataMsgReply.Reply);
+                  console.log("data to send Title :" + dataMsgReply.Title);
+                  console.log("data to send UpDay :" + dataMsgReply.UpDay);
+                  console.log("data to send AttachFile :" + dataMsgReply.AttachFile);
+                 // this.authService.showLoader("Loading Data");
+                  this.authService.messageReply(dataMsgReply).then((result) => {
                     this.response = result;
-            
+
                     var my = JSON.stringify(this.response);
                     console.log("response :" + my);
                     var dataoverall = JSON.parse(my);
                     if (dataoverall.success) {
-            
+
                       this.authService.presentToast(dataoverall.message);
                       this.authService.dismissLoading();
-            
+                      this.navCtrl.setRoot(DashboardPage);
                     } else {
                       this.authService.dismissLoading();
                       this.authService.presentToast(dataoverall.message);
                     }
-            
+
                   }, (err) => {
-                    this.authService.dismissLoading();
-            
+                    //this.authService.dismissLoading();
+                    //var my = JSON.stringify(err);
+                    //this.authService.presentToast(err.message);
                     var my = JSON.stringify(err);
                     if (err.message == "Unrecognized Session.") {
                       this.authService.removeSession();
@@ -145,8 +286,8 @@ export class MsgWritePage {
                       this.authService.presentToast("Please Login Again");
                       this.navCtrl.setRoot(HomePage);
                       console.log("errrorr " + err.status);
-            
-                    }else {
+
+                    } else {
                       this.navCtrl.setRoot(DashboardPage);
                       this.authService.presentToast("Something went wrong");
                       console.log("errrorr " + err.status);
@@ -154,22 +295,25 @@ export class MsgWritePage {
                   });
             
                 }else{
-                  console.log("error " + JSON.stringify(this.fileTransferresponse.messagecd ));
+                  this.authService.dismissLoading();
+                  //var my = JSON.stringify(err);
+                  this.authService.presentToast(dataresponse.message);
+                  console.log("bytesSent" + dataoverall.bytesSent);
+                  console.log("response" + dataoverall.response);
+                  console.log("responseCode" + dataoverall.responseCode);
+                  
+                  console.log("error  in if else " );
                 }
                 
                 
-                // success
-               // alert("success" + JSON.stringify(data));
+             
               }, (err) => {
                 // error
-                console.log("error " + JSON.stringify(err));
-               // alert("error" + JSON.stringify(err));
+                this.authService.dismissLoading();
+                var my = JSON.stringify(err);
+                this.authService.presentToast(err.message);
               });
-
-     // console.log("ym flelelee "+this.myFile);
-      //this.profileImage.push(this.myFile);
-      
-     // this.navCtrl.push(MessageMainPage);
+            }
       
   	}	
     cancel(){
@@ -191,8 +335,8 @@ export class MsgWritePage {
             this.path = entry.nativeURL.substring(0, entry.nativeURL.lastIndexOf('/'));
             alert(this.path);
             alert(entry.name);
-            this.fileName = entry.name;
-            
+            this.fileNames = entry.name;
+            alert(this.fileNames);
             this.selectFile = entry.name;
             
 
@@ -205,6 +349,8 @@ export class MsgWritePage {
             };
 
 /* 
+file:///storage/emulated/0/Download
+mypdf.pdf
             fileTransfer.upload(this.path + "/" + entry.name, 'http://chainayena.net/revo/api/revo-file-upload', options1)
               .then((data) => {
                 // success
@@ -376,7 +522,7 @@ export class MsgWritePage {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
       console.log(imageData);
-      this.profileImage = 'data:image/jpeg;base64,' + imageData;
+     // this.profileImage = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
       // Handle error
       console.log(err);
